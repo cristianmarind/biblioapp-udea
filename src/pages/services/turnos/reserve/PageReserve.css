@@ -1,0 +1,4 @@
+.result{
+  max-height: 50vh;
+  overflow: auto;
+}

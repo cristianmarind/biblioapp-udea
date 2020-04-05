@@ -1,0 +1,13 @@
+.labelPiso {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 2px;
+    color: green;
+    padding: 2px 4px;
+    font-size: smaller;
+}
+.top-0{
+    top: 0;
+}

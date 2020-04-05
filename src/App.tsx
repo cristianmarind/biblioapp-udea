@@ -1,9 +1,20 @@
-import Menu from './components/Menu';
-import Page from './pages/Page';
+import Menu from './components/general/headerBiblioapp/menu/Menu';
+import PageBiblioappInfo from './pages/biblioappInfo/PageBiblioappInfo'
+import PageMyReservations from './pages/services/turnos/myReservations/PageMyReservations'
+import PageReserve from './pages/services/turnos/reserve/PageReserve'
+import PageMyAccount from './pages/user/PageMyAccount'
+import PageEvents from './pages/events/PageEvents'
+import PageLibraries from './pages/services/turnos/libraries/PageLibraries'
+import PageBibliographicMaterial from './pages/services/bibliographicMaterial/PageBibliographicMaterial'
+import PageInstitutionalRepository from './pages/services/institutionalRepository/PageInstitutionalRepository'
+import PageSupplyDocuments from './pages/services/supplyDocuments/PageSupplyDocuments'
+import PageCarlosGaviria from './pages/services/turnos/libraries/carlosGaviria/PageCarlosGaviria'
+import PageArtes from './pages/services/turnos/libraries/artes/PageArtes'
+
 import React, { useState } from 'react';
 import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { Redirect, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -23,10 +34,13 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+localStorage.setItem('username', 'cristian.marind')
 
 const App: React.FC = () => {
 
-  const [selectedPage, setSelectedPage] = useState('');
+  const [selectedPage] = useState('');
 
   return (
     <IonApp>
@@ -34,12 +48,19 @@ const App: React.FC = () => {
         <IonSplitPane contentId="main">
           <Menu selectedPage={selectedPage} />
           <IonRouterOutlet id="main">
-            <Route path="/page/:name" render={(props) => {
-              setSelectedPage(props.match.params.name);
-              return <Page {...props} />;
-            }} exact={true} />
-            <Route path="/" render={() => <Redirect to="/page/Inbox" />} exact={true} />
-          </IonRouterOutlet>
+            <Route path="/myAccount" component={PageMyAccount} exact={true} />
+            <Route path="/events" component={PageEvents} exact={true} />
+            <Route path="/biblioappInfo" component={PageBiblioappInfo} exact={true} />
+            <Route path="/turnos/libraries" component={PageLibraries} exact={true} />
+            <Route path="/turnos/Reservar" component={PageReserve} exact={true} />
+            <Route path="/turnos/myreservations" component={PageMyReservations} exact={true} />
+            <Route path="/turnos/libraries/carlosGaviria" component={PageCarlosGaviria} exact={true} />
+            <Route path="/turnos/libraries/artes" component={PageArtes} exact={true} />
+            <Route path="/bibliographicSearcher" component={PageMyReservations} exact={true} />
+            <Route path="/bibliographicMaterial" component={PageBibliographicMaterial} exact={true} />
+            <Route path="/institutionalRepository" component={PageInstitutionalRepository} exact={true} />
+            <Route path="/supplyDocuments" component={PageSupplyDocuments} exact={true} />
+         </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
     </IonApp>
