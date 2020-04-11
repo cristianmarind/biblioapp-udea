@@ -1,4 +1,6 @@
 import Menu from './components/general/headerBiblioapp/menu/Menu';
+import PageLogin from './pages/login/PageLogin'
+import PageLobby from './pages/lobby/PageLobby'
 import PageBiblioappInfo from './pages/biblioappInfo/PageBiblioappInfo'
 import PageMyReservations from './pages/services/turnos/myReservations/PageMyReservations'
 import PageReserve from './pages/services/turnos/reserve/PageReserve'
@@ -36,6 +38,9 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+/* Custom styles */
+import './theme/customStyles.scss'
+
 localStorage.setItem('username', 'cristian.marind')
 
 const App: React.FC = () => {
@@ -48,6 +53,8 @@ const App: React.FC = () => {
         <IonSplitPane contentId="main">
           <Menu selectedPage={selectedPage} />
           <IonRouterOutlet id="main">
+            <Route path="/" component={PageLogin} exact={true} />
+            <Route path="/lobby" component={PageLobby} exact={true} />
             <Route path="/myAccount" component={PageMyAccount} exact={true} />
             <Route path="/events" component={PageEvents} exact={true} />
             <Route path="/biblioappInfo" component={PageBiblioappInfo} exact={true} />

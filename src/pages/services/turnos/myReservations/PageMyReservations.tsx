@@ -35,7 +35,7 @@ function cancelReservation(code:any){
     providerServices
     .getModel(`/CancelarReserva.php?codigoReserva=${code}`)
     .then(res => {
-      if(res.data.resultadoCancelarReserva == false){
+      if(res.data.resultadoCancelarReserva === false){
         return reject({
           message: 'No se pudo cancelar la reserva con éxito.'
         })

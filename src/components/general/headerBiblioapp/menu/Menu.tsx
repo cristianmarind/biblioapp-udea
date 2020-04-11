@@ -19,12 +19,14 @@ import {
   listOutline,
   libraryOutline,
   schoolOutline,
-  fileTrayFullOutline
+  fileTrayFullOutline,
+  homeOutline
 } from 'ionicons/icons';
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import './Menu.css';
+import './Menu.scss';
 import SubMenu from './subMenu/SubMenu'
+import logo from './../../../../assets/universidad/logo_verde.png'
 
 interface MenuProps extends RouteComponentProps {
   selectedPage: string;
@@ -39,6 +41,12 @@ interface AppPage {
 }
 
 const appPages: AppPage[] = [
+  {
+    title: 'Inicio',
+    url: '/lobby',
+    iosIcon: homeOutline,
+    mdIcon: homeOutline
+  },
   {
     title: 'Mi cuenta',
     url: '/myAccount',
@@ -111,12 +119,18 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
     <IonMenu contentId="main" type="overlay">
         <IonContent>
           <IonList lines="none" id="inbox-list">
-            <div className="w-75 mx-auto">
-              <IonImg src="https://d3q0kt5yih1b7n.cloudfront.net/organizations/covers/universidad-de-antioquia_8781395682.jpg" />
+            <div className="w-50 mx-auto">
+              <IonImg src={logo} />
             </div>
             <SubMenu appPages={appPages} hidden={false} />
-            <IonMenuToggle className="" autoHide={false}>
-              <IonItem className="itemMenu" routerDirection="none" lines="none" detail={false}>
+            <IonMenuToggle autoHide={false}>
+              <IonItem 
+                routerLink="/" 
+                className="itemMenu" 
+                routerDirection="none" 
+                lines="none" 
+                detail={false}
+              >
                 <IonIcon slot="start" icon={logOutOutline} />
                 <IonLabel>Cerrar sesión</IonLabel>
               </IonItem>

@@ -30,7 +30,7 @@ export default class SubMenu extends React.Component<any, any> {
             return (
               <IonMenuToggle key={index} autoHide={false}>
                 <IonItem 
-                  className={'itemMenu'} 
+                  className="itemMenu"
                   routerLink={appPage.url} 
                   routerDirection="none" 
                   lines="none" 
@@ -49,7 +49,7 @@ export default class SubMenu extends React.Component<any, any> {
         <IonItem className="itemMenu">
             <IonList className="py-0" lines="none">
               <IonItem 
-                className="itemMenu"
+                className={this.props.title?"itemMenu":"d-none"}
                 onClick={() => { this.setState({ isActive: !this.state.isActive }) }} 
                 lines="none" 
                 detail={false}

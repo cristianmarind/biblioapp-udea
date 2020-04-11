@@ -6,7 +6,7 @@ import { IonHeader, IonToolbar, IonMenuButton, IonButtons, IonTitle } from '@ion
 const BiblioappInfo = () => {
   return (
     <IonHeader>
-      <IonToolbar>
+      <IonToolbar color="primary">
         <IonButtons slot="start">
           <IonMenuButton />
         </IonButtons>

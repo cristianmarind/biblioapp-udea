@@ -1,0 +1,47 @@
+@import './customVariables.scss';
+
+
+/*Estilo de los inputs*/
+.custom-input{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  align-items: center;
+  input, select, textarea{
+    outline:0px;
+    width: 100%;
+    min-height: 2em;
+    max-width: 31em;
+    border-color: $custom-green;
+    border-style: solid;
+    border-radius: .5em;
+    border-width: 2px;
+    padding: 0 .5rem;
+    ::placeholder {
+      color: $custom-light !important;
+      font-size: small;
+    }
+  }
+  input:focus, select:focus{
+    border-color: $custom-dark-green;
+  }
+  label{
+    width: 100%;
+    max-width: 31em;
+    margin-bottom: 0px;
+    float: left;
+    font-size: medium;
+    color: $text-color;
+  }
+}
+
+.custom-bg-green{
+  background-color: $custom-green !important;
+  --background: $custom-green !important;
+}
+.custom-text-green{
+  color: $custom-green !important;
+}
+.custom-border-color-green{
+  border-color: $custom-green !important;
+}
