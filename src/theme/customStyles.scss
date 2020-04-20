@@ -45,3 +45,8 @@
 .custom-border-color-green{
   border-color: $custom-green !important;
 }
+
+a{
+  color: $custom-green !important;
+  text-decoration: underline;
+}

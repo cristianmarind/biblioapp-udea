@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {  
   IonCard, 
   IonCardTitle,
@@ -17,7 +17,7 @@ export default (props:any) => {
   if (props.isbn) {
     isbn = (
       <div>
-        <span className="font-weight-bold">ISBN: </span>
+        <span className="custom-text-green font-weight-bold">ISBN: </span>
         <span>{props.isbn}</span>
       </div>
     )
@@ -25,7 +25,7 @@ export default (props:any) => {
   if (parseInt(props.count)) {
     count = (
       <div>
-        <span className="font-weight-bold">Número ejemplares: </span>
+        <span className="custom-text-green font-weight-bold">Número ejemplares: </span>
         <span>{props.count}</span>
       </div>
     )
@@ -33,25 +33,25 @@ export default (props:any) => {
   if (props.autores) {
     authors = (
       <div>
-        <span className="font-weight-bold">Autores: </span>
-        <TextMaxSize sizeDefault="80" text={props.autores} labelVisible={false} />
+        <span className="custom-text-green font-weight-bold">Autores: </span>
+        <TextMaxSize sizeDefault="80" text={props.autores} />
       </div>
     )
   }
   if (props.description) {
     description = (
       <div>
-        <span className="font-weight-bold">Información: </span>
+        <span className="custom-text-green font-weight-bold">Información: </span>
         <TextMaxSize sizeDefault="80" text={props.description} labelVisible={false} />
       </div>
     )
   }
 
   return (
-    <IonCard>
+    <IonCard className="border custom-border-color-green">
       <IonCardHeader>
-        <IonCardTitle>
-          <TextMaxSize sizeDefault="49" text={props.title} label="ver titulo completo" />
+        <IonCardTitle className="custom-text-green font-weight-bold">
+          <TextMaxSize sizeDefault="49" text={props.title} />
         </IonCardTitle>
       </IonCardHeader>
       <IonCardContent>

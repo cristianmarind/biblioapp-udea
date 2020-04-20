@@ -1,5 +1,9 @@
 import React from 'react'
 import { IonItem, IonIcon, IonLabel, IonMenuToggle, IonList } from '@ionic/react';
+import { 
+  arrowUp,
+  arrowDown 
+} from 'ionicons/icons';
 import './SubMenu.css';
 
 export default class SubMenu extends React.Component<any, any> {
@@ -12,9 +16,11 @@ export default class SubMenu extends React.Component<any, any> {
   }
 
   render() {
-    let b = <div className="d-none"></div>
+    let subMenu = <div className="d-none"></div>
+    let iconSubMenu = <IonIcon size="small" slot="end" icon={arrowUp} />
     if (this.state.isActive) {
-      b = <div>
+      iconSubMenu = <IonIcon size="small" slot="end" icon={arrowDown} />
+      subMenu = <div>
         {this.props.appPages.map((appPage: any, index: any) => {
           if (appPage.urls) {
             return (
@@ -56,9 +62,10 @@ export default class SubMenu extends React.Component<any, any> {
               >
                 <IonIcon slot="start" icon={this.props.iosIcon?this.props.iosIcon:''} />
                 <IonLabel>{this.props.title}</IonLabel>
+                {iconSubMenu}
               </IonItem>
               <div className={this.props.isSecundary?'secundaryItem':''}>
-                {b}
+                {subMenu}
               </div>
               
             </IonList>

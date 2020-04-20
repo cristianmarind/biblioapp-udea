@@ -59,8 +59,6 @@ export default () => {
   const [reserveToCancel, setReserveToCancel] = useState('');
   
   useEffect(() => {
-    console.log(1);
-    
     refreshReservations().then((res:any) => {
       setReserves(res.data)
     }).catch(err => {

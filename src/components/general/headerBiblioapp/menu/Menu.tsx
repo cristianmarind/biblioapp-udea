@@ -20,7 +20,8 @@ import {
   libraryOutline,
   schoolOutline,
   fileTrayFullOutline,
-  homeOutline
+  homeOutline,
+  businessOutline
 } from 'ionicons/icons';
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
@@ -54,7 +55,7 @@ const appPages: AppPage[] = [
     mdIcon: personCircleOutline
   },
   {
-    title: 'Servicios',
+    title: 'Servicios digitales',
     urls: [
       {
         title: 'Reserva de equipos',
@@ -92,6 +93,12 @@ const appPages: AppPage[] = [
         iosIcon: fileTrayFullOutline,
         mdIcon: fileTrayFullOutline,
         url: '/supplyDocuments'
+      },
+      {
+        title: 'Reserva de espacios',
+        iosIcon: businessOutline,
+        mdIcon: businessOutline,
+        url: '/spaceReservation'
       },
     ],
     iosIcon: paperPlaneOutline,

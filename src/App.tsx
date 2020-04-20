@@ -9,6 +9,7 @@ import PageEvents from './pages/events/PageEvents'
 import PageLibraries from './pages/services/turnos/libraries/PageLibraries'
 import PageBibliographicMaterial from './pages/services/bibliographicMaterial/PageBibliographicMaterial'
 import PageInstitutionalRepository from './pages/services/institutionalRepository/PageInstitutionalRepository'
+import PageSpaceReservation from './pages/services/spaceReservation/PageSpaceReservation'
 import PageSupplyDocuments from './pages/services/supplyDocuments/PageSupplyDocuments'
 import PageCarlosGaviria from './pages/services/turnos/libraries/carlosGaviria/PageCarlosGaviria'
 import PageArtes from './pages/services/turnos/libraries/artes/PageArtes'
@@ -67,6 +68,7 @@ const App: React.FC = () => {
             <Route path="/bibliographicMaterial" component={PageBibliographicMaterial} exact={true} />
             <Route path="/institutionalRepository" component={PageInstitutionalRepository} exact={true} />
             <Route path="/supplyDocuments" component={PageSupplyDocuments} exact={true} />
+            <Route path="/spaceReservation" component={PageSpaceReservation} exact={true} />
          </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

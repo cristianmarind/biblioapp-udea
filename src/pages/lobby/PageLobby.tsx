@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Modal, ProgressBar } from 'react-bootstrap';
 import {
   IonPage,
@@ -12,12 +12,7 @@ import {
   IonImg,
   IonButton,
   IonSlides, 
-  IonSlide,
-  IonCard,
-  IonCardHeader,
-  IonTitle,
-  IonCardContent,
-  IonCardSubtitle
+  IonSlide
 } from '@ionic/react';
 import { 
   searchSharp, 
@@ -31,17 +26,13 @@ import HeaderBiblioapp from '../../components/general/headerBiblioapp/HeaderBibl
 import MaterialCard from './../../components/lobby/MaterialCard'
 import ProviderServices from './../../providerServices/index'
 import TextMaxSize from './../../components/general/textMaxSize/TextMaxSize'
+import Recommendations from './../../components/lobby/Recommendations'
 //import sss from './../../providerServices/services2'
 let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
 let appKey = "UGT*Vh4e11@s";
 
 export default () => {
-  const slideOpts = {
-    initialSlide: 0,
-    speed: 400
-  };
-
-
+  const [saveQueryVisibility, setSaveQueryVisibility] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [show, setShow] = useState(false)
   const [query, setQuery] = useState('')
@@ -61,7 +52,12 @@ export default () => {
     disponibilidad: []
   })
   const handleClose = () => setShow(false);
+  const slideOpts = {
+    initialSlide: 0,
+    speed: 400
+  };
   const search = () => {
+    setSaveQueryVisibility(true)
     setIsLoading(true)
     let response = [
       {
@@ -179,7 +175,7 @@ export default () => {
   if (isLoading) {
     loading = <ProgressBar style={{"height": ".5em"}} animated now={100} variant="success" />
   }
-  if (query) {
+  if (saveQueryVisibility) {
     saveQuery = (
       <IonItem>
         <IonIcon size="small" slot="start" icon={saveSharp} />
@@ -192,32 +188,8 @@ export default () => {
   let lobby
   if (!res.length) {
     lobby = (
-      <div className="px-3 mt-5">
-        <span className="font-weight-bold mt-3">Recomendaciones: </span>
-          <IonSlides pager={true} options={slideOpts}>
-            <IonSlide>
-              <IonCard className="mb-5">
-                <IonCardHeader>
-                  <IonTitle>Cien Años de Soledad</IonTitle>
-                  <IonCardSubtitle>Gabriel García Márquez</IonCardSubtitle>
-                </IonCardHeader>
-                <IonCardContent>
-                  <IonImg className="w-50 mx-auto" src='https://i.pinimg.com/564x/53/8c/06/538c06006b8d431ac1dca2fa095de66d.jpg' />
-                </IonCardContent>
-              </IonCard>
-            </IonSlide>
-            <IonSlide>
-              <IonCard className="mb-5">
-                <IonCardHeader>
-                  <IonTitle>Don Quijote de la mancha</IonTitle>
-                  <IonCardSubtitle>Miguel de Cervantes Saavedra</IonCardSubtitle>
-                </IonCardHeader>
-                <IonCardContent>
-                  <IonImg className="w-50 mx-auto" src='https://ep01.epimg.net/cultura/imagenes/2013/06/15/actualidad/1371283072_174122_1371283573_noticia_normal.jpg' />
-                </IonCardContent>
-              </IonCard>
-            </IonSlide>
-          </IonSlides>
+      <div className="mt-3">
+        <Recommendations />
       </div>
     )
   }
@@ -281,27 +253,27 @@ export default () => {
                   src={currentMaterial.image_url || "https://www.timvandevall.com/wp-content/uploads/2014/01/Book-Cover-Template-s.jpg"}
                 />
                 <div>
-                  <span className="font-weight-bold">Tipo de publicación: </span>
+                  <span className="custom-text-green font-weight-bold">Tipo: </span>
                   <span>{currentMaterial.tipo_publicacion}</span>
                 </div>
                 <div>
-                  <span className="font-weight-bold">Publicación: </span>
+                  <span className="custom-text-green font-weight-bold">Publicación: </span>
                   <span>{currentMaterial.publicacion}</span>
                 </div>
                 <div>
-                  <span className="font-weight-bold">Descripción: </span>
+                  <span className="custom-text-green font-weight-bold">Descripción: </span>
                   <span>{currentMaterial.descripcion_fisica}</span>
                 </div>
                 <div>
-                  <span className="font-weight-bold">Idioma: </span>
+                  <span className="custom-text-green font-weight-bold">Idioma: </span>
                   <span>{currentMaterial.idioma}</span>
                 </div>
                 <div>
-                  <span className="font-weight-bold">Resumen: </span>
+                  <span className="custom-text-green font-weight-bold">Resumen: </span>
                   <TextMaxSize sizeDefault="100" text={currentMaterial.nota} />
                 </div>
               </IonText>
-              <span className="font-weight-bold mt-3">Disponibilidad: </span>
+              <span className="custom-text-green font-weight-bold mt-3">Disponibilidad: </span>
               <IonSlides pager={true} options={slideOpts}>
                 {
                   currentMaterial.disponibilidad.map((item:any, index:any) => {
