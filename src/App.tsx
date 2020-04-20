@@ -54,21 +54,21 @@ const App: React.FC = () => {
         <IonSplitPane contentId="main">
           <Menu selectedPage={selectedPage} />
           <IonRouterOutlet id="main">
-            <Route path="/" component={PageLogin} exact={true} />
-            <Route path="/lobby" component={PageLobby} exact={true} />
-            <Route path="/myAccount" component={PageMyAccount} exact={true} />
-            <Route path="/events" component={PageEvents} exact={true} />
-            <Route path="/biblioappInfo" component={PageBiblioappInfo} exact={true} />
-            <Route path="/turnos/libraries" component={PageLibraries} exact={true} />
-            <Route path="/turnos/Reservar" component={PageReserve} exact={true} />
-            <Route path="/turnos/myreservations" component={PageMyReservations} exact={true} />
-            <Route path="/turnos/libraries/carlosGaviria" component={PageCarlosGaviria} exact={true} />
-            <Route path="/turnos/libraries/artes" component={PageArtes} exact={true} />
-            <Route path="/bibliographicSearcher" component={PageMyReservations} exact={true} />
-            <Route path="/bibliographicMaterial" component={PageBibliographicMaterial} exact={true} />
-            <Route path="/institutionalRepository" component={PageInstitutionalRepository} exact={true} />
-            <Route path="/supplyDocuments" component={PageSupplyDocuments} exact={true} />
-            <Route path="/spaceReservation" component={PageSpaceReservation} exact={true} />
+            <Route path="/" component={PageLogin} />
+            <Route path="/lobby" component={PageLobby} />
+            <Route path="/myAccount" component={PageMyAccount} />
+            <Route path="/events" component={PageEvents} />
+            <Route path="/biblioappInfo" component={PageBiblioappInfo} />
+            <Route path="/turnos/libraries" component={PageLibraries} />
+            <Route path="/turnos/Reservar" component={PageReserve} />
+            <Route path="/turnos/myreservations" component={PageMyReservations} />
+            <Route path="/turnos/libraries/carlosGaviria" component={PageCarlosGaviria} />
+            <Route path="/turnos/libraries/artes" component={PageArtes} />
+            <Route path="/bibliographicSearcher" component={PageMyReservations} />
+            <Route path="/bibliographicMaterial" component={PageBibliographicMaterial} />
+            <Route path="/institutionalRepository" component={PageInstitutionalRepository} />
+            <Route path="/supplyDocuments" component={PageSupplyDocuments} />
+            <Route path="/spaceReservation" component={PageSpaceReservation} />
          </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
