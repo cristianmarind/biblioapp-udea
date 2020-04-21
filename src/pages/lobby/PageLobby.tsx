@@ -288,7 +288,7 @@ export default () => {
                           </div>
                           <div className="text-left">
                             <span className="font-weight-bold">Colección y estante: </span>
-                            <span>{item.localizacion}</span>
+                            <span>{item.coleccion+","+item.estante}</span>
                           </div>
                           <div className="text-left">
                             <span className="font-weight-bold">Signatura: </span>
