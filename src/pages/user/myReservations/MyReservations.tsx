@@ -95,7 +95,7 @@ export default class MyReservations extends React.Component<any, any> {
                       right: '1em'
                     }}
                     color="danger"
-                    onClick={() => { this.deleteReservation(/*item.titleno*/) }} 
+                    onClick={() => { this.deleteReservation(item.reserva) }} 
                   >
                     <IonIcon size="small" icon={trashOutline} />
                   </IonButton>
@@ -131,21 +131,21 @@ export default class MyReservations extends React.Component<any, any> {
     })
   }
 
-  deleteReservation(/*titleno */){
-    /*this.setState({
+  deleteReservation(titleno:any){
+    this.setState({
       isLoading: true
     })
-    services.getMyReservations().then(res => {
+    services.removeReserve(titleno).then(res => {
       this.setState({
-        myReservations: res,
         isLoading: false
       })
+      this.getMyReservations()
     }).catch(err => {
       this.setState({
         myReservations: [],
         isLoading: false
       })
       console.log(err);
-    })*/
+    })
   }
 }

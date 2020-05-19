@@ -26,7 +26,7 @@ import { menuController } from '@ionic/core';
 import { RouteComponentProps, withRouter, useHistory } from 'react-router-dom';
 import './Menu.scss';
 import SubMenu from './subMenu/SubMenu'
-import logo from './../../../../assets/universidad/logo_verde.png'
+import logo from './../../../../assets/universidad/logo_horizontal_blanco.png'
 import logoutLogo from './../../../../assets/biblioapp/icons/cerrar.png'
 import servicesLogo from './../../../../assets/biblioapp/icons/servicios.png'
 import userLogo from './../../../../assets/biblioapp/icons/usuario.png'

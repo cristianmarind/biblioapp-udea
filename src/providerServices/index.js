@@ -271,17 +271,12 @@ export default class ProviderService {
     return new Promise((resolve, reject) => {
       this.postModelFormData('/services_olib/APP_GenerarReferenciaBibliograficaApa.php', bodydata).then(response => {
         if (response.data[0].codigoEncontrado == true) {
-
-
           resolve(response.data)
-
-
         } else {
           reject({
             msg: codes.CODES.SEARCH_EMPTY.MSG
           })
         }
-
       }).catch(error => {
         reject({
           msg: codes.CODES.DEFAULT.MSG,
@@ -438,6 +433,58 @@ export default class ProviderService {
         })
       })
     })
+  }
+  ReservarTitulo(titleno) {
+    var bodydata = [{ appKey: appKey, cedula: localStorage.getItem('userId'), titleno: titleno }];
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('isLogged')) {
+        reject({
+          msg: codes.CODES.UNLOGGED_USER.MSG
+        })
+      }
+      this.postModelFormData('services_olib/APP_ReservarTitulo.php', bodydata).then(response => {
+        if (response.data.reserva != null) {
+          resolve(response.data.mensaje)
+        } else {
+          reject({
+            msg: codes.CODES.ERROR_ADDBOOKING.MSG
+          })
+        }
+      }).catch(error => {
+        reject({
+          msg: codes.CODES.DEFAULT.MSG,
+          error
+        })
+      })
+    })
+  }
+
+  removeReserve(reserva) {
+    var bodydata = [{ appKey: appKey, cedula: localStorage.getItem('userId'), reserva: reserva }];
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('isLogged')) {
+        reject({
+          msg: codes.CODES.UNLOGGED_USER.MSG
+        })
+      }
+      this.postModelFormData('services_olib/APP_CancelarReserva.php', bodydata).then(response => {
+        if (response.data.cancelada == true) {
+          resolve(response.data.cancelada)
+        } else {
+          reject({
+            msg: codes.CODES.ERROR_DELETEBOOKING.MSG
+          })
+        }
+      }).catch(error => {
+        console.log(error);
+        
+        reject({
+          msg: codes.CODES.DEFAULT.MSG,
+          error
+        })
+      })
+    })
+
   }
   validarusuarioportal(usuario, clave) {
 
