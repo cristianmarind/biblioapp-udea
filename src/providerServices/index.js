@@ -202,6 +202,54 @@ export default class ProviderService {
         })
 
     }
+   ReservarTitulo(cedula, titleno){
+        var bodydata = [{ appKey: appKey, cedula: cedula, titleno: titleno }];
+        return new Promise((resolve, reject) => {
+            this.postModelFormData('services_olib/APP_ReservarTitulo.php', bodydata).then(response => {
+                if (response.data.reserva != null) {
+
+                    resolve(response.data.mensaje)
+
+                } else {
+                    reject({
+                        msg: codes.CODES.ERROR_ADDBOOKING.MSG
+                    })
+                }
+
+            }).catch(error => {
+                reject({
+                    msg: codes.CODES.DEFAULT.MSG,
+                    error
+                })
+            })
+        })
+    }
+
+    CancelarReserva(cedula, reserva){
+        var bodydata = [{ appKey: appKey, cedula: cedula, reserva: reserva }];
+        return new Promise((resolve, reject) => {
+            this.postModelFormData('services_olib/APP_CancelarReserva.php', bodydata).then(response => {
+                if (response.data.cancelada == true){    
+
+                    resolve(response.data.cancelada)
+                    //msg: codes.CODES.BOOKING_CANCELED
+                   
+
+                } else {
+                    reject({
+                        msg: codes.CODES.ERROR_DELETEBOOKING.MSG
+                    })
+                }
+
+            }).catch(error => {
+                reject({
+                    msg: codes.CODES.DEFAULT.MSG,
+                    error
+                })
+            })
+        })
+
+    }
     consultarReservasActivas(cedula) {
         var bodydata = [{ appKey: appKey, cedula: cedula }];
         return new Promise((resolve, reject) => {
