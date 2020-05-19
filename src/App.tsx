@@ -1,23 +1,37 @@
 import Menu from './components/general/headerBiblioapp/menu/Menu';
 import PageLogin from './pages/login/PageLogin'
+import PageUdeaLibraries from './pages/udeaLibraries/UdeaLibraries'
+import PageUdeaDocCenters from './pages/udeaDocCenters/UdeaDocCenters'
 import PageLobby from './pages/lobby/PageLobby'
 import PageBiblioappInfo from './pages/biblioappInfo/PageBiblioappInfo'
 import PageMyReservations from './pages/services/turnos/myReservations/PageMyReservations'
-import PageReserve from './pages/services/turnos/reserve/PageReserve'
+import PageReserve from './pages/services/turnos/libraries/carlosGaviria/reserve/PageReserve'
 import PageMyAccount from './pages/user/PageMyAccount'
+import PageActiveLoans from './pages/user/activeLoans/ActiveLoans'
+import PageWishList from './pages/user/wishList/WishList'
+import PageLoanHistory from './pages/user/loanHistory/LoanHistory'
+import MyReservations from './pages/user/myReservations/MyReservations'
 import PageEvents from './pages/events/PageEvents'
 import PageLibraries from './pages/services/turnos/libraries/PageLibraries'
 import PageBibliographicMaterial from './pages/services/bibliographicMaterial/PageBibliographicMaterial'
 import PageInstitutionalRepository from './pages/services/institutionalRepository/PageInstitutionalRepository'
 import PageSpaceReservation from './pages/services/spaceReservation/PageSpaceReservation'
 import PageSupplyDocuments from './pages/services/supplyDocuments/PageSupplyDocuments'
+import PageRequestTraining from './pages/services/requestTraining/RequestTraining'
+import ElectronicResources from './pages/services/electronicResources/ElectronicResources'
 import PageCarlosGaviria from './pages/services/turnos/libraries/carlosGaviria/PageCarlosGaviria'
-import PageArtes from './pages/services/turnos/libraries/artes/PageArtes'
+import PageDefoultLibrary from './pages/services/turnos/libraries/defoultLibrary/DefoultLibrary'
+import PageMaterialReviews from './pages/services/reviews/materialReviews/MaterialReviews'
+import PageMyReviews from './pages/user/myReviews/MyReviews'
+
 
 import React, { useState } from 'react';
 import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Route } from 'react-router-dom';
+
+import LoggedRoute from './utilities/router/LoggedRoute'
+import UnloggedRoute from './utilities/router/UnloggedRoute'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -42,33 +56,64 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 /* Custom styles */
 import './theme/customStyles.scss'
 
-localStorage.setItem('username', 'cristian.marind')
+/*localStorage.setItem('username', 'cristian.marind')
+localStorage.setItem('userId', '1152701738')
+localStorage.setItem('isLogged', 'true')*/
+
+import { Plugins } from '@capacitor/core';
+
+
+
+
 
 const App: React.FC = () => {
 
   const [selectedPage] = useState('');
+  const { Share } = Plugins;
 
+  Share.share({
+    title: 'See cool stuff',
+    text: 'Really awesome thing you need to see right meow',
+    url: 'http://ionicframework.com/',
+    dialogTitle: 'Share with buddies'
+  }).then(res => {
+    console.log(res);
+    
+  }).catch(err =>{
+    console.log(err);
+    
+  });
   return (
     <IonApp>
       <IonReactRouter>
         <IonSplitPane contentId="main">
           <Menu selectedPage={selectedPage} />
           <IonRouterOutlet id="main">
-            <Route path="/" component={PageLogin} />
-            <Route path="/lobby" component={PageLobby} />
-            <Route path="/myAccount" component={PageMyAccount} />
-            <Route path="/events" component={PageEvents} />
-            <Route path="/biblioappInfo" component={PageBiblioappInfo} />
-            <Route path="/turnos/libraries" component={PageLibraries} />
-            <Route path="/turnos/Reservar" component={PageReserve} />
-            <Route path="/turnos/myreservations" component={PageMyReservations} />
-            <Route path="/turnos/libraries/carlosGaviria" component={PageCarlosGaviria} />
-            <Route path="/turnos/libraries/artes" component={PageArtes} />
-            <Route path="/bibliographicSearcher" component={PageMyReservations} />
-            <Route path="/bibliographicMaterial" component={PageBibliographicMaterial} />
-            <Route path="/institutionalRepository" component={PageInstitutionalRepository} />
-            <Route path="/supplyDocuments" component={PageSupplyDocuments} />
-            <Route path="/spaceReservation" component={PageSpaceReservation} />
+            <UnloggedRoute path="/" component={PageLogin} exact={true} />
+            <Route path="/lobby" component={PageLobby} exact={true} />
+            <Route path="/libraries" component={PageUdeaLibraries} exact={true} />
+            <Route path="/docCenters" component={PageUdeaDocCenters} exact={true} />
+            <Route path="/events" component={PageEvents} exact={true} />
+            <Route path="/biblioappInfo" component={PageBiblioappInfo} exact={true} />
+            <LoggedRoute path="/turnos/libraries" component={PageLibraries} exact={true} />
+            <LoggedRoute path="/turnos/Reservar" component={PageReserve} exact={true} />
+            <LoggedRoute path="/turnos/myreservations" component={PageMyReservations} exact={true} />
+            <LoggedRoute path="/turnos/libraries/carlosGaviria" component={PageCarlosGaviria} exact={true} />
+            <LoggedRoute path="/turnos/libraries/defoultLibrary" component={PageDefoultLibrary} exact={true} />
+            <LoggedRoute path="/material/materiaReview" component={PageMaterialReviews} exact={true} />
+            <Route path="/bibliographicSearcher" component={PageMyReservations} exact={true} />
+            <Route path="/bibliographicMaterial" component={PageBibliographicMaterial} exact={true} />
+            <Route path="/institutionalRepository" component={PageInstitutionalRepository} exact={true} />
+            <Route path="/supplyDocuments" component={PageSupplyDocuments} exact={true} />
+            <Route path="/spaceReservation" component={PageSpaceReservation} exact={true} />
+            <Route path="/requestTraining" component={PageRequestTraining} exact={true} />
+            <Route path="/electronicResources" component={ElectronicResources} exact={true} />
+            <LoggedRoute path="/myAccount" component={PageMyAccount} exact={true} />
+            <LoggedRoute path="/account/activeLoans" component={PageActiveLoans} exact={true} />
+            <LoggedRoute path="/account/wishList" component={PageWishList} exact={true} />
+            <LoggedRoute path="/account/loanHistory" component={PageLoanHistory} exact={true} />
+            <LoggedRoute path="/account/myReservations" component={MyReservations} exact={true} />
+            <LoggedRoute path="/account/myReviews" component={PageMyReviews} exact={true} />
          </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

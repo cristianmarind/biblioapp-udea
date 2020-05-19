@@ -15,13 +15,14 @@ import {
 } from '@ionic/react';
 import HeaderBiblioapp from '../../../../components/general/headerBiblioapp/HeaderBiblioapp'
 import ProviderServices from './../../../../providerServices/index'
-let providerServices = new ProviderServices('http://localhost/turnos/services')
+
+let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
 
 function refreshReservations(){
   return new Promise((resolve, reject) => {
     providerServices.getModel(`/ListarReservasPorUsuario.php?usuarioConsulta=${localStorage.getItem('username')}`).then(res => {
       resolve({
-        data: res.data
+        data: Array.isArray(res.data)?res.data:[]
       })
     }).catch(() => {
       reject({
@@ -73,10 +74,11 @@ export default () => {
       <IonContent>
         <IonList>
           <IonListHeader>
-            <IonTitle>Mis reservas</IonTitle>
+            <IonTitle className="custom-text-green">Mis reservas</IonTitle>
           </IonListHeader>
           {
-            reserves.map((item:any, index:any) => {
+            reserves.length > 0?
+            (reserves.map((item:any, index:any) => {
               return (
                 <IonCard key={index}>
                   <IonItem>
@@ -110,7 +112,7 @@ export default () => {
                   </IonItem>
                 </IonCard>
               )
-            })
+            })):<div className="text-center pt-3">No tienes reservas actualmente</div>
           }
         </IonList>
         <IonAlert

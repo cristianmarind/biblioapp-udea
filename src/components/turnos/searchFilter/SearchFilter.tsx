@@ -49,7 +49,9 @@ export default class SearchFilter extends React.Component<any, any> {
       <IonGrid>
         <IonRow>
           <IonCol>
-            <IonLabel>Número de horas</IonLabel>
+            <div className="custom-bg-green text-light w-100 py-1 text-center">
+              <IonLabel>Número de horas</IonLabel>
+            </div>
             <IonSelect 
               value={this.state.nroHours} 
               onIonChange={(e) => {
@@ -62,7 +64,9 @@ export default class SearchFilter extends React.Component<any, any> {
             </IonSelect>
           </IonCol>
           <IonCol>
-            <IonLabel>Hora inicial</IonLabel>
+            <div className="custom-bg-green text-light w-100 py-1 text-center">
+              <IonLabel className="custom-bg-green text-light">Hora inicial</IonLabel>
+            </div>
             <IonSelect 
               value={this.state.hour} 
               onIonChange={(e) => {

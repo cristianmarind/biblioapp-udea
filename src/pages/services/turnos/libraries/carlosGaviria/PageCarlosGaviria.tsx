@@ -36,19 +36,13 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
   }
 
   applyFilter = async (filterObject: any) => {
-    let providerServices = new ProviderServices('http://localhost/turnos/services')
+    let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
     let filter = filterObject.filter
     let pcs:any = []
     await providerServices.postModel(`/ListarEquiposDisponiblesPorHora.php?horaConsulta=${filter.hour}`).then(res => {
       pcs = res.data
     }).catch((err) => {
       console.log(err);
-
-      /*EventBus.$emit(
-        "openMessage",
-        "El problema es nuestro, intenta mas tarde.",
-        "error"
-      );*/
     })
     if (filter.nroHours === 2) {
       await providerServices.postModel(`/ListarEquiposDisponiblesPorHora.php?horaConsulta=${filter.hour + 1}`).then(res => {
@@ -118,7 +112,12 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
       <IonPage>
         <HeaderBiblioapp />
         <IonContent>
-          <IonTitle>PageCarlosGaviria</IonTitle>
+          <div className="custom-bg-fluorescent-green text-light text-center py-2">
+            Reserva de equipos
+          </div>
+          <div className="pt-3 text-center">
+            <IonTitle>Carlos Gaviria Diaz</IonTitle>
+          </div>
           <SearchFilter applyFilter={this.applyFilter} />
           <div className="mb-2">
             <span>Selecciona la sala que deseas utilizar</span>
@@ -128,7 +127,7 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
               <Card.Header className="py-0 border-0">
                 <Accordion.Toggle className="w-100 py-0 position-relative" as={Button} variant="link" eventKey="0">
                   <IonImg src={piso3} />
-                  <div className="labelPiso">PISO 3</div>
+                  <div className="labelPiso custom-bg-fluorescent-green text-light">PISO 3</div>
                 </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey="0">
@@ -177,7 +176,7 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
               <Card.Header className="py-0 border-0">
                 <Accordion.Toggle className="w-100 py-0 position-relative" as={Button} variant="link" eventKey="1">
                   <IonImg src={piso2} />
-                  <div className="labelPiso">PISO 2</div>
+                  <div className="labelPiso custom-bg-fluorescent-green text-light">PISO 2</div>
                 </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey="1">
@@ -241,7 +240,7 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
               <Card.Header className="py-0 border-0">
                 <Accordion.Toggle className="w-100 py-0 position-relative" as={Button} variant="link" eventKey="3">
                   <IonImg src={piso1} />
-                  <div className="labelPiso">PISO 1</div>
+                  <div className="labelPiso custom-bg-fluorescent-green text-light">PISO 1</div>
                 </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey="3">

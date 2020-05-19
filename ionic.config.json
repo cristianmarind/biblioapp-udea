@@ -1,5 +1,7 @@
 {
   "name": "biblioapp",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }

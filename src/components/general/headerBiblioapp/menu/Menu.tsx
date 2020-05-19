@@ -9,25 +9,40 @@ import {
   IonMenuToggle,
 } from '@ionic/react';
 import { 
-  logOutOutline, 
+  logInOutline,
   calendarOutline, 
-  paperPlaneOutline, 
   informationCircleOutline, 
   laptopOutline, 
-  personCircleOutline,
   bookOutline,
-  listOutline,
   libraryOutline,
-  schoolOutline,
   fileTrayFullOutline,
   homeOutline,
-  businessOutline
+  businessOutline,
+  pencilOutline,
+  codeDownloadOutline
 } from 'ionicons/icons';
 import React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { menuController } from '@ionic/core';
+import { RouteComponentProps, withRouter, useHistory } from 'react-router-dom';
 import './Menu.scss';
 import SubMenu from './subMenu/SubMenu'
 import logo from './../../../../assets/universidad/logo_verde.png'
+import logoutLogo from './../../../../assets/biblioapp/icons/cerrar.png'
+import servicesLogo from './../../../../assets/biblioapp/icons/servicios.png'
+import userLogo from './../../../../assets/biblioapp/icons/usuario.png'
+import institutionalRepositoryLogo from './../../../../assets/biblioapp/icons/repositorio.png'
+import myReservationsLogo from './../../../../assets/biblioapp/icons/mis-reservas.png'
+import turnosLogo from './../../../../assets/biblioapp/icons/reserva1.png'
+import reserveLogo from './../../../../assets/biblioapp/icons/reserva-2.png'
+import supplyDocumentsLogo from './../../../../assets/biblioapp/icons/suministro.png'
+import udeaLibrariesLogo from './../../../../assets/biblioapp/icons/libro-2.png'
+import biblioappInfoLogo from './../../../../assets/biblioapp/icons/informacion.png'
+import eventsLogo from './../../../../assets/biblioapp/icons/eventos.png'
+
+
+import ProviderServices from './../../../../providerServices/index'
+
+let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
 
 interface MenuProps extends RouteComponentProps {
   selectedPage: string;
@@ -35,8 +50,7 @@ interface MenuProps extends RouteComponentProps {
 
 interface AppPage {
   url?: string;
-  iosIcon: string;
-  mdIcon: string;
+  icon: string;
   title: string;
   urls?: Array<AppPage>;
 }
@@ -45,106 +59,141 @@ const appPages: AppPage[] = [
   {
     title: 'Inicio',
     url: '/lobby',
-    iosIcon: homeOutline,
-    mdIcon: homeOutline
+    icon: homeOutline,
   },
   {
     title: 'Mi cuenta',
     url: '/myAccount',
-    iosIcon: personCircleOutline,
-    mdIcon: personCircleOutline
+    icon: userLogo,
   },
   {
     title: 'Servicios digitales',
+    icon: servicesLogo,
     urls: [
       {
         title: 'Reserva de equipos',
-        iosIcon: laptopOutline,
-        mdIcon: laptopOutline,
+        icon: turnosLogo,
         urls: [
           {
             title: 'Reservar',
-            iosIcon: bookOutline,
-            mdIcon: bookOutline,
+            icon: reserveLogo,
             url: '/turnos/libraries'
           },
           {
             title: 'Mis reservas',
-            iosIcon: listOutline,
-            mdIcon: listOutline,
+            icon: myReservationsLogo,
             url: '/turnos/myreservations'
           },
         ],
       },
       {
+        title: 'Recursos electrónicos',
+        icon: codeDownloadOutline,
+        url: '/electronicResources'
+      },
+      {
         title: 'Solicita material bibliografico',
-        iosIcon: libraryOutline,
-        mdIcon: libraryOutline,
+        icon: libraryOutline,
         url: '/bibliographicMaterial'
       },
       {
         title: 'Repositorio institucional',
-        iosIcon: schoolOutline,
-        mdIcon: schoolOutline,
+        icon: institutionalRepositoryLogo,
         url: '/institutionalRepository'
       },
       {
         title: 'Suministro de documentos',
-        iosIcon: fileTrayFullOutline,
-        mdIcon: fileTrayFullOutline,
+        icon: supplyDocumentsLogo,
         url: '/supplyDocuments'
       },
       {
         title: 'Reserva de espacios',
-        iosIcon: businessOutline,
-        mdIcon: businessOutline,
+        icon: businessOutline,
         url: '/spaceReservation'
       },
-    ],
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneOutline
+      {
+        title: 'Solicitud de capacitaciones',
+        icon: pencilOutline,
+        url: '/requestTraining'
+      },
+    ]
   },
   {
     title: 'Proximos eventos',
     url: '/events',
-    iosIcon: calendarOutline,
-    mdIcon: calendarOutline
+    icon: eventsLogo,
+  },
+  {
+    title: 'Bibliotecas UdeA',
+    url: '/libraries',
+    icon: udeaLibrariesLogo,
+  },
+  {
+    title: 'Centros de documentación',
+    url: '/docCenters',
+    icon: udeaLibrariesLogo,
   },
   {
     title: 'Biblioapp',
     url: '/biblioappInfo',
-    iosIcon: informationCircleOutline,
-    mdIcon: informationCircleOutline
+    icon: biblioappInfoLogo,
   },
   
 ];
 //onClick={()=>{appPage.isActive = true}}
 
 const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
-
+  const history = useHistory();
+  let loginItem, logoutItem
+  if (localStorage.getItem('isLogged')) {
+    logoutItem = (
+      <IonItem 
+        className="itemMenu bg-transparent text-light" 
+        lines="none" 
+        detail={false}
+        onClick={() => {
+          services.logout().then(() => {
+            menuController.close()
+            history.push("/")
+          })
+        }}
+      >
+        <div className="custom-icon mr-2">
+          <IonImg src={logoutLogo} />
+        </div>
+        <IonLabel>Cerrar sesión</IonLabel>
+      </IonItem>
+    )
+  }else{
+    loginItem = (
+      <IonMenuToggle>
+        <IonItem 
+        className="itemMenu bg-transparent" 
+        routerLink="/"
+        routerDirection="none" 
+        lines="none" 
+        detail={false}
+      >
+        <IonIcon color="white" slot="start" icon={logInOutline} />
+        <IonLabel>Iniciar sesión</IonLabel>
+      </IonItem>
+      </IonMenuToggle>
+      
+    )
+  }
   return (
     <IonMenu contentId="main" type="overlay">
-        <IonContent>
-          <IonList lines="none" id="inbox-list">
-            <div className="w-50 mx-auto">
-              <IonImg src={logo} />
-            </div>
-            <SubMenu appPages={appPages} hidden={false} />
-            <IonMenuToggle autoHide={false}>
-              <IonItem 
-                routerLink="/" 
-                className="itemMenu" 
-                routerDirection="none" 
-                lines="none" 
-                detail={false}
-              >
-                <IonIcon slot="start" icon={logOutOutline} />
-                <IonLabel>Cerrar sesión</IonLabel>
-              </IonItem>
-            </IonMenuToggle>
-          </IonList>
-        </IonContent>
-      </IonMenu>
+      <IonContent className="custom-bg-green text-light">
+        <IonList className="bg-transparent" lines="none" id="inbox-list">
+          <div className="mx-auto">
+            <IonImg src={logo} />
+          </div>
+          { loginItem }
+          <SubMenu appPages={appPages} hidden={false} />
+          { logoutItem }
+        </IonList>
+      </IonContent>
+    </IonMenu>
   );
 };
 

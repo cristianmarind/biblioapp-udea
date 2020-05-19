@@ -1,5 +1,5 @@
 import React from 'react'
-import { IonItem, IonIcon, IonLabel, IonMenuToggle, IonList } from '@ionic/react';
+import { IonItem, IonIcon, IonLabel, IonMenuToggle, IonList, IonImg } from '@ionic/react';
 import { 
   arrowUp,
   arrowDown 
@@ -17,9 +17,9 @@ export default class SubMenu extends React.Component<any, any> {
 
   render() {
     let subMenu = <div className="d-none"></div>
-    let iconSubMenu = <IonIcon size="small" slot="end" icon={arrowUp} />
+    let iconSubMenu = <IonIcon size="small" slot="end" color="white" icon={arrowUp} />
     if (this.state.isActive) {
-      iconSubMenu = <IonIcon size="small" slot="end" icon={arrowDown} />
+      iconSubMenu = <IonIcon size="small" slot="end" color="white" icon={arrowDown} />
       subMenu = <div>
         {this.props.appPages.map((appPage: any, index: any) => {
           if (appPage.urls) {
@@ -28,7 +28,7 @@ export default class SubMenu extends React.Component<any, any> {
                 key={index} 
                 appPages={appPage.urls} 
                 title={appPage.title} 
-                iosIcon={appPage.iosIcon} 
+                icon={appPage.icon} 
                 isSecundary={true}
                 hidden={true} />
             );
@@ -36,13 +36,15 @@ export default class SubMenu extends React.Component<any, any> {
             return (
               <IonMenuToggle key={index} autoHide={false}>
                 <IonItem 
-                  className="itemMenu"
+                  className="itemMenu bg-transparent text-light"
                   routerLink={appPage.url} 
                   routerDirection="none" 
                   lines="none" 
                   detail={false}
                 >
-                  <IonIcon slot="start" icon={appPage.iosIcon} />
+                  <div className="custom-icon mr-2">
+                    <IonImg src={appPage.icon} />
+                  </div>
                   <IonLabel>{appPage.title}</IonLabel>
                 </IonItem>
               </IonMenuToggle>
@@ -52,15 +54,17 @@ export default class SubMenu extends React.Component<any, any> {
       </div>
     }
     return (
-        <IonItem className="itemMenu">
-            <IonList className="py-0" lines="none">
+        <IonItem className="itemMenu bg-transparent text-light">
+            <IonList className="py-0 bg-transparent" lines="none">
               <IonItem 
-                className={this.props.title?"itemMenu":"d-none"}
+                className={this.props.title?"itemMenu bg-transparent text-light":"d-none"}
                 onClick={() => { this.setState({ isActive: !this.state.isActive }) }} 
                 lines="none" 
                 detail={false}
               >
-                <IonIcon slot="start" icon={this.props.iosIcon?this.props.iosIcon:''} />
+                <div className="custom-icon mr-2">
+                  <IonImg src={this.props.icon?this.props.icon:''} />
+                </div>
                 <IonLabel>{this.props.title}</IonLabel>
                 {iconSubMenu}
               </IonItem>

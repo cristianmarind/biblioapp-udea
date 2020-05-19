@@ -10,6 +10,8 @@ import {
   IonCardSubtitle
 } from '@ionic/react';
 import HeaderBiblioapp from '../../components/general/headerBiblioapp/HeaderBiblioapp'
+import logoVerde from './../../assets/universidad/logo_verde.png'
+import biblioappLogo from './../../assets/biblioapp/azul.png'
 
 export default () => {
   return (
@@ -17,9 +19,7 @@ export default () => {
       <HeaderBiblioapp />
       <IonContent>
         <IonCard>
-        <div className="imgUdeA">
-            <IonImg src="https://lh3.googleusercontent.com/JqnKD22aMVQfj2OkAn4IKdX_9h91247ftyAKZeLCMYVUzTe3vSu1wo56mRh5nXL392VZ" />
-          </div>
+          <IonImg src={biblioappLogo} />
           <IonCardHeader>
             <IonCardSubtitle>Version 4.0.0</IonCardSubtitle>
             <IonCardTitle>BiblioApp</IonCardTitle>
@@ -29,6 +29,7 @@ export default () => {
             Sistema de bibliotecas <br />
             Gestion de T.I
           </IonCardContent>
+          <IonImg src={logoVerde} />
         </IonCard>
       </IonContent>
     </IonPage>

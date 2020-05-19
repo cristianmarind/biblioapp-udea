@@ -7,6 +7,9 @@ export default () => {
         <IonPage>
             <HeaderBiblioapp />
             <IonContent>
+                <div className="custom-bg-fluorescent-green text-light text-center py-2">
+                    Repositorio institucional
+                </div>
                 <iframe 
                     title="Repositorio institucional"
                     width="100%"

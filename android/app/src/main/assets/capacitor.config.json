@@ -1,0 +1,8 @@
+{
+    "appId": "com.biblioapp",
+    "appName": "biblioapp",
+    "bundledWebRuntime": false,
+    "npmClient": "npm",
+    "webDir": "build",
+    "cordova": {}
+}

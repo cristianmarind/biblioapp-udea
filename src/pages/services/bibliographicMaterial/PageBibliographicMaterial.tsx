@@ -7,6 +7,9 @@ export default () => {
         <IonPage>
             <HeaderBiblioapp />
             <IonContent>
+                <div className="custom-bg-fluorescent-green text-light text-center py-2">
+                    Solicita material bibliográfico
+                </div>
                 <iframe 
                     title="Solicita material bibliografico"
                     width="100%"

@@ -34,7 +34,11 @@
     color: $text-color;
   }
 }
-
+.bg-transparent{
+  background-color: rgba(0, 0, 0, 0) !important;
+  --background: rgba(0, 0, 0, 0) !important;
+}
+/*Custom green*/
 .custom-bg-green{
   background-color: $custom-green !important;
   --background: $custom-green !important;
@@ -45,8 +49,28 @@
 .custom-border-color-green{
   border-color: $custom-green !important;
 }
+/*Custom fluorescent green*/
+.custom-bg-fluorescent-green{
+  background-color: $custom-fluorescent-green !important;
+  --background: $custom-fluorescent-green !important;
+}
+.custom-text-fluorescent-green{
+  color: $custom-fluorescent-green !important;
+}
+.custom-border-color-fluorescent-green{
+  border-color: $custom-fluorescent-green !important;
+}
+
 
 a{
   color: $custom-green !important;
   text-decoration: underline;
+}
+.custom-icon{
+  width: 1.3em;
+  height: 1.3em;
+}
+.custom-icon-lg{
+  width: 2em;
+  height: 2em;
 }

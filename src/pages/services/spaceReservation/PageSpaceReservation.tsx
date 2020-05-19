@@ -7,6 +7,9 @@ export default () => {
         <IonPage>
             <HeaderBiblioapp />
             <IonContent>
+                <div className="custom-bg-fluorescent-green text-light text-center py-2">
+                    Reserva de espacios
+                </div>
                 <iframe 
                     title="Reserva de espacios"
                     width="100%"

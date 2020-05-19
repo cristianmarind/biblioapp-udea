@@ -16,12 +16,12 @@ import {
   IonImg,
   IonAlert
 } from '@ionic/react';
-import sala from './../../../../assets/universidad/bibliotecas/CarlosGaviria/pisos/salas.png'
-import HeaderBiblioapp from '../../../../components/general/headerBiblioapp/HeaderBiblioapp'
-import ProviderServices from './../../../../providerServices/index'
+import sala from './../../../../../../assets/universidad/bibliotecas/CarlosGaviria/pisos/salas.png'
+import HeaderBiblioapp from '../../../../../../components/general/headerBiblioapp/HeaderBiblioapp'
+import ProviderServices from '../../../../../../providerServices/index'
 import './PageReserve.css'
 
-let providerServices = new ProviderServices('http://localhost/turnos/services')
+let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
 
 function reserve(pcSelected:any, filter:any) {
   return new Promise((resolve, reject) => {
@@ -67,6 +67,7 @@ export default (props: any) => {
 
   let pcs = []
   let filter = {}
+  
   if (props.location.state) {
     if (isArray(props.location.state.pcs)) {
       pcs = props.location.state.pcs
@@ -86,7 +87,12 @@ export default (props: any) => {
         <div className="result px-3">
           <IonList>
             <IonRadioGroup onIonChange={e => setPc(e.detail.value)}>
-              {
+              {/*
+                pcs = [
+                  {
+                    nombrePc: 'PC 001'//Index = 0
+                  }
+                ]*/
                 pcs.map((item: any, index: any) => {
                   return (
                     <IonItem key={index}>
