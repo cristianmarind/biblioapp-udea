@@ -27,6 +27,7 @@ import { RouteComponentProps, withRouter, useHistory } from 'react-router-dom';
 import './Menu.scss';
 import SubMenu from './subMenu/SubMenu'
 import logo from './../../../../assets/universidad/logo_horizontal_blanco.png'
+import biblioappLogo from './../../../../assets/biblioapp/blanco.png'
 import logoutLogo from './../../../../assets/biblioapp/icons/cerrar.png'
 import servicesLogo from './../../../../assets/biblioapp/icons/servicios.png'
 import userLogo from './../../../../assets/biblioapp/icons/usuario.png'
@@ -185,12 +186,18 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
     <IonMenu contentId="main" type="overlay">
       <IonContent className="custom-bg-green text-light">
         <IonList className="bg-transparent" lines="none" id="inbox-list">
-          <div className="mx-auto">
+          <div className="mx-auto px-3 mb-3">
             <IonImg src={logo} />
           </div>
-          { loginItem }
-          <SubMenu appPages={appPages} hidden={false} />
-          { logoutItem }
+          <div className="pl-2">
+            { loginItem }
+            <SubMenu appPages={appPages} hidden={false} />
+            { logoutItem }
+
+          </div>
+          <div className="mx-auto mb-3">
+            <IonImg src={biblioappLogo} />
+          </div>
         </IonList>
       </IonContent>
     </IonMenu>

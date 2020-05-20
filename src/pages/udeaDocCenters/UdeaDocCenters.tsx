@@ -35,7 +35,7 @@ export default class UdeaDocCenters extends React.Component<any, any> {
   }
 
   async componentDidMount() {
-    let providerServices = new ProviderServices('http://localhost:3000/api')
+    let providerServices = new ProviderServices('http://cirene.udea.edu.co:3001/api')
     providerServices.getModel('/libraries', {
       where: {
         type: 'centro_doc'
@@ -54,6 +54,9 @@ export default class UdeaDocCenters extends React.Component<any, any> {
       <IonPage>
         <HeaderBiblioapp />
         <IonContent>
+          <div className="custom-bg-fluorescent-green text-light text-center py-2">
+            Centros de inv. UdeA
+          </div>
           <IonList>
             {
               this.state.libraries.map((library: any, libraryIndex: any) => {

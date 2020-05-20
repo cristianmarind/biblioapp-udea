@@ -44,6 +44,9 @@ export default class WishList extends React.Component<any, any> {
         <HeaderBiblioapp />
         {loadingTemplate}
         <IonContent>
+          <div className="custom-bg-fluorescent-green text-light text-center py-2">
+            Mi lista de deseos
+          </div>
           {
             this.state.wishList.length?
             (
@@ -100,7 +103,7 @@ export default class WishList extends React.Component<any, any> {
             isOpen={this.state.deleteProcess == 2}
             onDidDismiss={() => this.setState({deleteProcess: 0})}
             header={'BiblioApp'}
-            message={'Ha eliminado con exito.'}
+            message={'Ha eliminado con éxito.'}
             buttons={[
               {
                 text: 'Cerrar'

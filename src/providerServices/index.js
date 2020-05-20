@@ -314,7 +314,7 @@ export default class ProviderService {
     })
   }
   getActiveLoans() {
-    var bodydata = [{ appKey: appKey, cedula: /*1036962284*/localStorage.getItem('userId') }];
+    var bodydata = [{ appKey: appKey, cedula: localStorage.getItem('userId') }];
     return new Promise((resolve, reject) => {
       if (!localStorage.getItem('isLogged')) {
         return reject({
@@ -434,7 +434,7 @@ export default class ProviderService {
       })
     })
   }
-  ReservarTitulo(titleno) {
+  reserveMaterial(titleno) {
     var bodydata = [{ appKey: appKey, cedula: localStorage.getItem('userId'), titleno: titleno }];
     return new Promise((resolve, reject) => {
       if (!localStorage.getItem('isLogged')) {
@@ -442,15 +442,33 @@ export default class ProviderService {
           msg: codes.CODES.UNLOGGED_USER.MSG
         })
       }
-      this.postModelFormData('services_olib/APP_ReservarTitulo.php', bodydata).then(response => {
-        if (response.data.reserva != null) {
-          resolve(response.data.mensaje)
-        } else {
+      this.postModelFormData('/services_olib/APP_ReservarTitulo.php', bodydata).then(response => {
+        if (response.data.length > 0) {
+          let res = JSON.parse(JSON.stringify(response.data[0]))
+          let message = JSON.parse(res.respuesta)
+          if (message.length > 0) {
+            if (message[0].reserva) {
+              resolve({
+                msg: message[0].mensaje
+              })
+            }
+            reject({
+              msg: message[0].mensaje
+            })
+          }else{
+            reject({
+              msg: codes.CODES.DEFAULT.MSG,
+              error: null
+            })
+          }
+        }else{
           reject({
-            msg: codes.CODES.ERROR_ADDBOOKING.MSG
+            msg: codes.CODES.DEFAULT.MSG,
+            error: null
           })
         }
       }).catch(error => {
+        console.log(error);
         reject({
           msg: codes.CODES.DEFAULT.MSG,
           error
@@ -467,17 +485,31 @@ export default class ProviderService {
           msg: codes.CODES.UNLOGGED_USER.MSG
         })
       }
-      this.postModelFormData('services_olib/APP_CancelarReserva.php', bodydata).then(response => {
-        if (response.data.cancelada == true) {
-          resolve(response.data.cancelada)
-        } else {
+      this.postModelFormData('/services_OLIB/APP_CancelarReserva.php', bodydata).then(response => {
+        if (response.data.length > 0) {
+          let res = JSON.parse(JSON.stringify(response.data[0]))
+          let message = JSON.parse(res.respuesta)
+          if (message.length > 0) {
+            if (message[0].cancelada) {
+              resolve()
+            }
+            reject({
+              msg: codes.CODES.ERROR_DELETEBOOKING.MSG
+            })
+          }else{
+            reject({
+              msg: codes.CODES.DEFAULT.MSG,
+              error: null
+            })
+          }
+        }else{
           reject({
-            msg: codes.CODES.ERROR_DELETEBOOKING.MSG
+            msg: codes.CODES.DEFAULT.MSG,
+            error: null
           })
         }
       }).catch(error => {
         console.log(error);
-        
         reject({
           msg: codes.CODES.DEFAULT.MSG,
           error

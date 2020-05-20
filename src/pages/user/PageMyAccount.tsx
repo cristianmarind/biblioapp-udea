@@ -48,6 +48,9 @@ export default class PageMyAccount extends React.Component<any, any> {
         <HeaderBiblioapp />
         {loadingTemplate}
         <IonContent>
+          <div className="custom-bg-fluorescent-green text-light text-center py-2">
+            Mis cuenta
+          </div>
           <IonList className="custom-border-color-green profileInformation pb-0">
             <IonItem>
               <IonIcon className="custom-text-green pr-1" icon={personCircleOutline} />

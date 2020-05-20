@@ -7,7 +7,9 @@ export default () => {
         <IonPage>
             <HeaderBiblioapp />
             <IonContent>
-                <h1>Events</h1>
+                <div className="custom-bg-fluorescent-green text-light text-center py-2">
+                    Eventos
+                </div>
             </IonContent>
         </IonPage>
     )

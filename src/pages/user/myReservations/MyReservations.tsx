@@ -17,7 +17,9 @@ export default class MyReservations extends React.Component<any, any> {
     this.state = {
       myReservations: [],
       isLoading: false,
-      errorMessage: ""
+      errorMessage: "",
+      deleteProcess: 0,
+      currentItem: null
     }
   }
 
@@ -35,6 +37,9 @@ export default class MyReservations extends React.Component<any, any> {
         <HeaderBiblioapp />
         {loadingTemplate}
         <IonContent>
+          <div className="custom-bg-fluorescent-green text-light text-center py-2">
+            Mis reservas
+          </div>
           {
             this.state.myReservations.length?
             (this.state.myReservations.map((item: any, index: any) => {
@@ -95,7 +100,7 @@ export default class MyReservations extends React.Component<any, any> {
                       right: '1em'
                     }}
                     color="danger"
-                    onClick={() => { this.deleteReservation(item.reserva) }} 
+                    onClick={() => { this.setState({deleteProcess: 1, currentItem: item.reserva }) } } 
                   >
                     <IonIcon size="small" icon={trashOutline} />
                   </IonButton>
@@ -103,7 +108,48 @@ export default class MyReservations extends React.Component<any, any> {
               )
             })):(<div className="text-center pt-3">{this.state.errorMessage}</div>)
           }
-
+          <IonAlert
+            isOpen={this.state.deleteProcess == 1}
+            onDidDismiss={() => {this.setState({deleteProcess: 0})}}
+            header={'BiblioApp'}
+            message={'¿Esta seguro que desea eliminar su reserva?'}
+            buttons={[
+              {
+                text: 'Cancelar',
+                role: 'cancel',
+                cssClass: 'secondary'
+              },
+              {
+                text: 'Eliminar',
+                cssClass: 'danger',
+                handler: () => {
+                  this.deleteReservation(this.state.currentItem)
+                }
+              }
+            ]}
+          />
+          <IonAlert
+            isOpen={this.state.deleteProcess == 2}
+            onDidDismiss={() => this.setState({deleteProcess: 0})}
+            header={'BiblioApp'}
+            message={'Se ha eliminado su reserva exitosamente.'}
+            buttons={[
+              {
+                text: 'Cerrar'
+              }
+            ]}
+          />
+          <IonAlert
+            isOpen={this.state.deleteProcess == -1}
+            onDidDismiss={() => this.setState({deleteProcess: 0})}
+            header={'BiblioApp'}
+            message="No se pudo eliminar su reserva"
+            buttons={[
+              {
+                text: 'Cerrar'
+              }
+            ]}
+          />
         </IonContent>
       </IonPage>
     )
@@ -137,13 +183,14 @@ export default class MyReservations extends React.Component<any, any> {
     })
     services.removeReserve(titleno).then(res => {
       this.setState({
-        isLoading: false
+        isLoading: false,
+        deleteProcess: 2
       })
       this.getMyReservations()
     }).catch(err => {
       this.setState({
-        myReservations: [],
-        isLoading: false
+        isLoading: false,
+        deleteProcess: -1
       })
       console.log(err);
     })

@@ -43,7 +43,7 @@ export default class UdeaLibraries extends React.Component<any, any> {
   }
 
   async componentDidMount(){
-    let providerServices = new ProviderServices('http://localhost:3000/api')
+    let providerServices = new ProviderServices('http://cirene.udea.edu.co:3001/api')
     let medellin = [], regiones = []
     try {
       let res = await providerServices.getModel('/libraries', {
@@ -82,6 +82,9 @@ export default class UdeaLibraries extends React.Component<any, any> {
       <IonPage>
         <HeaderBiblioapp />
         <IonContent>
+          <div className="custom-bg-fluorescent-green text-light text-center py-2">
+            Bibliotecas UdeA
+          </div>
           <Tabs defaultActiveKey="libraryLocation-0" id="tab-udea-libraires">
             {
               this.state.librariesLocation.map((item: any, index: any) => {

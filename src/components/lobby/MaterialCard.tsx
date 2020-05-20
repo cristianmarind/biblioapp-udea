@@ -16,7 +16,8 @@ import {
   IonIcon
 } from '@ionic/react';
 import {
-  bookmarkOutline
+  bookmarkOutline,
+  ribbonOutline
 } from 'ionicons/icons';
 import { Modal, ProgressBar } from 'react-bootstrap';
 import TextMaxSize from "./../general/textMaxSize/TextMaxSize"
@@ -74,6 +75,20 @@ export default (props: any) => {
     setIsLoadingModal(true)
     setMsg(null)
     services.addMaterialToFavorites(currentMaterial.titleno).then(res => {
+      setIsLoadingModal(false)
+      setMsg(res.msg)
+    }).catch(err => {
+      console.log(err);
+      
+      setIsLoadingModal(false)
+      setMsg(err.msg)
+    })
+  }
+
+  const reserve = () => {
+    setIsLoadingModal(true)
+    setMsg(null)
+    services.reserveMaterial(currentMaterial.titleno).then(res => {
       setIsLoadingModal(false)
       setMsg(res.msg)
     }).catch(err => {
@@ -154,10 +169,6 @@ export default (props: any) => {
             <TextMaxSize sizeDefault="35" text={currentMaterial.titulo} />
           </Modal.Title>
         </Modal.Header>
-        {
-          isLoadingModal ?
-            (<ProgressBar style={{ "height": ".5em" }} animated now={100} variant="success" />) : null
-        }
         <Modal.Body>
           <div style={{
             maxHeight: "80vh",
@@ -257,11 +268,17 @@ export default (props: any) => {
           }
           <IonGrid>
             <IonRow>
+              <IonCol className="d-flex flex-column align-items-center" onClick={() => { reserve() }} size="6">
+                <div className="custom-icon-lg">
+                  <IonImg src={ribbonOutline} />
+                </div>
+                <IonText>Reservar</IonText>
+              </IonCol>
               <IonCol className="d-flex flex-column align-items-center" onClick={() => { addMaterialToFavorites() }} size="6">
                 <div className="custom-icon-lg">
                   <IonImg src={heart} />
                 </div>
-                <IonText className="">Agregar a favoritos</IonText>
+                <IonText className="text-center" >Agregar a mi lista de deseos</IonText>
               </IonCol>
               {
                 currentMaterial.isbn?
@@ -295,6 +312,10 @@ export default (props: any) => {
             </IonRow>
           </IonGrid>
         </Modal.Body>
+        {
+          isLoadingModal ?
+            (<ProgressBar style={{ "height": ".7em" }} animated now={100} variant="success" />) : null
+        }
       </Modal>
       <Modal show={msg !== null} onHide={() => { setMsg(null) }}>
         <Modal.Header closeButton>

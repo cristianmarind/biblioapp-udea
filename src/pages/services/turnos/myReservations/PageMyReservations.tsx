@@ -20,11 +20,13 @@ let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com
 
 function refreshReservations(){
   return new Promise((resolve, reject) => {
-    providerServices.getModel(`/ListarReservasPorUsuario.php?usuarioConsulta=${localStorage.getItem('username')}`).then(res => {
+    providerServices.getModel(`/ListarReservasPorUsuarioAPP.php?usuarioConsulta=${localStorage.getItem('username')}`).then(res => {
       resolve({
         data: Array.isArray(res.data)?res.data:[]
       })
-    }).catch(() => {
+    }).catch((err) => {
+      console.log(err);
+      
       reject({
         message: 'El problema es nuestro, intenta mas tarde.'
       })

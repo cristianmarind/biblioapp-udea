@@ -31,6 +31,9 @@ export default class ActiveLoans extends React.Component<any, any> {
           (<ProgressBar style={{ "height": ".5em" }} animated now={100} variant="success" />):null
         }
         <IonContent>
+          <div className="custom-bg-fluorescent-green text-light text-center py-2">
+            Mis prestamos activos
+          </div>
           {
             this.state.activeLoans.length?
             (this.state.activeLoans.map((item: any, index: any) => {
