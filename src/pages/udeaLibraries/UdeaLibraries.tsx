@@ -43,7 +43,7 @@ export default class UdeaLibraries extends React.Component<any, any> {
   }
 
   async componentDidMount(){
-    let providerServices = new ProviderServices('http://cirene.udea.edu.co:3001/api')
+    let providerServices = new ProviderServices('http://4c491fb9.ngrok.io/api')
     let medellin = [], regiones = []
     try {
       let res = await providerServices.getModel('/libraries', {
