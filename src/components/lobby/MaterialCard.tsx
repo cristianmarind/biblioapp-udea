@@ -32,7 +32,7 @@ export default (props: any) => {
   let history = useHistory();
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingModal, setIsLoadingModal] = useState(false)
-  const [msg, setMsg] = useState(null)
+  const [msg, setMsg] = useState("")
   const [apaReference, setAPAReference] = useState('')
   const [visibilityMaterialDetail, setVisibilityMaterialDetail] = useState(false)
   const handleCloseMaterialDetail = () => setVisibilityMaterialDetail(false);
@@ -59,10 +59,8 @@ export default (props: any) => {
       return
     }
     setIsLoading(true)
-    setMsg(null)
+    setMsg("")
     services.consultarDetallesTitulo(titleno).then(res => {
-      console.log(res);
-      
       setMaterial(res);
       setIsLoading(false)
       setVisibilityMaterialDetail(true)
@@ -75,7 +73,7 @@ export default (props: any) => {
 
   const addMaterialToFavorites = () => {
     setIsLoadingModal(true)
-    setMsg(null)
+    setMsg("")
     services.addMaterialToFavorites(currentMaterial.titleno).then(res => {
       setIsLoadingModal(false)
       setMsg(res.msg)
@@ -89,7 +87,7 @@ export default (props: any) => {
 
   const reserve = () => {
     setIsLoadingModal(true)
-    setMsg(null)
+    setMsg("")
     services.reserveMaterial(currentMaterial.titleno).then(res => {
       setIsLoadingModal(false)
       setMsg(res.msg)
@@ -101,9 +99,15 @@ export default (props: any) => {
 
   const getAPAReference = () => {
     setIsLoadingModal(true)
-    setMsg(null)
+    setMsg("")
+    setAPAReference("")
     services.getAPAReference(currentMaterial.isbn).then(res => {
-      setAPAReference(res[0].referenciaBibliograficaApa)
+      let ref = res[0].referenciaBibliograficaApa
+      if (ref.search('flash-notice') > 0) {
+        setMsg("No se pudo generar la referencia, intente mas tarde.")
+      }else{
+        setAPAReference(ref)
+      }
       setIsLoadingModal(false)
     }).catch(err => {
       setMsg(err.msg)
@@ -319,7 +323,7 @@ export default (props: any) => {
             (<ProgressBar style={{ "height": ".7em" }} animated now={100} variant="success" />) : null
         }
       </Modal>
-      <Modal show={msg !== null} onHide={() => { setMsg(null) }}>
+      <Modal show={msg !== ""} onHide={() => { setMsg("") }}>
         <Modal.Header closeButton>
           <Modal.Title className="custom-text-green">
             Biblioapp
