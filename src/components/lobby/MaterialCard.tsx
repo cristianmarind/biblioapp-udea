@@ -61,6 +61,8 @@ export default (props: any) => {
     setIsLoading(true)
     setMsg(null)
     services.consultarDetallesTitulo(titleno).then(res => {
+      console.log(res);
+      
       setMaterial(res);
       setIsLoading(false)
       setVisibilityMaterialDetail(true)

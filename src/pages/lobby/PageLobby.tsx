@@ -53,7 +53,7 @@ export default () => {
 
   const saveQuery = () => {
     setIsLoading(true)
-    services.GuardarBusquedaPorUsuario('1152704738', query).then(res => {
+    services.GuardarBusquedaPorUsuario(localStorage.getItem('userId'), query).then(res => {
       setIsLoading(false)
       console.log(res);
       alert("Se ha guardado correctamente")
@@ -73,14 +73,6 @@ export default () => {
   saveQueryButton
   if (isLoading) {
     loading = <ProgressBar style={{"height": ".5em"}} animated now={100} variant="success" />
-  }
-  if (saveQueryVisibility) {
-    saveQueryButton = (
-      <IonItem onClick={() => { saveQuery() }}>
-        <IonIcon size="small" slot="start" icon={saveSharp} />
-        <IonLabel>Guardar búsqueda</IonLabel>
-      </IonItem>
-    )
   }
 
 
@@ -121,11 +113,20 @@ export default () => {
             />
             <IonButton onClick={() => { search() }}>Buscar</IonButton>
           </IonItem>
-          { saveQueryButton }
-          <IonItem onClick={() => { setVisibilityStoredSearches(true) }}>
-            <IonIcon size="small" slot="start" icon={list} />
-            <IonLabel>Ver búsquedas almacenadas</IonLabel>
-          </IonItem>
+          { 
+            saveQueryVisibility && localStorage.getItem('userId')?
+            (<IonItem onClick={() => { saveQuery() }}>
+              <IonIcon size="small" slot="start" icon={saveSharp} />
+              <IonLabel>Guardar búsqueda</IonLabel>
+            </IonItem>):null
+          }
+          {
+            localStorage.getItem('userId')?
+            (<IonItem onClick={() => { setVisibilityStoredSearches(true) }}>
+              <IonIcon size="small" slot="start" icon={list} />
+              <IonLabel>Ver búsquedas almacenadas</IonLabel>
+            </IonItem>):null
+          }
           {lobby}
           <div className="mt-3"></div>
           {
