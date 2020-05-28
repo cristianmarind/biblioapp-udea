@@ -8,15 +8,14 @@ import {
   calendarOutline,
   personCircleOutline,
   atCircleOutline,
-  fingerPrintOutline,
-  pencilOutline
+  fingerPrintOutline
  } from 'ionicons/icons';
 import HeaderBiblioapp from '../../components/general/headerBiblioapp/HeaderBiblioapp'
 import './PageMyAccount.css'
 import ProviderServices from './../../providerServices/index'
-import { Link } from 'react-router-dom';
+import HOSTS from './../../providerServices/hosts.js'
 
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+let services = new ProviderServices(HOSTS.CIRENE.HOST)
 
 
 export default class PageMyAccount extends React.Component<any, any> {
@@ -87,25 +86,6 @@ export default class PageMyAccount extends React.Component<any, any> {
               <IonIcon className="custom-text-green pr-1" size="large" icon={calendarOutline} />
               <IonLabel>Mis reservas</IonLabel>
             </IonItem>
-            {
-              /*
-              <Link
-              to={{
-                pathname: "/turnos/Reservar",
-                state: {
-                  pcs: this.state.piso3,
-                  filter: this.state.filter
-                }
-              }}
-            >
-              <IonItem routerLink="/account/myReviews">
-                <IonIcon className="custom-text-green pr-1" size="large" icon={pencilOutline} />
-                <IonLabel>Mis reseñas</IonLabel>
-              </IonItem>
-            </Link>
-              */
-            }
-            
           </IonList>
         </IonContent>
       </IonPage>

@@ -7,8 +7,8 @@ import logoVerde from './../../assets/universidad/logo_verde.png'
 import biblioappLogo from './../../assets/biblioapp/azul.png'
 import ProviderServices from './../../providerServices/index'
 
-
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+import HOSTS from './../../providerServices/hosts.js'
+let services = new ProviderServices(HOSTS.CIRENE.HOST)
 
 export default () => {
   const history = useHistory();

@@ -8,7 +8,8 @@ import HeaderBiblioapp from '../../../components/general/headerBiblioapp/HeaderB
 import ProviderServices from './../../../providerServices/index'
 import TextMaxSize from '../../../components/general/textMaxSize/TextMaxSize';
 
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+import HOSTS from './../../../providerServices/hosts.js'
+let services = new ProviderServices(HOSTS.CIRENE.HOST)
 
 export default class MyReservations extends React.Component<any, any> {
 

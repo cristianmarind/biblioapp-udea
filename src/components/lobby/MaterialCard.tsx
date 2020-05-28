@@ -25,8 +25,9 @@ import shareSocial from './../../assets/biblioapp/icons/compartir.png'
 import star from './../../assets/biblioapp/icons/estrella.png'
 import heart from './../../assets/biblioapp/icons/corazon.png'
 
+import HOSTS from './../../providerServices/hosts.js'
 import ProviderServices from './../../providerServices/index'
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+let services = new ProviderServices(HOSTS.CIRENE.HOST)
 
 export default (props: any) => {
   let history = useHistory();

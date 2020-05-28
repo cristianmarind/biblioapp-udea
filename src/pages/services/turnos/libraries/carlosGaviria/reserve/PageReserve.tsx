@@ -21,7 +21,8 @@ import HeaderBiblioapp from '../../../../../../components/general/headerBiblioap
 import ProviderServices from '../../../../../../providerServices/index'
 import './PageReserve.css'
 
-let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
+import HOSTS from '../../../../../../providerServices/hosts.js'
+let providerServices = new ProviderServices(HOSTS.TURNOS.HOST)
 
 function reserve(pcSelected:any, filter:any) {
   return new Promise((resolve, reject) => {

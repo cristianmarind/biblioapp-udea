@@ -1,8 +1,6 @@
 import React from 'react'
 import { IonPage, IonContent, IonList, IonItem, IonIcon, IonLabel, IonText, IonImg, IonButton } from '@ionic/react';
 import {
-  Tabs,
-  Tab,
   Modal
 } from 'react-bootstrap';
 import {
@@ -10,6 +8,8 @@ import {
 } from 'ionicons/icons';
 import HeaderBiblioapp from '../../components/general/headerBiblioapp/HeaderBiblioapp'
 import TextMaxSize from "./../../components/general/textMaxSize/TextMaxSize"
+
+import HOSTS from './../../providerServices/hosts.js'
 import ProviderServices from './../../providerServices/index'
 
 export default class UdeaDocCenters extends React.Component<any, any> {
@@ -35,7 +35,7 @@ export default class UdeaDocCenters extends React.Component<any, any> {
   }
 
   async componentDidMount() {
-    let providerServices = new ProviderServices('http://4c491fb9.ngrok.io/api')
+    let providerServices = new ProviderServices(HOSTS.LIBRARIES.HOST)
     providerServices.getModel('/libraries', {
       where: {
         type: 'centro_doc'

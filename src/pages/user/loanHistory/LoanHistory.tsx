@@ -2,10 +2,12 @@ import React from 'react'
 import { IonPage, IonContent, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonGrid, IonRow, IonCol, IonText } from '@ionic/react';
 import { ProgressBar } from 'react-bootstrap';
 import HeaderBiblioapp from '../../../components/general/headerBiblioapp/HeaderBiblioapp'
+
+import HOSTS from './../../../providerServices/hosts.js'
 import ProviderServices from './../../../providerServices/index'
 import TextMaxSize from '../../../components/general/textMaxSize/TextMaxSize';
 
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+let services = new ProviderServices(HOSTS.CIRENE.HOST)
 
 export default class LoanHistory extends React.Component<any, any> {
 

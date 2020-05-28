@@ -12,6 +12,8 @@ import {
 import { Accordion, Card, Button } from 'react-bootstrap';
 import HeaderBiblioapp from '../../../../../components/general/headerBiblioapp/HeaderBiblioapp'
 import SearchFilter from './../../../../../components/turnos/searchFilter/SearchFilter'
+
+import HOSTS from './../../../../../providerServices/hosts.js'
 import ProviderServices from './../../../../../providerServices/index'
 import piso1 from './../../../../../assets/universidad/bibliotecas/CarlosGaviria/pisos/piso1.png'
 import piso2 from './../../../../../assets/universidad/bibliotecas/CarlosGaviria/pisos/piso2.png'
@@ -36,7 +38,7 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
   }
 
   applyFilter = async (filterObject: any) => {
-    let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
+    let providerServices = new ProviderServices(HOSTS.TURNOS.HOST)
     let filter = filterObject.filter
     let pcs:any = []
     await providerServices.postModel(`/ListarEquiposDisponiblesPorHora.php?horaConsulta=${filter.hour}`).then(res => {

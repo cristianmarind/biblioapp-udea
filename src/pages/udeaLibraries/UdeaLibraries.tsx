@@ -10,6 +10,8 @@ import {
 } from 'ionicons/icons';
 import HeaderBiblioapp from '../../components/general/headerBiblioapp/HeaderBiblioapp'
 import TextMaxSize from "./../../components/general/textMaxSize/TextMaxSize"
+
+import HOSTS from './../../providerServices/hosts.js'
 import ProviderServices from './../../providerServices/index'
 
 export default class UdeaLibraries extends React.Component<any, any> {
@@ -43,7 +45,7 @@ export default class UdeaLibraries extends React.Component<any, any> {
   }
 
   async componentDidMount(){
-    let providerServices = new ProviderServices('http://4c491fb9.ngrok.io/api')
+    let providerServices = new ProviderServices(HOSTS.LIBRARIES.HOST)
     let medellin = [], regiones = []
     try {
       let res = await providerServices.getModel('/libraries', {

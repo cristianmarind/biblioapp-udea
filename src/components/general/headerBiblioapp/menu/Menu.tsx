@@ -40,10 +40,10 @@ import udeaLibrariesLogo from './../../../../assets/biblioapp/icons/libro-2.png'
 import biblioappInfoLogo from './../../../../assets/biblioapp/icons/informacion.png'
 import eventsLogo from './../../../../assets/biblioapp/icons/eventos.png'
 
-
+import HOSTS from './../../../../providerServices/hosts.js'
 import ProviderServices from './../../../../providerServices/index'
 
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+let services = new ProviderServices(HOSTS.CIRENE.HOST)
 
 interface MenuProps extends RouteComponentProps {
   selectedPage: string;

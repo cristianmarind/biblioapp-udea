@@ -4,9 +4,11 @@ import { ProgressBar } from 'react-bootstrap';
 import { 
   trashOutline
  } from 'ionicons/icons';
+
+import HOSTS from './../../providerServices/hosts.js'
 import ProviderServices from './../../providerServices/index'
 
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+let services = new ProviderServices(HOSTS.CIRENE.HOST)
 
 
 export default class StoredSearches extends React.Component<any, any> {

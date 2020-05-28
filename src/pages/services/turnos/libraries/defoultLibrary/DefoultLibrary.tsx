@@ -13,6 +13,7 @@ import {
 } from '@ionic/react';
 import HeaderBiblioapp from '../../../../../components/general/headerBiblioapp/HeaderBiblioapp'
 import SearchFilter from './../../../../../components/turnos/searchFilter/SearchFilter'
+import HOSTS from './../../../../../providerServices/hosts.js'
 import ProviderServices from './../../../../../providerServices/index'
 
 
@@ -32,7 +33,7 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
   }
 
   applyFilter = async (filterObject: any) => {
-    let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
+    let providerServices = new ProviderServices(HOSTS.TURNOS.HOST)
     let filter = filterObject.filter
     let pcs: any = []
     this.setState({filter: filterObject})
@@ -66,7 +67,7 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
   }
 
   reserve(pcSelected:any, filter:any) {
-    let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
+    let providerServices = new ProviderServices(HOSTS.TURNOS.HOST)
     return new Promise((resolve, reject) => {
       if (!pcSelected) {
         reject({

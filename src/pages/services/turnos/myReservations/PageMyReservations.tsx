@@ -14,9 +14,10 @@ import {
   IonButton
 } from '@ionic/react';
 import HeaderBiblioapp from '../../../../components/general/headerBiblioapp/HeaderBiblioapp'
+import HOSTS from './../../../../providerServices/hosts.js'
 import ProviderServices from './../../../../providerServices/index'
 
-let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
+let providerServices = new ProviderServices(HOSTS.TURNOS.HOST)
 
 function refreshReservations(){
   return new Promise((resolve, reject) => {

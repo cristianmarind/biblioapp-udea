@@ -11,6 +11,7 @@ import {
   IonCardSubtitle
 } from '@ionic/react';
 import HeaderBiblioapp from '../../../../components/general/headerBiblioapp/HeaderBiblioapp'
+import HOSTS from './../../../../providerServices/hosts.js'
 import ProviderServices from './../../../../providerServices/index'
 
 export default class PageLibraries extends React.Component<any, any> {
@@ -29,7 +30,7 @@ export default class PageLibraries extends React.Component<any, any> {
   }
 
   componentDidMount(){
-    let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
+    let providerServices = new ProviderServices(HOSTS.TURNOS.HOST)
     providerServices.getModel(`/listarsalas.php`).then((res:any) => {
       let arr = []
       for (const iterator of res.data) {
