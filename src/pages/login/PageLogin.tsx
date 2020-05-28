@@ -8,7 +8,7 @@ import biblioappLogo from './../../assets/biblioapp/azul.png'
 import ProviderServices from './../../providerServices/index'
 
 
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+let services = new ProviderServices('http://cirene.udea.edu.co')
 
 export default () => {
   const history = useHistory();

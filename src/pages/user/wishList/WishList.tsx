@@ -8,7 +8,7 @@ import HeaderBiblioapp from '../../../components/general/headerBiblioapp/HeaderB
 import MaterialCard from './../../../components/lobby/MaterialCard'
 import ProviderServices from './../../../providerServices/index'
 
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+let services = new ProviderServices('http://cirene.udea.edu.co')
 
 export default class WishList extends React.Component<any, any> {
 

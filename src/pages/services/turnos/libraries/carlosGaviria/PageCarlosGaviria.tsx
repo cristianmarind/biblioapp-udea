@@ -36,7 +36,7 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
   }
 
   applyFilter = async (filterObject: any) => {
-    let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
+    let providerServices = new ProviderServices('http://biblioteca.udea.edu.co/turnos/services')
     let filter = filterObject.filter
     let pcs:any = []
     await providerServices.postModel(`/ListarEquiposDisponiblesPorHora.php?horaConsulta=${filter.hour}`).then(res => {

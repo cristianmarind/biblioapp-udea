@@ -29,7 +29,7 @@ export default class PageLibraries extends React.Component<any, any> {
   }
 
   componentDidMount(){
-    let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
+    let providerServices = new ProviderServices('http://biblioteca.udea.edu.co/turnos/services')
     providerServices.getModel(`/listarsalas.php`).then((res:any) => {
       let arr = []
       for (const iterator of res.data) {

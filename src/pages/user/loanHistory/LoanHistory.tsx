@@ -5,7 +5,7 @@ import HeaderBiblioapp from '../../../components/general/headerBiblioapp/HeaderB
 import ProviderServices from './../../../providerServices/index'
 import TextMaxSize from '../../../components/general/textMaxSize/TextMaxSize';
 
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+let services = new ProviderServices('http://cirene.udea.edu.co')
 
 export default class LoanHistory extends React.Component<any, any> {
 

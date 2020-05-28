@@ -22,7 +22,7 @@ import LogginLink from './../../components/general/logginLink/LogginLink'
 import Recommendations from './../../components/lobby/Recommendations'
 import StoredSearches from './../../components/lobby/StoredSearches'
 //import sss from './../../providerServices/services2'
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+let services = new ProviderServices('http://cirene.udea.edu.co')
 export default () => {
   const [saveQueryVisibility, setSaveQueryVisibility] = useState(false)
   const [isLoading, setIsLoading] = useState(false)

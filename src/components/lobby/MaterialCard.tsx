@@ -26,7 +26,7 @@ import star from './../../assets/biblioapp/icons/estrella.png'
 import heart from './../../assets/biblioapp/icons/corazon.png'
 
 import ProviderServices from './../../providerServices/index'
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+let services = new ProviderServices('http://cirene.udea.edu.co')
 
 export default (props: any) => {
   let history = useHistory();

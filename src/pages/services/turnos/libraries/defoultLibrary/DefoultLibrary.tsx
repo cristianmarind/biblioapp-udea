@@ -32,7 +32,7 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
   }
 
   applyFilter = async (filterObject: any) => {
-    let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
+    let providerServices = new ProviderServices('http://biblioteca.udea.edu.co/turnos/services')
     let filter = filterObject.filter
     let pcs: any = []
     this.setState({filter: filterObject})
@@ -66,7 +66,7 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
   }
 
   reserve(pcSelected:any, filter:any) {
-    let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
+    let providerServices = new ProviderServices('http://biblioteca.udea.edu.co/turnos/services')
     return new Promise((resolve, reject) => {
       if (!pcSelected) {
         reject({

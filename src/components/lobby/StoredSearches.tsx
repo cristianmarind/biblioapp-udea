@@ -6,7 +6,7 @@ import {
  } from 'ionicons/icons';
 import ProviderServices from './../../providerServices/index'
 
-let services = new ProviderServices('https://cors-anywhere.herokuapp.com/http://cirene.udea.edu.co')
+let services = new ProviderServices('http://cirene.udea.edu.co')
 
 
 export default class StoredSearches extends React.Component<any, any> {

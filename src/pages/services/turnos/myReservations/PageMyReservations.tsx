@@ -16,7 +16,7 @@ import {
 import HeaderBiblioapp from '../../../../components/general/headerBiblioapp/HeaderBiblioapp'
 import ProviderServices from './../../../../providerServices/index'
 
-let providerServices = new ProviderServices('https://cors-anywhere.herokuapp.com/http://biblioteca.udea.edu.co/turnos/services')
+let providerServices = new ProviderServices('http://biblioteca.udea.edu.co/turnos/services')
 
 function refreshReservations(){
   return new Promise((resolve, reject) => {
