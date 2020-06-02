@@ -111,7 +111,9 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
           <div className="custom-bg-fluorescent-green text-light text-center py-2">
             Reserva de equipos
           </div>
-          <IonTitle className="pt-3">{this.props.location.state?this.props.location.state.currentLocation:null}</IonTitle>
+          <div className="pt-1 pl-3">
+            <span className="pt-3 font-weight-bold">{this.props.location.state?this.props.location.state.currentLocation:null}</span>
+          </div>
           <SearchFilter applyFilter={this.applyFilter} />
           <div className="pt-2 px-3">
             <IonLabel>Resultados de busqueda</IonLabel>

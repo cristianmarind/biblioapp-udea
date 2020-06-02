@@ -10,16 +10,9 @@ import {
 } from '@ionic/react';
 import { 
   logInOutline,
-  calendarOutline, 
-  informationCircleOutline, 
-  laptopOutline, 
-  bookOutline,
   libraryOutline,
-  fileTrayFullOutline,
-  homeOutline,
   businessOutline,
-  pencilOutline,
-  codeDownloadOutline
+  pencilOutline
 } from 'ionicons/icons';
 import React from 'react';
 import { menuController } from '@ionic/core';
@@ -29,6 +22,8 @@ import SubMenu from './subMenu/SubMenu'
 import logo from './../../../../assets/universidad/logo_horizontal_blanco.png'
 import biblioappLogo from './../../../../assets/biblioapp/blanco.png'
 import logoutLogo from './../../../../assets/biblioapp/icons/cerrar.png'
+import lobbyLogo from './../../../../assets/biblioapp/icons/inicio.png'
+import electronicResourcesLogo from './../../../../assets/biblioapp/icons/resursos-electronicos.png'
 import servicesLogo from './../../../../assets/biblioapp/icons/servicios.png'
 import userLogo from './../../../../assets/biblioapp/icons/usuario.png'
 import institutionalRepositoryLogo from './../../../../assets/biblioapp/icons/repositorio.png'
@@ -60,7 +55,7 @@ const appPages: AppPage[] = [
   {
     title: 'Inicio',
     url: '/lobby',
-    icon: homeOutline,
+    icon: lobbyLogo,
   },
   {
     title: 'Mi cuenta',
@@ -89,7 +84,7 @@ const appPages: AppPage[] = [
       },
       {
         title: 'Recursos electrónicos',
-        icon: codeDownloadOutline,
+        icon: electronicResourcesLogo,
         url: '/electronicResources'
       },
       {

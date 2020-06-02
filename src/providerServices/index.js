@@ -2,6 +2,7 @@ import axios from 'axios'
 let codes = require('./responseCodes.js')
 let appKey = "UGT*Vh4e11@s";
 
+
 export default class ProviderService {
 
   constructor(rootAPI) {

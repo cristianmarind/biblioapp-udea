@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Plugins } from '@capacitor/core';
 import { useHistory } from "react-router-dom";
 import {
   IonCard,
@@ -12,22 +13,20 @@ import {
   IonImg,
   IonSlides,
   IonSlide,
-  IonList,
-  IonIcon
+  IonList
 } from '@ionic/react';
-import {
-  bookmarkOutline,
-  ribbonOutline
-} from 'ionicons/icons';
 import { Modal, ProgressBar } from 'react-bootstrap';
 import TextMaxSize from "./../general/textMaxSize/TextMaxSize"
 import shareSocial from './../../assets/biblioapp/icons/compartir.png'
 import star from './../../assets/biblioapp/icons/estrella.png'
 import heart from './../../assets/biblioapp/icons/corazon.png'
+import reserveIcon from './../../assets/biblioapp/icons/reservas.png'
+import refIcon from './../../assets/biblioapp/icons/referencia.png'
 
 import HOSTS from './../../providerServices/hosts.js'
 import ProviderServices from './../../providerServices/index'
 let services = new ProviderServices(HOSTS.CIRENE.HOST)
+const { Share } = Plugins
 
 export default (props: any) => {
   let history = useHistory();
@@ -113,6 +112,15 @@ export default (props: any) => {
     }).catch(err => {
       setMsg(err.msg)
       setIsLoadingModal(false)
+    })
+  }
+
+  const shareMaterial = () => {
+    Share.share({
+      title: 'Compartir material',
+      text: `¡Hola! Te comparto este material bibliográfico del Sistema de Bibliotecas desde la BiblioApp. Material: ${currentMaterial.titulo}`,
+      url: `http://aplicacionesbiblioteca.udea.edu.co/biblioApp/?isbn=${currentMaterial.isbn}&titleno=${currentMaterial.titleno}`,
+      dialogTitle: 'Compartir material'
     })
   }
 
@@ -277,7 +285,7 @@ export default (props: any) => {
             <IonRow>
               <IonCol className="d-flex flex-column align-items-center" onClick={() => { reserve() }} size="6">
                 <div className="custom-icon-lg">
-                  <IonImg src={ribbonOutline} />
+                  <IonImg src={reserveIcon} />
                 </div>
                 <IonText>Reservar</IonText>
               </IonCol>
@@ -290,11 +298,13 @@ export default (props: any) => {
               {
                 currentMaterial.isbn?
                 (<IonCol className="d-flex flex-column align-items-center" onClick={() => { getAPAReference() }} size="6">
-                <IonIcon className="mx-2" color="primary" size="large" icon={bookmarkOutline} />
-                <IonText className="">Referencia APA</IonText>
-              </IonCol>):null
+                  <div className="custom-icon-lg">
+                    <IonImg src={refIcon} />
+                  </div>
+                  <IonText className="">Referencia APA</IonText>
+                </IonCol>):null
               }
-              <IonCol className="d-flex flex-column align-items-center" onClick={() => { }} size="6">
+              <IonCol className="d-flex flex-column align-items-center" onClick={() => { shareMaterial() }} size="6">
                 <div className="custom-icon-lg">
                   <IonImg src={shareSocial} />
                 </div>

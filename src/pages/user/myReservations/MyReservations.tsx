@@ -3,7 +3,7 @@ import {
   trashOutline
  } from 'ionicons/icons';
 import { IonPage, IonContent, IonButton, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonGrid, IonRow, IonCol, IonText, IonIcon, IonAlert } from '@ionic/react';
-import { ProgressBar } from 'react-bootstrap';
+import { ProgressBar, Modal } from 'react-bootstrap';
 import HeaderBiblioapp from '../../../components/general/headerBiblioapp/HeaderBiblioapp'
 import ProviderServices from './../../../providerServices/index'
 import TextMaxSize from '../../../components/general/textMaxSize/TextMaxSize';
@@ -109,48 +109,58 @@ export default class MyReservations extends React.Component<any, any> {
               )
             })):(<div className="text-center pt-3">{this.state.errorMessage}</div>)
           }
-          <IonAlert
-            isOpen={this.state.deleteProcess == 1}
-            onDidDismiss={() => {this.setState({deleteProcess: 0})}}
-            header={'BiblioApp'}
-            message={'¿Esta seguro que desea eliminar su reserva?'}
-            buttons={[
-              {
-                text: 'Cancelar',
-                role: 'cancel',
-                cssClass: 'secondary'
-              },
-              {
-                text: 'Eliminar',
-                cssClass: 'danger',
-                handler: () => {
-                  this.deleteReservation(this.state.currentItem)
-                }
-              }
-            ]}
-          />
-          <IonAlert
-            isOpen={this.state.deleteProcess == 2}
-            onDidDismiss={() => this.setState({deleteProcess: 0})}
-            header={'BiblioApp'}
-            message={'Se ha eliminado su reserva exitosamente.'}
-            buttons={[
-              {
-                text: 'Cerrar'
-              }
-            ]}
-          />
-          <IonAlert
-            isOpen={this.state.deleteProcess == -1}
-            onDidDismiss={() => this.setState({deleteProcess: 0})}
-            header={'BiblioApp'}
-            message="No se pudo eliminar su reserva"
-            buttons={[
-              {
-                text: 'Cerrar'
-              }
-            ]}
-          />
+          <Modal show={this.state.deleteProcess == 1} onHide={() => { this.setState({deleteProcess: 0}) }}>
+            <Modal.Header closeButton>
+              <Modal.Title className="custom-text-green">
+                BiblioApp
+              </Modal.Title>
+            </Modal.Header>
+            <div className="pt-2 pb-4 px-3">
+              <div className="d-flex justify-content-center">
+                <span>¿Esta seguro que desea eliminar su reserva?</span>
+              </div>
+              <div className="d-flex justify-content-center">
+                <IonButton onClick={() => {this.setState({deleteProcess: 0})}}>
+                  Cancelar
+                </IonButton>
+                <IonButton color="danger" onClick={() => {this.deleteReservation(this.state.currentItem)}}>Eliminar</IonButton>
+              </div>
+            </div>
+          </Modal>
+          <Modal show={this.state.deleteProcess == 2} onHide={() => { this.setState({deleteProcess: 0}) }}>
+            <Modal.Header closeButton>
+              <Modal.Title className="custom-text-green">
+                BiblioApp
+              </Modal.Title>
+            </Modal.Header>
+            <div className="pt-2 pb-4 px-3">
+              <div className="d-flex justify-content-center">
+                <span>Se ha eliminado su reserva exitosamente.</span>
+              </div>
+              <div className="d-flex justify-content-center">
+                <IonButton onClick={() => {this.setState({deleteProcess: 0})}}>
+                  Cerrar
+                </IonButton>
+              </div>
+            </div>
+          </Modal>
+          <Modal show={this.state.deleteProcess == -1} onHide={() => { this.setState({deleteProcess: 0}) }}>
+            <Modal.Header closeButton>
+              <Modal.Title className="custom-text-green">
+                BiblioApp
+              </Modal.Title>
+            </Modal.Header>
+            <div className="pt-2 pb-4 px-3">
+              <div className="d-flex justify-content-center">
+                <span>No se pudo eliminar su reserva.</span>
+              </div>
+              <div className="d-flex justify-content-center">
+                <IonButton onClick={() => {this.setState({deleteProcess: 0})}}>
+                  Cerrar
+                </IonButton>
+              </div>
+            </div>
+          </Modal>
         </IonContent>
       </IonPage>
     )

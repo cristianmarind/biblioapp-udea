@@ -60,29 +60,10 @@ import './theme/customStyles.scss'
 localStorage.setItem('userId', '1152701738')
 localStorage.setItem('isLogged', 'true')*/
 
-import { Plugins } from '@capacitor/core';
-
-
-
-
-
 const App: React.FC = () => {
 
   const [selectedPage] = useState('');
-  const { Share } = Plugins;
 
-  Share.share({
-    title: 'See cool stuff',
-    text: 'Really awesome thing you need to see right meow',
-    url: 'http://ionicframework.com/',
-    dialogTitle: 'Share with buddies'
-  }).then(res => {
-    console.log(res);
-    
-  }).catch(err =>{
-    console.log(err);
-    
-  });
   return (
     <IonApp>
       <IonReactRouter>

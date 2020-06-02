@@ -45,32 +45,26 @@ export default class StoredSearches extends React.Component<any, any> {
         overflowY: 'auto',
         position: 'relative'
       }}>
-        <p className="px-3 pt-2 mb-0">Selecciona la búsqueda que quieres restablecer:</p>
-        <IonList>
-          {
-            this.state.storedSearches.map((item:any, index:any) => {
-              return (
-                <IonItem key={index}>
-                  <IonLabel onClick={() => { this.props.search(item.busquedaAlmacenada) }}>{item.busquedaAlmacenada}</IonLabel>
-                  <IonButtons onClick={() => { this.setState({deleteProcess: 1, currentItem: item.idBusqueda })}}>
-                    <IonIcon className="text-danger" icon={trashOutline} />
-                  </IonButtons>
-                </IonItem>
-              )
-            })
-          }
-        </IonList>
-        <div style={{
-          position: 'absolute',
-          left: '0',
-          right: '0',
-          bottom: '0'
-        }}>
-          {loading}
+        <div>
+          <p className="px-3 pt-2 mb-0">Selecciona la búsqueda que quieres restablecer:</p>
         </div>
-        <div style={{
-          zIndex: 100
-        }}>
+        <div className="overflow-auto h-75">
+          <IonList>
+            {
+              this.state.storedSearches.map((item:any, index:any) => {
+                return (
+                  <IonItem key={index}>
+                    <IonLabel onClick={() => { this.props.search(item.busquedaAlmacenada) }}>{item.busquedaAlmacenada}</IonLabel>
+                    <IonButtons onClick={() => { this.setState({deleteProcess: 1, currentItem: item.idBusqueda })}}>
+                      <IonIcon className="text-danger" icon={trashOutline} />
+                    </IonButtons>
+                  </IonItem>
+                )
+              })
+            }
+          </IonList>
+        </div>
+        <div>
           {
             this.state.deleteProcess == 1?
             (<div>
@@ -102,6 +96,14 @@ export default class StoredSearches extends React.Component<any, any> {
             </div>):null
           }
         </div>
+        <div style={{
+          position: 'absolute',
+          left: '0',
+          right: '0',
+          bottom: '0'
+        }}>
+          {loading}
+        </div>
       </div>
     )
   }
@@ -132,6 +134,8 @@ export default class StoredSearches extends React.Component<any, any> {
   }
 
   removeQuery = (idQuery:any) => {
+    console.log(1);
+    
     this.setState({
       isLoading: true,
       needUpdate: false,

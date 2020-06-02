@@ -24,11 +24,14 @@ import StoredSearches from './../../components/lobby/StoredSearches'
 
 import HOSTS from './../../providerServices/hosts.js'
 let services = new ProviderServices(HOSTS.CIRENE.HOST)
+
+
 export default () => {
   const [saveQueryVisibility, setSaveQueryVisibility] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isResult, setIsResult] = useState(false)
   const [visibilityStoredSearches, setVisibilityStoredSearches] = useState(false)
+  const [visibilitySearchStored, setVisibilitySearchStored] = useState(false)
   const [query, setQuery] = useState('')
   const [res, setRes] = useState<any>([])
   const handleCloseStoredSearches = () => setVisibilityStoredSearches(false);
@@ -36,6 +39,9 @@ export default () => {
 
   const search = (q?:any) => {
     let queryParam = q?q:query
+    if (!queryParam.trim()) {
+      return
+    }
     setRes([])
     setIsLoading(true)
     services.searchMaterial(queryParam).then(res => {
@@ -56,8 +62,7 @@ export default () => {
     setIsLoading(true)
     services.GuardarBusquedaPorUsuario(localStorage.getItem('userId'), query).then(res => {
       setIsLoading(false)
-      console.log(res);
-      alert("Se ha guardado correctamente")
+      setVisibilitySearchStored(true)
     }).catch(err => {
       setIsLoading(false)
       console.log(err);
@@ -157,6 +162,16 @@ export default () => {
             </Modal.Title>
           </Modal.Header>
           <StoredSearches search={selectOldSearch} />
+        </Modal>
+        <Modal show={visibilitySearchStored} onHide={() => { setVisibilitySearchStored(false) }}>
+          <Modal.Header closeButton>
+            <Modal.Title className="custom-text-green">
+              Busquedas guardadas
+            </Modal.Title>
+          </Modal.Header>
+          <div className="pt-2 pb-4 px-3">
+            Se ha guardado correctamente la busqueda realizada.
+          </div>
         </Modal>
       </IonContent>
     </IonPage>

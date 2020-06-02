@@ -8,7 +8,9 @@ import {
   IonCardContent, 
   IonImg,
   IonTitle,
-  IonCardSubtitle
+  IonCardSubtitle,
+  IonList,
+  IonCardTitle
 } from '@ionic/react';
 import HeaderBiblioapp from '../../../../components/general/headerBiblioapp/HeaderBiblioapp'
 import HOSTS from './../../../../providerServices/hosts.js'
@@ -63,7 +65,9 @@ export default class PageLibraries extends React.Component<any, any> {
                     <div className="custom-bg-fluorescent-green pt-2" />
                   </IonCardHeader>
                   <IonCardContent>
-                    <IonTitle>{library.name}</IonTitle>
+                    <div className="text-center">
+                      <span className="font-weight-bold">{library.name}</span>
+                    </div>
                   </IonCardContent>
                 </IonCard>
               )
@@ -88,9 +92,13 @@ export default class PageLibraries extends React.Component<any, any> {
                 <IonCard>
                   <IonCardHeader>
                     <div className="custom-bg-fluorescent-green pt-2" />
-                    <IonTitle>{library.nombreBiblioteca}</IonTitle>
-                    <IonCardSubtitle>{library.ubicacion}</IonCardSubtitle>
                   </IonCardHeader>
+                  <IonCardContent>
+                    <div className="d-flex flex-column">
+                      <span className="font-weight-bold text-center">{library.nombreBiblioteca}</span>
+                      <span>{library.ubicacion}</span>
+                    </div>
+                  </IonCardContent>
                 </IonCard>
                 </Link>
               )

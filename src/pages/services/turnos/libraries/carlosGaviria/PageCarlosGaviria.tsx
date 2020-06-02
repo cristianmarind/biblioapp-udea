@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { 
   IonPage, 
   IonContent, 
-  IonTitle,
   IonImg,
   IonGrid,
   IonRow,
   IonCol
 } from '@ionic/react';
-import { Accordion, Card, Button } from 'react-bootstrap';
+
+import { Accordion, Card, Button, ProgressBar } from 'react-bootstrap';
 import HeaderBiblioapp from '../../../../../components/general/headerBiblioapp/HeaderBiblioapp'
 import SearchFilter from './../../../../../components/turnos/searchFilter/SearchFilter'
 
@@ -33,11 +33,15 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
       piso2Central: [],
       plantaBaja: [],
       plantaBajaAudiovisuales: [],
-      filter: {}
+      filter: {},
+      isLoading: false
     };
   }
 
   applyFilter = async (filterObject: any) => {
+    this.setState({
+      isLoading: true
+    })
     let providerServices = new ProviderServices(HOSTS.TURNOS.HOST)
     let filter = filterObject.filter
     let pcs:any = []
@@ -79,7 +83,8 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
       piso2Central: [] as any,
       plantaBaja: [] as any,
       plantaBajaAudiovisuales: [] as any,
-      filter: filterObject
+      filter: filterObject,
+      isLoading: false
     }
     for (const pc of pcs) {
       switch (pc.nombreSala) {
@@ -113,18 +118,23 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
     return (
       <IonPage>
         <HeaderBiblioapp />
+        {
+          this.state.isLoading?(<ProgressBar style={{"height": ".5em"}} animated now={100} variant="success" />):null
+        }
         <IonContent>
           <div className="custom-bg-fluorescent-green text-light text-center py-2">
             Reserva de equipos
           </div>
-          <div className="pt-3 text-center">
-            <IonTitle>Carlos Gaviria Diaz</IonTitle>
+          <div className="pt-3 text-center font-weight-bold">
+            <span>Carlos Gaviria Diaz</span>
           </div>
           <SearchFilter applyFilter={this.applyFilter} />
-          <div className="mb-2">
+          <div className="mb-2 px-2">
             <span>Selecciona la sala que deseas utilizar</span>
           </div>
-          <Accordion defaultActiveKey="0">
+          {
+            !this.state.isLoading?
+            (<Accordion defaultActiveKey="0">
             <Card>
               <Card.Header className="py-0 border-0">
                 <Accordion.Toggle className="w-100 py-0 position-relative" as={Button} variant="link" eventKey="0">
@@ -286,7 +296,8 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
                 </Card.Body>
               </Accordion.Collapse>
             </Card>
-          </Accordion>
+          </Accordion>):null
+          }
         </IonContent>
       </IonPage>
     )
