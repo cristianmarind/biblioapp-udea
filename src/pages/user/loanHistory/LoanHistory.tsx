@@ -31,12 +31,9 @@ export default class LoanHistory extends React.Component<any, any> {
     }
     return (
       <IonPage>
-        <HeaderBiblioapp />
+        <HeaderBiblioapp history={this.props.history} />
         {loadingTemplate}
         <IonContent>
-          <div className="custom-bg-fluorescent-green text-light text-center py-2">
-            Historial de prestamos
-          </div>
           {
             this.state.loanHistory.length?
             (this.state.loanHistory.map((item: any, index: any) => {

@@ -117,14 +117,11 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
   render() {
     return (
       <IonPage>
-        <HeaderBiblioapp />
+        <HeaderBiblioapp history={this.props.history} />
         {
           this.state.isLoading?(<ProgressBar style={{"height": ".5em"}} animated now={100} variant="success" />):null
         }
         <IonContent>
-          <div className="custom-bg-fluorescent-green text-light text-center py-2">
-            Reserva de equipos
-          </div>
           <div className="pt-3 text-center font-weight-bold">
             <span>Carlos Gaviria Diaz</span>
           </div>
@@ -252,7 +249,7 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
               <Card.Header className="py-0 border-0">
                 <Accordion.Toggle className="w-100 py-0 position-relative" as={Button} variant="link" eventKey="3">
                   <IonImg src={piso1} />
-                  <div className="labelPiso custom-bg-fluorescent-green text-light">PISO 1</div>
+                  <div className="labelPiso custom-bg-fluorescent-green text-light">PLANTA BAJA</div>
                 </Accordion.Toggle>
               </Card.Header>
               <Accordion.Collapse eventKey="3">

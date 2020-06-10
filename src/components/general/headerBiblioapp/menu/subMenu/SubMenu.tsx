@@ -25,6 +25,7 @@ export default class SubMenu extends React.Component<any, any> {
           if (appPage.urls) {
             return (
               <SubMenu 
+                history={this.props.history}
                 key={index} 
                 appPages={appPage.urls} 
                 title={appPage.title} 
@@ -32,12 +33,17 @@ export default class SubMenu extends React.Component<any, any> {
                 isSecundary={true}
                 hidden={true} />
             );
-          } else {
+          } else {//appPage.url
             return (
               <IonMenuToggle key={index} autoHide={false}>
                 <IonItem 
                   className="itemMenu bg-transparent text-light"
-                  routerLink={appPage.url} 
+                  onClick={() => {
+                    this.props.history.push({
+                      pathname: appPage.url,
+                      state: { refresh: true }
+                    })
+                  }} 
                   routerDirection="none" 
                   lines="none" 
                   detail={false}

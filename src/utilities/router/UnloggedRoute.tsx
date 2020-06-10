@@ -11,7 +11,7 @@ export default class LoggedRoute extends React.Component<any, any> {
           render={props => (
               !localStorage.getItem('isLogged')?
               <Component {...props} /> :
-              <Redirect to='/lobby' />
+              <Redirect to='/' />
           )} 
         />
       )

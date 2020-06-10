@@ -13,10 +13,10 @@ import HeaderBiblioapp from '../../components/general/headerBiblioapp/HeaderBibl
 import logoVerde from './../../assets/universidad/logo_verde.png'
 import biblioappLogo from './../../assets/biblioapp/azul.png'
 
-export default () => {
+export default (props:any) => {
   return (
     <IonPage>
-      <HeaderBiblioapp />
+      <HeaderBiblioapp history={props.history} />
       <IonContent>
         <IonCard>
           <IonImg src={biblioappLogo} />

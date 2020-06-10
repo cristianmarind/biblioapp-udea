@@ -34,15 +34,13 @@ import supplyDocumentsLogo from './../../../../assets/biblioapp/icons/suministro
 import udeaLibrariesLogo from './../../../../assets/biblioapp/icons/libro-2.png'
 import biblioappInfoLogo from './../../../../assets/biblioapp/icons/informacion.png'
 import eventsLogo from './../../../../assets/biblioapp/icons/eventos.png'
+import requestTrainingLogo from './../../../../assets/biblioapp/icons/capacitaciones.png'
 
 import HOSTS from './../../../../providerServices/hosts.js'
 import ProviderServices from './../../../../providerServices/index'
 
 let services = new ProviderServices(HOSTS.CIRENE.HOST)
 
-interface MenuProps extends RouteComponentProps {
-  selectedPage: string;
-}
 
 interface AppPage {
   url?: string;
@@ -89,7 +87,7 @@ const appPages: AppPage[] = [
       },
       {
         title: 'Solicita material bibliografico',
-        icon: libraryOutline,
+        icon: udeaLibrariesLogo,
         url: '/bibliographicMaterial'
       },
       {
@@ -109,7 +107,7 @@ const appPages: AppPage[] = [
       },
       {
         title: 'Solicitud de capacitaciones',
-        icon: pencilOutline,
+        icon: requestTrainingLogo,
         url: '/requestTraining'
       },
     ]
@@ -138,8 +136,7 @@ const appPages: AppPage[] = [
 ];
 //onClick={()=>{appPage.isActive = true}}
 
-const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
-  const history = useHistory();
+const Menu: React.FunctionComponent<any> = (props) => {
   let loginItem, logoutItem
   if (localStorage.getItem('isLogged')) {
     logoutItem = (
@@ -150,7 +147,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
         onClick={() => {
           services.logout().then(() => {
             menuController.close()
-            history.push("/")
+            props.history.push("/")
           })
         }}
       >
@@ -186,7 +183,7 @@ const Menu: React.FunctionComponent<MenuProps> = ({ selectedPage }) => {
           </div>
           <div className="pl-2">
             { loginItem }
-            <SubMenu appPages={appPages} hidden={false} />
+            <SubMenu history={props.history} appPages={appPages} hidden={false} />
             { logoutItem }
 
           </div>

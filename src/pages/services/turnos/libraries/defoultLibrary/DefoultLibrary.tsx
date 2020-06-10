@@ -2,7 +2,6 @@ import React from 'react'
 import {
   IonPage,
   IonContent,
-  IonTitle,
   IonLabel,
   IonList,
   IonRadioGroup,
@@ -106,11 +105,8 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
   render() {
     return (
       <IonPage>
-        <HeaderBiblioapp />
+        <HeaderBiblioapp history={this.props.history} />
         <IonContent>
-          <div className="custom-bg-fluorescent-green text-light text-center py-2">
-            Reserva de equipos
-          </div>
           <div className="pt-1 pl-3">
             <span className="pt-3 font-weight-bold">{this.props.location.state?this.props.location.state.currentLocation:null}</span>
           </div>
@@ -206,7 +202,10 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
             {
               text: 'Cerrar',
               handler: () => {
-                this.props.history.push('/turnos/myreservations')
+                this.props.history.push({
+                  pathname: '/turnos/myreservations',
+                  state: { refresh: true }
+                })
               }
             }
           ]}

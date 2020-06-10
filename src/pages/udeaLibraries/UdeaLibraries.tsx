@@ -82,11 +82,8 @@ export default class UdeaLibraries extends React.Component<any, any> {
   render() {
     return (
       <IonPage>
-        <HeaderBiblioapp />
+        <HeaderBiblioapp history={this.props.history} />
         <IonContent>
-          <div className="custom-bg-fluorescent-green text-light text-center py-2">
-            Bibliotecas UdeA
-          </div>
           <Tabs defaultActiveKey="libraryLocation-0" id="tab-udea-libraires">
             {
               this.state.librariesLocation.map((item: any, index: any) => {

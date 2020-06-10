@@ -44,12 +44,9 @@ export default class PageMyAccount extends React.Component<any, any> {
     }
     return (
       <IonPage>
-        <HeaderBiblioapp />
+        <HeaderBiblioapp history={this.props.history} />
         {loadingTemplate}
         <IonContent>
-          <div className="custom-bg-fluorescent-green text-light text-center py-2">
-            Mis cuenta
-          </div>
           <IonList className="custom-border-color-green profileInformation pb-0">
             <IonItem>
               <IonIcon className="custom-text-green pr-1" icon={personCircleOutline} />
@@ -70,19 +67,47 @@ export default class PageMyAccount extends React.Component<any, any> {
             </IonItem>
           </IonList>
           <IonList>
-            <IonItem routerLink="/account/wishList" >
+            <IonItem 
+              onClick={() => {
+                this.props.history.push({
+                  pathname: '/account/wishList',
+                  state: { refresh: true }
+                })
+              }}
+            >
               <IonIcon className="custom-text-green pr-1" size="large" icon={heart} />
               <IonLabel>Mi lista de deseos</IonLabel>
             </IonItem>
-            <IonItem routerLink="/account/activeLoans">
+            <IonItem
+              onClick={() => {
+                this.props.history.push({
+                  pathname: '/account/activeLoans',
+                  state: { refresh: true }
+                })
+              }}
+            >
               <IonIcon className="custom-text-green pr-1" size="large" icon={bookmark} />
               <IonLabel>Mis prestamos activos</IonLabel>
             </IonItem>
-            <IonItem routerLink="/account/loanHistory">
+            <IonItem
+              onClick={() => {
+                this.props.history.push({
+                  pathname: '/account/loanHistory',
+                  state: { refresh: true }
+                })
+              }}
+            >
               <IonIcon className="custom-text-green pr-1" size="large" icon={wallet} />
               <IonLabel>Mi historial de prestamos</IonLabel>
             </IonItem>
-            <IonItem routerLink="/account/myReservations">
+            <IonItem
+              onClick={() => {
+                this.props.history.push({
+                  pathname: '/account/myReservations',
+                  state: { refresh: true }
+                })
+              }}
+            >
               <IonIcon className="custom-text-green pr-1" size="large" icon={calendarOutline} />
               <IonLabel>Mis reservas</IonLabel>
             </IonItem>

@@ -52,11 +52,8 @@ export default class UdeaDocCenters extends React.Component<any, any> {
   render() {
     return (
       <IonPage>
-        <HeaderBiblioapp />
+        <HeaderBiblioapp history={this.props.history} />
         <IonContent>
-          <div className="custom-bg-fluorescent-green text-light text-center py-2">
-            Centros de documentación UdeA
-          </div>
           <IonList>
             {
               this.state.libraries.map((library: any, libraryIndex: any) => {

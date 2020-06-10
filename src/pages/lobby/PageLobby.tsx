@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Modal, ProgressBar } from 'react-bootstrap';
 import {
   IonPage,
@@ -26,7 +26,7 @@ import HOSTS from './../../providerServices/hosts.js'
 let services = new ProviderServices(HOSTS.CIRENE.HOST)
 
 
-export default () => {
+export default (props:any) => {
   const [saveQueryVisibility, setSaveQueryVisibility] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [isResult, setIsResult] = useState(false)
@@ -36,6 +36,17 @@ export default () => {
   const [res, setRes] = useState<any>([])
   const handleCloseStoredSearches = () => setVisibilityStoredSearches(false);
   const [errorMessage, setErrorMessage] = useState('')
+
+  useEffect(() => {
+    setSaveQueryVisibility(false)
+    setIsLoading(false)
+    setIsResult(false)
+    setVisibilityStoredSearches(false)
+    setVisibilitySearchStored(false)
+    setQuery('')
+    setRes([])
+    setErrorMessage('')
+  }, [props.location.state])
 
   const search = (q?:any) => {
     let queryParam = q?q:query
@@ -102,7 +113,7 @@ export default () => {
 
   return (
     <IonPage>
-      <HeaderBiblioapp />
+      <HeaderBiblioapp history={props.history} />
       { loading }
       <IonContent>
         <IonList>
@@ -115,6 +126,11 @@ export default () => {
               value={query}
               onIonChange={(e:any)=>{
                 setQuery(e.detail.value)
+              }}
+              onKeyPress={e => {
+                if(e.key === 'Enter'){
+                  search()
+                }
               }}
             />
             <IonButton onClick={() => { search() }}>Buscar</IonButton>

@@ -10,7 +10,7 @@ import ProviderServices from './../../providerServices/index'
 import HOSTS from './../../providerServices/hosts.js'
 let services = new ProviderServices(HOSTS.CIRENE.HOST)
 
-export default () => {
+export default (props:any) => {
   const history = useHistory();
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -32,7 +32,7 @@ export default () => {
   }
   return (
     <IonPage>
-      <HeaderBiblioapp />
+      <HeaderBiblioapp history={props.history} />
       <IonContent>
         {loadingTemplate}
         <IonList className="px-4">

@@ -53,15 +53,14 @@ function cancelReservation(code:any){
   })
 }
 
-export default () => {
-  //const location = useLocation();
+export default (props: any) => {
   const [showConfirmAlert, setShowConfirmAlert] = useState(false);
   const [showCorrectAlert, setShowCorrectAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [reserves, setReserves] = useState([]);
   const [reserveToCancel, setReserveToCancel] = useState('');
-  
+
   useEffect(() => {
     refreshReservations().then((res:any) => {
       setReserves(res.data)
@@ -69,16 +68,13 @@ export default () => {
       setErrorMessage(err.message)
       setShowErrorAlert(true)
     })
-  }, [showCorrectAlert/*, location*/])
+  }, [showCorrectAlert, props.location.state])
 
   return (
     <IonPage>
-      <HeaderBiblioapp />
+      <HeaderBiblioapp history={props.history} />
       <IonContent>
         <IonList>
-          <IonListHeader>
-            <IonTitle className="custom-text-green">Mis reservas</IonTitle>
-          </IonListHeader>
           {
             reserves.length > 0?
             (reserves.map((item:any, index:any) => {

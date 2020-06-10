@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { isArray } from 'util';
+import { Modal, ProgressBar } from 'react-bootstrap';
 import {
   IonPage,
   IonContent,
@@ -80,7 +81,7 @@ export default (props: any) => {
 
   return (
     <IonPage>
-      <HeaderBiblioapp />
+      <HeaderBiblioapp history={props.history} />
       <IonContent>
         <div className="pt-2 px-3">
           <IonLabel>Resultados de busqueda</IonLabel>
@@ -128,6 +129,8 @@ export default (props: any) => {
             <IonImg src={sala} />
           </IonCardContent>
         </IonCard>
+        
+
         <IonAlert
           isOpen={showConfirmAlert}
           onDidDismiss={() => setShowConfirmAlert(false)}
@@ -161,7 +164,10 @@ export default (props: any) => {
             {
               text: 'Cerrar',
               handler: () => {
-                props.history.push('/turnos/myreservations')
+                props.history.push({
+                  pathname: '/turnos/myreservations',
+                  state: { refresh: true }
+                })
               }
             }
           ]}
@@ -181,3 +187,16 @@ export default (props: any) => {
     </IonPage>
   )
 }
+
+/*
+<Modal show={visibilitySearchStored} onHide={() => { setVisibilitySearchStored(false) }}>
+  <Modal.Header closeButton>
+    <Modal.Title className="custom-text-green">
+      Busquedas guardadas
+    </Modal.Title>
+  </Modal.Header>
+  <div className="pt-2 pb-4 px-3">
+    Se ha guardado correctamente la busqueda realizada.
+  </div>
+</Modal>
+*/

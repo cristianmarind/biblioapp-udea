@@ -51,11 +51,8 @@ export default class PageLibraries extends React.Component<any, any> {
   render(){
     return (
       <IonPage>
-        <HeaderBiblioapp />
+        <HeaderBiblioapp history={this.props.history} />
         <IonContent>
-          <div className="custom-bg-fluorescent-green text-light text-center py-2">
-            Reserva de equipos
-          </div>
           {
             this.state.librariesCustomDesign.map((library:any, index:any) => {
               return (

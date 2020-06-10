@@ -18,10 +18,16 @@ export default class WishList extends React.Component<any, any> {
     this.state = {
       wishList: [],
       isLoading: false,
-      needUpdate: false,
+      needUpdate: this.props.location.state.refresh,
       errorMessage: '',
       deleteProcess: 0,
       currentItem: null
+    }
+  }
+
+  componentWillReceiveProps(nextProps:any){
+    if (nextProps.location.pathname == '/account/wishList') {
+      this.getWishList()
     }
   }
 
@@ -42,12 +48,9 @@ export default class WishList extends React.Component<any, any> {
     }
     return (
       <IonPage>
-        <HeaderBiblioapp />
+        <HeaderBiblioapp history={this.props.history} />
         {loadingTemplate}
         <IonContent>
-          <div className="custom-bg-fluorescent-green text-light text-center py-2">
-            Mi lista de deseos
-          </div>
           {
             this.state.wishList.length?
             (

@@ -69,33 +69,34 @@ const App: React.FC = () => {
       <IonReactRouter>
         <IonSplitPane contentId="main">
           <Menu selectedPage={selectedPage} />
-          <IonRouterOutlet id="main">
-            <UnloggedRoute path="/" component={PageLogin} exact={true} />
-            <Route path="/lobby" component={PageLobby} exact={true} />
-            <Route path="/libraries" component={PageUdeaLibraries} exact={true} />
-            <Route path="/docCenters" component={PageUdeaDocCenters} exact={true} />
-            <Route path="/events" component={PageEvents} exact={true} />
-            <Route path="/biblioappInfo" component={PageBiblioappInfo} exact={true} />
-            <LoggedRoute path="/turnos/libraries" component={PageLibraries} exact={true} />
-            <LoggedRoute path="/turnos/Reservar" component={PageReserve} exact={true} />
-            <LoggedRoute path="/turnos/myreservations" component={PageMyReservations} exact={true} />
-            <LoggedRoute path="/turnos/libraries/carlosGaviria" component={PageCarlosGaviria} exact={true} />
-            <LoggedRoute path="/turnos/libraries/defoultLibrary" component={PageDefoultLibrary} exact={true} />
-            <LoggedRoute path="/material/materiaReview" component={PageMaterialReviews} exact={true} />
-            <Route path="/bibliographicSearcher" component={PageMyReservations} exact={true} />
-            <Route path="/bibliographicMaterial" component={PageBibliographicMaterial} exact={true} />
-            <Route path="/institutionalRepository" component={PageInstitutionalRepository} exact={true} />
-            <Route path="/supplyDocuments" component={PageSupplyDocuments} exact={true} />
-            <Route path="/spaceReservation" component={PageSpaceReservation} exact={true} />
-            <Route path="/requestTraining" component={PageRequestTraining} exact={true} />
-            <Route path="/electronicResources" component={ElectronicResources} exact={true} />
-            <LoggedRoute path="/myAccount" component={PageMyAccount} exact={true} />
-            <LoggedRoute path="/account/activeLoans" component={PageActiveLoans} exact={true} />
-            <LoggedRoute path="/account/wishList" component={PageWishList} exact={true} />
-            <LoggedRoute path="/account/loanHistory" component={PageLoanHistory} exact={true} />
-            <LoggedRoute path="/account/myReservations" component={MyReservations} exact={true} />
-            <LoggedRoute path="/account/myReviews" component={PageMyReviews} exact={true} />
-         </IonRouterOutlet>
+            <IonRouterOutlet id="main">
+              <Route path="/" component={PageLobby} exact={true} />
+              <UnloggedRoute path="/login" component={PageLogin} exact={true} />
+              <Route path="/lobby" component={PageLobby} exact={true} />
+              <Route path="/libraries" component={PageUdeaLibraries} exact={true} />
+              <Route path="/docCenters" component={PageUdeaDocCenters} exact={true} />
+              <Route path="/events" component={PageEvents} exact={true} />
+              <Route path="/biblioappInfo" component={PageBiblioappInfo} exact={true} />
+              <LoggedRoute path="/turnos/libraries" component={PageLibraries} exact={true} />
+              <LoggedRoute path="/turnos/Reservar" component={PageReserve} exact={true} />
+              <LoggedRoute path="/turnos/myreservations" component={PageMyReservations} exact={true} />
+              <LoggedRoute path="/turnos/libraries/carlosGaviria" component={PageCarlosGaviria} exact={true} />
+              <LoggedRoute path="/turnos/libraries/defoultLibrary" component={PageDefoultLibrary} exact={true} />
+              <LoggedRoute path="/material/materiaReview" component={PageMaterialReviews} exact={true} />
+              <Route path="/bibliographicSearcher" component={PageMyReservations} exact={true} />
+              <Route path="/bibliographicMaterial" component={PageBibliographicMaterial} exact={true} />
+              <Route path="/institutionalRepository" component={PageInstitutionalRepository} exact={true} />
+              <Route path="/supplyDocuments" component={PageSupplyDocuments} exact={true} />
+              <Route path="/spaceReservation" component={PageSpaceReservation} exact={true} />
+              <Route path="/requestTraining" component={PageRequestTraining} exact={true} />
+              <Route path="/electronicResources" component={ElectronicResources} exact={true} />
+              <LoggedRoute path="/myAccount" component={PageMyAccount} exact={true} />
+              <LoggedRoute path="/account/activeLoans" component={PageActiveLoans} exact={true} />
+              <LoggedRoute path="/account/wishList" component={PageWishList} exact={true} />
+              <LoggedRoute path="/account/loanHistory" component={PageLoanHistory} exact={true} />
+              <LoggedRoute path="/account/myReservations" component={MyReservations} exact={true} />
+              <LoggedRoute path="/account/myReviews" component={PageMyReviews} exact={true} />
+          </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
     </IonApp>

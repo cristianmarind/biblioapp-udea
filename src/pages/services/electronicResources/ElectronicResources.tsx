@@ -2,14 +2,11 @@ import React from 'react'
 import { IonPage, IonContent } from '@ionic/react';
 import HeaderBiblioapp from '../../../components/general/headerBiblioapp/HeaderBiblioapp'
 
-export default () => {
+export default (props:any) => {
     return (
         <IonPage>
-            <HeaderBiblioapp />
+            <HeaderBiblioapp history={props.history} />
             <IonContent>
-                <div className="custom-bg-fluorescent-green text-light text-center py-2">
-                    Recursos electrónicos 
-                </div>
                 <iframe 
                     title="Recursos electrónicos "
                     width="100%"

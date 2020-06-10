@@ -24,8 +24,10 @@ export default class MyReservations extends React.Component<any, any> {
     }
   }
 
-  componentDidMount() {
-    this.getMyReservations()
+  componentWillReceiveProps(nextProps:any){
+    if (nextProps.location.pathname == '/account/myReservations') {
+      this.getMyReservations()
+    }
   }
 
   render() {
@@ -35,12 +37,9 @@ export default class MyReservations extends React.Component<any, any> {
     }
     return (
       <IonPage>
-        <HeaderBiblioapp />
+        <HeaderBiblioapp history={this.props.history} />
         {loadingTemplate}
         <IonContent>
-          <div className="custom-bg-fluorescent-green text-light text-center py-2">
-            Mis reservas
-          </div>
           {
             this.state.myReservations.length?
             (this.state.myReservations.map((item: any, index: any) => {

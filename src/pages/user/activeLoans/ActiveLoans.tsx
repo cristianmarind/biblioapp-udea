@@ -19,22 +19,21 @@ export default class ActiveLoans extends React.Component<any, any> {
     }
   }
 
-  componentDidMount() {
-    this.getActiveLoans()
+  componentWillReceiveProps(nextProps:any){
+    if (nextProps.location.pathname == '/account/activeLoans') {
+      this.getActiveLoans()
+    }
   }
 
   render() {
     return (
       <IonPage>
-        <HeaderBiblioapp />
+        <HeaderBiblioapp history={this.props.history} />
         {
           this.state.isLoading?
           (<ProgressBar style={{ "height": ".5em" }} animated now={100} variant="success" />):null
         }
         <IonContent>
-          <div className="custom-bg-fluorescent-green text-light text-center py-2">
-            Mis prestamos activos
-          </div>
           {
             this.state.activeLoans.length?
             (this.state.activeLoans.map((item: any, index: any) => {
