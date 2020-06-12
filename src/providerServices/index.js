@@ -353,7 +353,7 @@ export default class ProviderService {
       this.postModelFormData('/services_OLIB/APP_RenovarMaterial.php', bodydata).then(response => {
         if (response.data.respuesta == 'true') {
           resolve(response.data.mensaje)
-        }else{
+        } else {
           reject({
             msg: response.data.mensaje
           })
@@ -369,8 +369,8 @@ export default class ProviderService {
 
   }
 
-  getRecommendations(){
-    var bodydata = [{ appKey: appKey, documentoUsuario: localStorage.getItem('userId')}];
+  getRecommendations() {
+    var bodydata = [{ appKey: appKey, documentoUsuario: localStorage.getItem('userId') }];
     return new Promise((resolve, reject) => {
       if (!localStorage.getItem('isLogged')) {
         reject({
@@ -512,13 +512,13 @@ export default class ProviderService {
             reject({
               msg: message[0].mensaje
             })
-          }else{
+          } else {
             reject({
               msg: codes.CODES.DEFAULT.MSG,
               error: null
             })
           }
-        }else{
+        } else {
           reject({
             msg: codes.CODES.DEFAULT.MSG,
             error: null
@@ -553,13 +553,13 @@ export default class ProviderService {
             reject({
               msg: codes.CODES.ERROR_DELETEBOOKING.MSG
             })
-          }else{
+          } else {
             reject({
               msg: codes.CODES.DEFAULT.MSG,
               error: null
             })
           }
-        }else{
+        } else {
           reject({
             msg: codes.CODES.DEFAULT.MSG,
             error: null
@@ -613,6 +613,88 @@ export default class ProviderService {
       })
     })
   }
+  getEventList() {
+    var bodydata = [{ appKey: appKey, documentoUsuario: localStorage.getItem('userId'), miCuenta: "true" }];
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('isLogged')) {
+        return reject({
+          msg: codes.CODES.UNLOGGED_USER.MSG
+        })
+      }
+      this.postModelFormData('/programador/services/listareventosActivosApp.php', bodydata).then(response => {
+
+        if (response.data.length !== 0) {
+          //console.log(response.data)
+          resolve(response.data)
+        } else {
+          reject({
+            msg: codes.CODES.EMPTY_EVENTLIST.MSG
+          })
+        }
+
+      }).catch(error => {
+        reject({
+          msg: codes.CODES.DEFAULT.MSG,
+          error
+        })
+      })
+    })
+  }
+  deleteEventListItem(idEvent) {
+    var bodydata = [{ appKey: appKey, documentoUsuario: localStorage.getItem('userId'), idEvento: idEvent }];
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('isLogged')) {
+        return reject({
+          msg: codes.CODES.UNLOGGED_USER.MSG
+        })
+      }
+      this.postModelFormData('/programador/services/EliminarEventoPorUsuarioApp.php', bodydata).then(response => {
+        //console.log(JSON.parse(response.data))    
+        //if (response.data.resultadoEliminarBusqueda == true) {
+        resolve(response.data)
+        //   resolve(response.data.mensajeServicio)
+
+        // } else {
+        //   reject({
+        //     msg: codes.CODES.ERROR_DELETEWISHLIST.MSG
+        //   })
+        // }
+
+      }).catch(error => {
+        reject({
+          msg: codes.CODES.DEFAULT.MSG,
+          error
+        })
+      })
+    })
+  }
+  getEventPublishedList() {
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('isLogged')) {
+        return reject({
+          msg: codes.CODES.UNLOGGED_USER.MSG
+        })
+      }
+      this.postModelFormData('/programador/services/ListarEventosPublicados.php').then(response => {
+
+        if (response.data.length !== 0) {
+          //console.log(response)
+          resolve(response.data)
+        } else {
+          reject({
+            msg: codes.CODES.EMPTY_EVENTPUBLISHEDLIST.MSG
+          })
+        }
+
+      }).catch(error => {
+        reject({
+          msg: codes.CODES.DEFAULT.MSG,
+          error
+        })
+      })
+    })
+  }
+
   login(username, password) {
     return new Promise((resolve, reject) => {
       this.validarusuarioportal(username, password).then(res => {

@@ -111,6 +111,17 @@ export default class PageMyAccount extends React.Component<any, any> {
               <IonIcon className="custom-text-green pr-1" size="large" icon={calendarOutline} />
               <IonLabel>Mis reservas</IonLabel>
             </IonItem>
+            <IonItem
+              onClick={() => {
+                this.props.history.push({
+                  pathname: '/account/myEvents',
+                  state: { refresh: true }
+                })
+              }}
+            >
+              <IonIcon className="custom-text-green pr-1" size="large" icon={calendarOutline} />
+              <IonLabel>Mis eventos</IonLabel>
+            </IonItem>
           </IonList>
         </IonContent>
       </IonPage>
