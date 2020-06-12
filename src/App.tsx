@@ -23,7 +23,7 @@ import PageCarlosGaviria from './pages/services/turnos/libraries/carlosGaviria/P
 import PageDefoultLibrary from './pages/services/turnos/libraries/defoultLibrary/DefoultLibrary'
 import PageMaterialReviews from './pages/services/reviews/materialReviews/MaterialReviews'
 import PageMyReviews from './pages/user/myReviews/MyReviews'
-
+import PageMyEvents from './pages/user/myEvents/MyEvents'
 
 import React, { useState } from 'react';
 import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
@@ -96,6 +96,7 @@ const App: React.FC = () => {
               <LoggedRoute path="/account/loanHistory" component={PageLoanHistory} exact={true} />
               <LoggedRoute path="/account/myReservations" component={MyReservations} exact={true} />
               <LoggedRoute path="/account/myReviews" component={PageMyReviews} exact={true} />
+              <LoggedRoute path="/account/myEvents" component={PageMyEvents} exact={true}/>
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

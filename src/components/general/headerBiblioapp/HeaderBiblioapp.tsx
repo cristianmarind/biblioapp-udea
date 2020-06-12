@@ -98,10 +98,20 @@ const BiblioappInfo = (props:any) => {
       route: '/docCenters',
       title: 'Centros de documentación UdeA',
       backActive: false
+    },
+    {
+      route: '/account/myEvents',
+      title: 'Mis eventos',
+      backActive: true
+    },
+    {
+      route: '/events',
+      title: 'Eventos',
+      backActive: false
     }
   ]
   const currentRoute = routes.find(r => {
-    return r.route == props.history.location.pathname
+    return r.route == window.location.pathname
   })
   //console.log(title);
 

@@ -17,6 +17,12 @@ module.exports = {
         EMPTY_WISHLIST:{
             MSG:'Tu lista de deseos esta vacía actualmente'
         },
+        EMPTY_EVENTLIST:{
+            MSG:'No estas inscrito en ningún evento actualmente'
+        },
+        EMPTY_EVENTPUBLISHEDLIST:{
+            MSG:'No hay eventos publicados'
+        },
         EMPTY_RESERVATION:{
             MSG:'No tienes reservas activas actualmente'
         },
