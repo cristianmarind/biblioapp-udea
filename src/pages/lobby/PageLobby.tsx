@@ -157,16 +157,18 @@ export default (props:any) => {
           {
             res.map((item:any, index:any) => {
               return (
-                  <MaterialCard 
-                    key={index}
-                    title={item.titulo} 
-                    image={item.image_url} 
-                    autores={item.autores} 
-                    isbn={item.isbn}
-                    count={item.ejemplares}
-                    description={item.padre}
-                    titleno={item.titleno}
-                  />
+                  <div className="my-3">
+                    <MaterialCard 
+                      key={index}
+                      title={item.titulo} 
+                      image={item.image_url} 
+                      autores={item.autores} 
+                      isbn={item.isbn}
+                      count={item.ejemplares}
+                      description={item.padre}
+                      titleno={item.titleno}
+                    />
+                  </div>
               )
             })
           }

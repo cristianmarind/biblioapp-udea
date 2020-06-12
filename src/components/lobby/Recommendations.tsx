@@ -111,7 +111,7 @@ export default (props:any) => {
                     {
                       recommendationsByAuthors.map((item:any, index:any) => {
                         return (
-                          <IonCol key={index} size="12" className="p-0 my-2">
+                          <IonCol key={index} size="12" className="p-0 my-1">
                             <MaterialCard 
                               className="h-100"
                               title={item.titulo} 
@@ -121,6 +121,7 @@ export default (props:any) => {
                               count={item.ejemplares}
                               description={item.padre}
                               titleno={item.titleno}
+                              MaterialCardMode="1"
                             />
                           </IonCol>
                         )

@@ -126,19 +126,19 @@ export default (props: any) => {
 
   return (
     <div className="">
-      <IonCard onClick={() => { showMoreInfo(props.titleno) }} className="border custom-border-color-green">
-        <IonCardHeader>
+      <IonCard onClick={() => { showMoreInfo(props.titleno) }} className="border custom-border-color-green my-1">
+        <IonCardHeader className={props.MaterialCardMode == '1'?'pt-2':''}>
           <IonCardTitle className="custom-text-green font-weight-bold font-size-large">
             <TextMaxSize sizeDefault="45" text={props.title} />
           </IonCardTitle>
         </IonCardHeader>
-        <IonCardContent>
+        <IonCardContent className={props.MaterialCardMode == '1'?'pb-0':''}>
           <IonGrid>
             <IonRow>
-              <IonCol size={props.MaterialCardMode == '1'?'12':'4'}>
+              <IonCol size='4'>
                 <img src={props.image || "https://www.timvandevall.com/wp-content/uploads/2014/01/Book-Cover-Template-s.jpg"} alt="Img" />
               </IonCol>
-              <IonCol size={props.MaterialCardMode == '1'?'12':'8'}>
+              <IonCol size='8'>
                 <IonText>
                   {
                     props.autores ?
