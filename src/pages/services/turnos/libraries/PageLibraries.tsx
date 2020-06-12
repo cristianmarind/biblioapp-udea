@@ -6,11 +6,7 @@ import {
   IonCard, 
   IonCardHeader, 
   IonCardContent, 
-  IonImg,
-  IonTitle,
-  IonCardSubtitle,
-  IonList,
-  IonCardTitle
+  IonImg
 } from '@ionic/react';
 import HeaderBiblioapp from '../../../../components/general/headerBiblioapp/HeaderBiblioapp'
 import HOSTS from './../../../../providerServices/hosts.js'

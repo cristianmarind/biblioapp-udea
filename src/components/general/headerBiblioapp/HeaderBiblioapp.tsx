@@ -1,5 +1,6 @@
 import React from 'react'
-import { IonHeader, IonToolbar, IonMenuButton, IonButtons, IonTitle, IonImg, IonIcon, IonBackButton } from '@ionic/react';
+import { useHistory } from "react-router-dom";
+import { IonHeader, IonToolbar, IonMenuButton, IonButtons, IonTitle, IonIcon } from '@ionic/react';
 import { 
   arrowBackOutline,
   menuOutline
@@ -8,6 +9,7 @@ import {
 
 
 const BiblioappInfo = (props:any) => {
+  let history = useHistory();
   const routes = [
     {
       route: '/myAccount',
@@ -134,7 +136,7 @@ const BiblioappInfo = (props:any) => {
             className="mx-1"
             icon={arrowBackOutline} 
             onClick={() => {
-              props.history.goBack()
+              history.goBack()
             }}
           />):null
         }
