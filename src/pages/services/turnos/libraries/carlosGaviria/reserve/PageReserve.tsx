@@ -14,8 +14,7 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
-  IonImg,
-  IonAlert
+  IonImg
 } from '@ionic/react';
 import sala from './../../../../../../assets/universidad/bibliotecas/CarlosGaviria/pisos/salas.png'
 import HeaderBiblioapp from '../../../../../../components/general/headerBiblioapp/HeaderBiblioapp'
@@ -66,6 +65,7 @@ export default (props: any) => {
   const [showCorrectAlert, setShowCorrectAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   let pcs = []
   let filter = {}
@@ -82,6 +82,10 @@ export default (props: any) => {
   return (
     <IonPage>
       <HeaderBiblioapp history={props.history} />
+      {
+        isLoading?
+        (<ProgressBar style={{ "height": ".5em" }} animated now={100} variant="success" />):null
+      }
       <IonContent>
         <div className="pt-2 px-3">
           <IonLabel>Resultados de busqueda</IonLabel>
@@ -130,73 +134,79 @@ export default (props: any) => {
           </IonCardContent>
         </IonCard>
         
-
-        <IonAlert
-          isOpen={showConfirmAlert}
-          onDidDismiss={() => setShowConfirmAlert(false)}
-          header={'BiblioApp'}
-          message={'¿Esta seguro que desea reservar el equipo?'}
-          buttons={[
-            {
-              text: 'Cancelar',
-              role: 'cancel',
-              cssClass: 'secondary'
-            },
-            {
-              text: 'Reservar',
-              handler: () => {
+        <Modal show={showConfirmAlert} onHide={() => { setShowConfirmAlert(false) }}>
+          <Modal.Header closeButton>
+            <Modal.Title className="custom-text-green">
+              BiblioApp
+            </Modal.Title>
+          </Modal.Header>
+          <div className="pt-2 pb-4 px-3">
+            <div className="d-flex justify-content-center">
+              <span>¿Esta seguro que desea reservar el equipo?</span>
+            </div>
+            <div className="d-flex justify-content-center">
+              <IonButton onClick={() => {setShowConfirmAlert(false)}}>
+                Cancelar
+              </IonButton>
+              <IonButton color="success" onClick={() => {
+                setIsLoading(true)
                 reserve(pc, filter).then(res => {
+                  setIsLoading(false)
+                  setShowConfirmAlert(false)
                   setShowCorrectAlert(true)
                 }).catch(err => {
+                  setIsLoading(false)
+                  setShowConfirmAlert(false)
                   setErrorMessage(err.message)
                   setShowErrorAlert(true)
                 })
-              }
-            }
-          ]}
-        />
-        <IonAlert
-          isOpen={showCorrectAlert}
-          onDidDismiss={() => setShowCorrectAlert(false)}
-          header={'BiblioApp'}
-          message={'Ha reservado el equipo con exito.'}
-          buttons={[
-            {
-              text: 'Cerrar',
-              handler: () => {
-                props.history.push({
-                  pathname: '/turnos/myreservations',
-                  state: { refresh: true }
-                })
-              }
-            }
-          ]}
-        />
-        <IonAlert
-          isOpen={showErrorAlert}
-          onDidDismiss={() => setShowErrorAlert(false)}
-          header={'BiblioApp'}
-          message={errorMessage}
-          buttons={[
-            {
-              text: 'Cerrar'
-            }
-          ]}
-        />
+              }}>Reservar</IonButton>
+            </div>
+          </div>
+        </Modal>
+        <Modal show={showCorrectAlert} onHide={() => { setShowCorrectAlert(false) }}>
+          <Modal.Header closeButton>
+            <Modal.Title className="custom-text-green">
+              BiblioApp
+            </Modal.Title>
+          </Modal.Header>
+          <div className="pt-2 pb-4 px-3">
+            <div className="d-flex justify-content-center">
+              <span>Ha reservado el equipo con exito.</span>
+            </div>
+            <div className="d-flex justify-content-center">
+              <IonButton 
+                onClick={() => {
+                  setShowCorrectAlert(false)
+                  props.history.push({
+                    pathname: '/turnos/myreservations',
+                    state: { refresh: true }
+                })}}
+              >
+                Cerrar
+              </IonButton>
+            </div>
+          </div>
+        </Modal>
+
+        <Modal show={showErrorAlert} onHide={() => { setShowErrorAlert(false) }}>
+          <Modal.Header closeButton>
+            <Modal.Title className="custom-text-green">
+              BiblioApp
+            </Modal.Title>
+          </Modal.Header>
+          <div className="pt-2 pb-4 px-3">
+            <div className="d-flex justify-content-center">
+              <span>{errorMessage}</span>
+            </div>
+            <div className="d-flex justify-content-center">
+              <IonButton onClick={() => {setShowErrorAlert(false)}}>
+              Cerrar
+              </IonButton>
+            </div>
+          </div>
+        </Modal>
       </IonContent>
     </IonPage>
   )
 }
-
-/*
-<Modal show={visibilitySearchStored} onHide={() => { setVisibilitySearchStored(false) }}>
-  <Modal.Header closeButton>
-    <Modal.Title className="custom-text-green">
-      Busquedas guardadas
-    </Modal.Title>
-  </Modal.Header>
-  <div className="pt-2 pb-4 px-3">
-    Se ha guardado correctamente la busqueda realizada.
-  </div>
-</Modal>
-*/

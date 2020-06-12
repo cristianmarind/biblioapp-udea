@@ -11,75 +11,93 @@ const BiblioappInfo = (props:any) => {
   const routes = [
     {
       route: '/myAccount',
-      title: 'Mi cuenta'
+      title: 'Mi cuenta',
+      backActive: false
     },
     {
       route: '/turnos/libraries',
-      title: 'Reserva de equipos'
+      title: 'Reserva de equipos',
+      backActive: false
     },
     {
       route: '/turnos/libraries/carlosGaviria',
-      title: 'Reserva de equipos'
+      title: 'Reserva de equipos',
+      backActive: true
     },
     {
       route: '/turnos/libraries/defoultLibrary',
-      title: 'Reserva de equipos'
+      title: 'Reserva de equipos',
+      backActive: true
     },
     {
       route: '/turnos/Reservar',
-      title: 'Reserva de equipos'
+      title: 'Reserva de equipos',
+      backActive: true
     },
     {
       route: '/turnos/myreservations',
-      title: 'Mis reservas'
+      title: 'Mis reservas',
+      backActive: false
     },
     {
       route: '/electronicResources',
-      title: 'Recursos electrónicos'
+      title: 'Recursos electrónicos',
+      backActive: false
     },
     {
       route: '/bibliographicMaterial',
-      title: 'Solicita material bibliográfico'
+      title: 'Solicita material bibliográfico',
+      backActive: false
     },
     {
       route: '/institutionalRepository',
-      title: 'Repositorio institucional'
+      title: 'Repositorio institucional',
+      backActive: false
     },
     {
       route: '/supplyDocuments',
-      title: 'Suministro de documentos'
+      title: 'Suministro de documentos',
+      backActive: false
     },
     {
       route: '/spaceReservation',
-      title: 'Reserva de espacios'
+      title: 'Reserva de espacios',
+      backActive: false
     },
     {
       route: '/requestTraining',
-      title: 'Solicitud de capacitaciones'
+      title: 'Solicitud de capacitaciones',
+      backActive: false
     },
     {
       route: '/account/wishList',
-      title: 'Mi lista de deseos'
+      title: 'Mi lista de deseos',
+      backActive: true
     },
     {
       route: '/account/activeLoans',
-      title: 'Mis prestamos activos'
+      title: 'Mis prestamos activos',
+      backActive: true
     },
     {
       route: '/account/loanHistory',
-      title: 'Historial de prestamos'
+      title: 'Historial de prestamos',
+      backActive: true
     },
     {
       route: '/account/myReservations',
-      title: 'Mis reservas'
+      title: 'Mis reservas',
+      backActive: true
     },
     {
       route: '/libraries',
-      title: 'Bibliotecas UdeA'
+      title: 'Bibliotecas UdeA',
+      backActive: false
     },
     {
       route: '/docCenters',
-      title: 'Centros de documentación UdeA'
+      title: 'Centros de documentación UdeA',
+      backActive: false
     }
   ]
   const currentRoute = routes.find(r => {
@@ -100,13 +118,16 @@ const BiblioappInfo = (props:any) => {
         <IonTitle>BiblioApp UdeA</IonTitle>
       </IonToolbar>
       <div className="custom-bg-fluorescent-green text-light text-center p-2 d-flex align-items-center">
-        <IonIcon 
-          className="mx-1"
-          icon={arrowBackOutline} 
-          onClick={() => {
-            props.history.goBack()
-          }}
-        />
+        {
+          currentRoute?.backActive?
+          (<IonIcon 
+            className="mx-1"
+            icon={arrowBackOutline} 
+            onClick={() => {
+              props.history.goBack()
+            }}
+          />):null
+        }
         {currentRoute?.title}
       </div>
     </IonHeader>

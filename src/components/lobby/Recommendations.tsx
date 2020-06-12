@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import TextMaxSize from "./../general/textMaxSize/TextMaxSize"
+import MaterialCard from './../../components/lobby/MaterialCard'
 import {
   IonCard,
   IonCardHeader,
-  IonTitle,
   IonCardContent,
   IonCardSubtitle,
   IonImg,
@@ -16,99 +16,121 @@ import {
   Tabs,
   Tab
 } from 'react-bootstrap';
+import ProviderServices from './../../providerServices/index'
+import HOSTS from './../../providerServices/hosts.js'
+let services = new ProviderServices(HOSTS.CIRENE.HOST)
 
-export default () => {
+export default (props:any) => {
+  const [recommendationsByAuthors, setRecommendationsByAuthors] = useState<any>([])
+  const [recommendationsByUser, setRecommendationsByUser] = useState<any>([])
+  const [recommendationsByNews, setRecommendationsByNews] = useState<any>([])
+
+  useEffect(() => {
+    getRecommendations()
+  }, [/*props.location.state*/])
+
+  const getRecommendations = () => {
+    services.getRecommendations().then(res => {
+      setRecommendationsByAuthors(res.authors)
+      setRecommendationsByUser(res.user)
+      setRecommendationsByNews(res.news)
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
   return (
     <div className="d-flex flex-column">
       <div className="pl-2 pb-3">
         <span className="custom-text-green font-weight-bold">Recomendaciones</span>
       </div>
       <div>
-        <Tabs defaultActiveKey="forYou" id="uncontrolled-tab-example">
-          <Tab eventKey="forYou" title="Para ti">
-            <IonGrid className="p-0">
-              <IonRow>
-                <IonCol size="6" className="p-0">
-                  <IonCard className="h-100 border custom-border-color-green">
-                    <IonCardContent>
-                      <IonImg className="mx-auto" src='https://i.pinimg.com/564x/53/8c/06/538c06006b8d431ac1dca2fa095de66d.jpg' />
-                    </IonCardContent>
-                    <IonCardHeader>
-                      <IonCardTitle><TextMaxSize sizeDefault="20" text="Cien Años de Soledad" /></IonCardTitle>
-                      <IonCardSubtitle><TextMaxSize sizeDefault="30" text="Gabriel García Márquez" /></IonCardSubtitle>
-                    </IonCardHeader>
-                  </IonCard>
-                </IonCol>
-                <IonCol size="6" className="p-0">
-                  <IonCard className="h-100 border custom-border-color-green">
-                    <IonCardContent>
-                      <IonImg className="mx-auto" src='https://ep01.epimg.net/cultura/imagenes/2013/06/15/actualidad/1371283072_174122_1371283573_noticia_normal.jpg' />
-                    </IonCardContent>
-                    <IonCardHeader>
-                      <IonCardTitle><TextMaxSize sizeDefault="20" text="Don Quijote de la mancha" /></IonCardTitle>
-                      <IonCardSubtitle><TextMaxSize sizeDefault="30" text="Miguel de Cervantes Saavedra" /></IonCardSubtitle>
-                    </IonCardHeader>
-                  </IonCard>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
-          </Tab>
-          <Tab eventKey="recent" title="Reciente">
-            <IonGrid className="p-0">
-              <IonRow>
-                <IonCol size="6" className="p-0">
-                  <IonCard className="h-100 border custom-border-color-green">
-                    <IonCardContent>
-                      <IonImg className="mx-auto" src='https://i.pinimg.com/564x/53/8c/06/538c06006b8d431ac1dca2fa095de66d.jpg' />
-                    </IonCardContent>
-                    <IonCardHeader>
-                      <IonCardTitle><TextMaxSize sizeDefault="20" text="Cien Años de Soledad" /></IonCardTitle>
-                      <IonCardSubtitle><TextMaxSize sizeDefault="30" text="Gabriel García Márquez" /></IonCardSubtitle>
-                    </IonCardHeader>
-                  </IonCard>
-                </IonCol>
-                <IonCol size="6" className="p-0">
-                  <IonCard className="h-100 border custom-border-color-green">
-                    <IonCardContent>
-                      <IonImg className="mx-auto" src='https://ep01.epimg.net/cultura/imagenes/2013/06/15/actualidad/1371283072_174122_1371283573_noticia_normal.jpg' />
-                    </IonCardContent>
-                    <IonCardHeader>
-                      <IonCardTitle><TextMaxSize sizeDefault="20" text="Don Quijote de la mancha" /></IonCardTitle>
-                      <IonCardSubtitle><TextMaxSize sizeDefault="30" text="Miguel de Cervantes Saavedra" /></IonCardSubtitle>
-                    </IonCardHeader>
-                  </IonCard>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
-          </Tab>
-          <Tab eventKey="authors" title="Autores">
-            <IonGrid className="p-0">
-              <IonRow>
-                <IonCol size="6" className="p-0">
-                  <IonCard className="h-100 border custom-border-color-green">
-                    <IonCardContent>
-                      <IonImg className="mx-auto" src='https://i.pinimg.com/564x/53/8c/06/538c06006b8d431ac1dca2fa095de66d.jpg' />
-                    </IonCardContent>
-                    <IonCardHeader>
-                      <IonCardTitle><TextMaxSize sizeDefault="20" text="Cien Años de Soledad" /></IonCardTitle>
-                      <IonCardSubtitle><TextMaxSize sizeDefault="30" text="Gabriel García Márquez" /></IonCardSubtitle>
-                    </IonCardHeader>
-                  </IonCard>
-                </IonCol>
-                <IonCol size="6" className="p-0">
-                  <IonCard className="h-100 border custom-border-color-green">
-                    <IonCardContent>
-                      <IonImg className="mx-auto" src='https://ep01.epimg.net/cultura/imagenes/2013/06/15/actualidad/1371283072_174122_1371283573_noticia_normal.jpg' />
-                    </IonCardContent>
-                    <IonCardHeader>
-                      <IonCardTitle><TextMaxSize sizeDefault="20" text="Don Quijote de la mancha" /></IonCardTitle>
-                      <IonCardSubtitle><TextMaxSize sizeDefault="30" text="Miguel de Cervantes Saavedra" /></IonCardSubtitle>
-                    </IonCardHeader>
-                  </IonCard>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
-          </Tab>
+        <Tabs id="uncontrolled-tab-example">
+        {
+            recommendationsByUser.length > 0?
+            (
+              <Tab eventKey="forYou" title="Para ti">
+                <IonGrid className="p-0">
+                  <IonRow>
+                    {
+                      recommendationsByUser.map((item:any, index:any) => {
+                        return (
+                          <IonCol key={index} size="6" className="p-0 my-2">
+                            <MaterialCard 
+                              title={item.titulo} 
+                              image={item.image_url} 
+                              autores={item.autores} 
+                              isbn={item.isbn}
+                              count={item.ejemplares}
+                              description={item.padre}
+                              titleno={item.titleno}
+                            />
+                          </IonCol>
+                        )
+                      })
+                    }
+                  </IonRow>
+                </IonGrid>
+              </Tab>
+            ):null
+          }
+          {
+            recommendationsByNews.length > 0?
+            (
+              <Tab eventKey="recent" title="Reciente">
+                <IonGrid className="p-0">
+                  <IonRow>
+                    {
+                      recommendationsByNews.map((item:any, index:any) => {
+                        return (
+                          <IonCol key={index} size="6" className="p-0 my-2">
+                            <MaterialCard 
+                              title={item.titulo} 
+                              image={item.image_url} 
+                              autores={item.autores} 
+                              isbn={item.isbn}
+                              count={item.ejemplares}
+                              description={item.padre}
+                              titleno={item.titleno}
+                            />
+                          </IonCol>
+                        )
+                      })
+                    }
+                  </IonRow>
+                </IonGrid>
+              </Tab>
+            ):null
+          }
+          {
+            recommendationsByAuthors.length > 0?
+            (
+              <Tab eventKey="authors" title="Autores">
+                <IonGrid className="p-0">
+                  <IonRow>
+                    {
+                      recommendationsByAuthors.map((item:any, index:any) => {
+                        return (
+                          <IonCol key={index} size="12" className="p-0 my-2">
+                            <MaterialCard 
+                              className="h-100"
+                              title={item.titulo} 
+                              image={item.image_url} 
+                              autores={item.autores} 
+                              isbn={item.isbn}
+                              count={item.ejemplares}
+                              description={item.padre}
+                              titleno={item.titleno}
+                            />
+                          </IonCol>
+                        )
+                      })
+                    }
+                  </IonRow>
+                </IonGrid>
+              </Tab>
+            ):null
+          }
         </Tabs>
       </div>
     </div>

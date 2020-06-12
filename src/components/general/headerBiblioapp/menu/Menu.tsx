@@ -10,9 +10,7 @@ import {
 } from '@ionic/react';
 import { 
   logInOutline,
-  libraryOutline,
   businessOutline,
-  pencilOutline
 } from 'ionicons/icons';
 import React from 'react';
 import { menuController } from '@ionic/core';
@@ -161,8 +159,8 @@ const Menu: React.FunctionComponent<any> = (props) => {
     loginItem = (
       <IonMenuToggle>
         <IonItem 
-        className="itemMenu bg-transparent" 
-        routerLink="/"
+        className="itemMenu bg-transparent text-light" 
+        routerLink="/login"
         routerDirection="none" 
         lines="none" 
         detail={false}

@@ -125,20 +125,20 @@ export default (props: any) => {
   }
 
   return (
-    <div>
+    <div className="">
       <IonCard onClick={() => { showMoreInfo(props.titleno) }} className="border custom-border-color-green">
         <IonCardHeader>
-          <IonCardTitle className="custom-text-green font-weight-bold">
+          <IonCardTitle className="custom-text-green font-weight-bold font-size-large">
             <TextMaxSize sizeDefault="45" text={props.title} />
           </IonCardTitle>
         </IonCardHeader>
         <IonCardContent>
           <IonGrid>
             <IonRow>
-              <IonCol size="4">
+              <IonCol size={props.MaterialCardMode == '1'?'12':'4'}>
                 <img src={props.image || "https://www.timvandevall.com/wp-content/uploads/2014/01/Book-Cover-Template-s.jpg"} alt="Img" />
               </IonCol>
-              <IonCol size="8">
+              <IonCol size={props.MaterialCardMode == '1'?'12':'8'}>
                 <IonText>
                   {
                     props.autores ?
@@ -148,21 +148,21 @@ export default (props: any) => {
                       </div>) : null
                   }
                   {
-                    props.isbn ?
+                    props.isbn && props.MaterialCardMode != '1' ?
                       (<div>
                         <span className="custom-text-green font-weight-bold">ISBN: </span>
                         <span>{props.isbn}</span>
                       </div>) : null
                   }
                   {
-                    props.count > 0 ?
+                    props.count > 0 && props.MaterialCardMode != '1'?
                       (<div>
                         <span className="custom-text-green font-weight-bold">Número ejemplares: </span>
                         <span>{props.count}</span>
                       </div>) : null
                   }
                   {
-                    props.description ?
+                    props.description && props.MaterialCardMode != '1'?
                       (<div>
                         <span className="custom-text-green font-weight-bold">Información: </span>
                         <TextMaxSize sizeDefault="80" text={props.description} labelVisible={false} />

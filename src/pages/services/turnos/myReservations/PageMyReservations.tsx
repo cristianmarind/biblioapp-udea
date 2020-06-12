@@ -13,6 +13,7 @@ import {
   IonBadge,
   IonButton
 } from '@ionic/react';
+import { Modal, ProgressBar } from 'react-bootstrap';
 import HeaderBiblioapp from '../../../../components/general/headerBiblioapp/HeaderBiblioapp'
 import HOSTS from './../../../../providerServices/hosts.js'
 import ProviderServices from './../../../../providerServices/index'
@@ -114,55 +115,72 @@ export default (props: any) => {
             })):<div className="text-center pt-3">No tienes reservas actualmente</div>
           }
         </IonList>
-        <IonAlert
-          isOpen={showConfirmAlert}
-          onDidDismiss={() => setShowConfirmAlert(false)}
-          header={'BiblioApp'}
-          message={'¿Esta seguro que desea cancelar la reserva?'}
-          buttons={[
-            {
-              text: 'No',
-              role: 'cancel',
-              cssClass: 'secondary'
-            },
-            {
-              text: 'Si',
-              handler: () => {
+        <Modal show={showConfirmAlert} onHide={() => { setShowConfirmAlert(false) }}>
+          <Modal.Header closeButton>
+            <Modal.Title className="custom-text-green">
+              BiblioApp
+            </Modal.Title>
+          </Modal.Header>
+          <div className="pt-2 pb-4 px-3">
+            <div className="d-flex justify-content-center">
+              <span>¿Esta seguro que desea cancelar la reserva?</span>
+            </div>
+            <div className="d-flex justify-content-center">
+              <IonButton onClick={() => {setShowConfirmAlert(false)}}>
+                No
+              </IonButton>
+              <IonButton color="success" onClick={() => {
                 cancelReservation(reserveToCancel).then((res:any) => {
+                  setShowConfirmAlert(false)
                   setShowCorrectAlert(true)
                 }).catch(err => {
+                  setShowConfirmAlert(false)
                   setErrorMessage(err.message)
                   setShowErrorAlert(true)
                 })
-              }
-            }
-          ]}
-        />
-        <IonAlert
-          isOpen={showCorrectAlert}
-          onDidDismiss={() => setShowCorrectAlert(false)}
-          header={'BiblioApp'}
-          message={'Ha cancelado su reserva con éxito.'}
-          buttons={[
-            {
-              text: 'Cerrar',
-              handler: () => {
-                refreshReservations()
-              }
-            }
-          ]}
-        />
-        <IonAlert
-          isOpen={showErrorAlert}
-          onDidDismiss={() => setShowErrorAlert(false)}
-          header={'BiblioApp'}
-          message={errorMessage}
-          buttons={[
-            {
-              text: 'Cerrar'
-            }
-          ]}
-        />
+              }}>Cancelar la reserva</IonButton>
+            </div>
+          </div>
+        </Modal>
+        <Modal show={showCorrectAlert} onHide={() => { setShowCorrectAlert(false) }}>
+          <Modal.Header closeButton>
+            <Modal.Title className="custom-text-green">
+              BiblioApp
+            </Modal.Title>
+          </Modal.Header>
+          <div className="pt-2 pb-4 px-3">
+            <div className="d-flex justify-content-center">
+              <span>Ha cancelado su reserva con éxito.</span>
+            </div>
+            <div className="d-flex justify-content-center">
+              <IonButton 
+                onClick={() => {
+                  setShowCorrectAlert(false)
+                  refreshReservations()
+                }}
+              >
+                Cerrar
+              </IonButton>
+            </div>
+          </div>
+        </Modal>
+        <Modal show={showErrorAlert} onHide={() => { setShowErrorAlert(false) }}>
+          <Modal.Header closeButton>
+            <Modal.Title className="custom-text-green">
+              BiblioApp
+            </Modal.Title>
+          </Modal.Header>
+          <div className="pt-2 pb-4 px-3">
+            <div className="d-flex justify-content-center">
+              <span>{errorMessage}</span>
+            </div>
+            <div className="d-flex justify-content-center">
+              <IonButton onClick={() => {setShowErrorAlert(false)}}>
+              Cerrar
+              </IonButton>
+            </div>
+          </div>
+        </Modal>
       </IonContent>
     </IonPage>
   )

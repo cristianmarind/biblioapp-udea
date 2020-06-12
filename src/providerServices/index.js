@@ -315,7 +315,7 @@ export default class ProviderService {
     })
   }
   getActiveLoans() {
-    var bodydata = [{ appKey: appKey, cedula: localStorage.getItem('userId') }];
+    var bodydata = [{ appKey: appKey, cedula: /*'1000415486'*/localStorage.getItem('userId') }];
     return new Promise((resolve, reject) => {
       if (!localStorage.getItem('isLogged')) {
         return reject({
@@ -333,8 +333,33 @@ export default class ProviderService {
             msg: codes.CODES.EMPTY_LOANLIST
           })
         }
-
       }).catch(error => {
+        reject({
+          msg: codes.CODES.DEFAULT.MSG,
+          error
+        })
+      })
+    })
+  }
+
+  renewLoan(barcode) {
+    var bodydata = [{ appKey: appKey, cedula: /*'1000415486'*/localStorage.getItem('userId'), barcode: barcode }];
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('isLogged')) {
+        reject({
+          msg: codes.CODES.UNLOGGED_USER.MSG
+        })
+      }
+      this.postModelFormData('/services_OLIB/APP_RenovarMaterial.php', bodydata).then(response => {
+        if (response.data.respuesta == 'true') {
+          resolve(response.data.mensaje)
+        }else{
+          reject({
+            msg: response.data.mensaje
+          })
+        }
+      }).catch(error => {
+        console.log(error);
         reject({
           msg: codes.CODES.DEFAULT.MSG,
           error
@@ -343,6 +368,37 @@ export default class ProviderService {
     })
 
   }
+
+  getRecommendations(){
+    var bodydata = [{ appKey: appKey, documentoUsuario: localStorage.getItem('userId')}];
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('isLogged')) {
+        reject({
+          msg: codes.CODES.UNLOGGED_USER.MSG
+        })
+      }
+      this.postModelFormData('/services_olib/APP_TitulosRecomendados.php', bodydata).then(response => {
+        if (!response.data.errores) {
+          resolve({
+            authors: JSON.parse(response.data.titulos_autores.split("\n").join("")),
+            user: JSON.parse(response.data.titulos_materias.split("\n").join("")),
+            news: JSON.parse(response.data.titulos_nuevos.split("\n").join(""))
+          })
+        } else {
+          reject({
+            msg: codes.CODES.DEFAULT.MSG
+          })
+        }
+      }).catch(error => {
+        console.log(error);
+        reject({
+          msg: codes.CODES.DEFAULT.MSG,
+          error
+        })
+      })
+    })
+  }
+
   consultarMaterialporCodigodeBarras(codigoDeBarras) {
     var bodydata = [{ appKey: appKey, codigoDeBarras: codigoDeBarras }];
     return new Promise((resolve, reject) => {

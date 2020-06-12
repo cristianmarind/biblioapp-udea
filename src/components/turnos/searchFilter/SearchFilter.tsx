@@ -14,7 +14,7 @@ export default class SearchFilter extends React.Component<any, any> {
     super(props);
     this.state = {
       nroHours: 1,
-      hour: 9/*new Date(Date.now()).getHours()*/
+      hour: new Date(Date.now()).getHours()
     };
     this.applyFilter()
   }
@@ -42,7 +42,7 @@ export default class SearchFilter extends React.Component<any, any> {
   render() {
     //let currentDate =  new Date(Date.now())
     let hours = []
-    for (let index = 9/*currentDate.getHours()*/; index <= 20; index++) {
+    for (let index = new Date(Date.now()).getHours(); index <= 20; index++) {
       hours.push(index)
     }
     return (
