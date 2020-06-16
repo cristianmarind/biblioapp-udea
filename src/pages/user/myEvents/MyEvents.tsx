@@ -27,7 +27,8 @@ export default class MyEvents extends React.Component<any, any> {
             deleteProcess: 0,
             currentItem: null,
             visibilityEventDetail: false,
-            eventDetails: []
+            eventDetails: ,
+            mayorInfo: ""
 
         }
     }
@@ -171,7 +172,7 @@ export default class MyEvents extends React.Component<any, any> {
                                 <div className="container">
                                     <div className="row">
                                         <div className=" overflow-auto col p-0">
-                                            {ReactHtmlParser(this.state.eventDetails.mayorInfoEvento)}
+                                            {ReactHtmlParser(this.state.mayorInfo)}
                                         </div>
                                     </div>
                                 </div>
@@ -243,7 +244,7 @@ export default class MyEvents extends React.Component<any, any> {
         if (!Details) {
             return
         }
-        this.setState({ eventDetails: Details, visibilityEventDetail: true })
+        this.setState({ eventDetails: Details, visibilityEventDetail: true, mayorInfo: Details.mayorInfoEvento.replace("width: 950px;", "") })
 
     }
     deleteEventListItem = (idEvent: any) => {
