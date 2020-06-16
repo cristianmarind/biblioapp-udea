@@ -27,7 +27,7 @@ export default class MyEvents extends React.Component<any, any> {
             deleteProcess: 0,
             currentItem: null,
             visibilityEventDetail: false,
-            eventDetails: ,
+            eventDetails: [],
             mayorInfo: ""
 
         }
