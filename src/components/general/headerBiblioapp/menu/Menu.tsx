@@ -94,7 +94,7 @@ const appPages: AppPage[] = [
         url: '/institutionalRepository'
       },
       {
-        title: 'Suministro de documentos',
+        title: 'Conmutación bibliográfica',
         icon: supplyDocumentsLogo,
         url: '/supplyDocuments'
       },

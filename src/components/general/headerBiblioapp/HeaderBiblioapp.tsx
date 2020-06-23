@@ -58,7 +58,7 @@ const BiblioappInfo = (props:any) => {
     },
     {
       route: '/supplyDocuments',
-      title: 'Suministro de documentos',
+      title: 'Conmutación bibliográfica',
       backActive: false
     },
     {

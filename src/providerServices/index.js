@@ -81,10 +81,7 @@ export default class ProviderService {
     return axios.get(`${this.rootAPI}${route}${filter}`, { /*headers: { "Authorization": this.accessToken }, withCredentials: true*/ })
   }
 
-  searchMaterial(query) {
-
-    var pagina = 1;
-    var regxpagina = 10;
+  searchMaterial(query, pagina, regxpagina) {
     var bodydata = [{ appKey: appKey, busqueda: query, pagina: pagina, regxpagina: regxpagina }];
     return new Promise((resolve, reject) => {
       this.postModelFormData('/services_OLIB/APP_ConsultarCatalogo.php', bodydata).then(response => {
