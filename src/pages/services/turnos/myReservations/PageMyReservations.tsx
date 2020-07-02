@@ -138,7 +138,7 @@ export default (props: any) => {
                   setErrorMessage(err.message)
                   setShowErrorAlert(true)
                 })
-              }}>Cancelar la reserva</IonButton>
+              }}>Si</IonButton>
             </div>
           </div>
         </Modal>

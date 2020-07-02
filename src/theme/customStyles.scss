@@ -4,6 +4,11 @@
   margin-top: 7em;
 }
 
+.modal-content{
+  border-color: $custom-green;
+  border-width: medium;
+}
+
 
 /*Estilo de los inputs*/
 .custom-input{
@@ -87,4 +92,20 @@ a{
 
 .custom-text-red{
   color: $custom-red !important;
+}
+
+.bottom-0 {
+  bottom: 0;
+}
+
+.rigth-0{
+  right: 0;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.left-0{
+  left: 0;
 }

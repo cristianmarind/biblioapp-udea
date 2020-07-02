@@ -21,6 +21,7 @@ import HeaderBiblioapp from '../../components/general/headerBiblioapp/HeaderBibl
 import MaterialCard from './../../components/lobby/MaterialCard'
 import ProviderServices from './../../providerServices/index'
 import LogginLink from './../../components/general/logginLink/LogginLink'
+import DayPhrases from '../../components/lobby/dayPhrases/DayPhrases'
 import Recommendations from './../../components/lobby/Recommendations'
 import StoredSearches from './../../components/lobby/StoredSearches'
 
@@ -97,6 +98,7 @@ export default (props: any) => {
       console.log(err);
     })
   }
+
   const selectOldSearch = (oldSearch: any) => {
     setQuery(oldSearch)
     handleCloseStoredSearches()
@@ -104,14 +106,17 @@ export default (props: any) => {
   }
 
 
-
-
   let lobby
   if (!isResult) {
     if (localStorage.getItem('isLogged')) {
       lobby = (
-        <div className="mt-3">
-          <Recommendations />
+        <div className="d-flex flex-column">
+          <div className="mt-3">
+            <DayPhrases />
+          </div>
+          <div className="mt-3">
+            <Recommendations />
+          </div>
         </div>
       )
     } else {

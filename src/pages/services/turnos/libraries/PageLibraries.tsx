@@ -31,9 +31,11 @@ export default class PageLibraries extends React.Component<any, any> {
     let providerServices = new ProviderServices(HOSTS.TURNOS.HOST)
     providerServices.getModel(`/listarsalas.php`).then((res:any) => {
       let arr = []
-      for (const iterator of res.data) {
-        if (iterator.nombreBiblioteca !== 'Biblioteca Carlos Gaviria Díaz') {
-          arr.push(iterator)
+      if (Array.isArray(res.data)) {
+        for (const iterator of res.data) {
+          if (iterator.nombreBiblioteca !== 'Biblioteca Carlos Gaviria Díaz') {
+            arr.push(iterator)
+          }
         }
       }
       this.setState({

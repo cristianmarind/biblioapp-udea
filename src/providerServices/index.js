@@ -76,7 +76,7 @@ export default class ProviderService {
   }
 
   /* Es la misma explicacion que el metodo postModel y deleteModel */
-  getModel(route, query) {
+  getModel(route, query = undefined) {
     let filter = query === null || query === undefined ? "" : `/?filter=${JSON.stringify(query)}`
     return axios.get(`${this.rootAPI}${route}${filter}`, { /*headers: { "Authorization": this.accessToken }, withCredentials: true*/ })
   }

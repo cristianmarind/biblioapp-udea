@@ -22,7 +22,7 @@ import star from './../../assets/biblioapp/icons/estrella.png'
 import heart from './../../assets/biblioapp/icons/corazon.png'
 import reserveIcon from './../../assets/biblioapp/icons/reservas.png'
 import refIcon from './../../assets/biblioapp/icons/referencia.png'
-
+import utilities from './../../utilities/index'
 import HOSTS from './../../providerServices/hosts.js'
 import ProviderServices from './../../providerServices/index'
 let services = new ProviderServices(HOSTS.CIRENE.HOST)
@@ -106,7 +106,7 @@ export default (props: any) => {
       if (ref.search('flash-notice') > 0) {
         setMsg("No se pudo generar la referencia, intente mas tarde.")
       }else{
-        setAPAReference(ref)
+        setAPAReference(ref.trim())
       }
       setIsLoadingModal(false)
     }).catch(err => {
@@ -122,6 +122,15 @@ export default (props: any) => {
       url: `http://aplicacionesbiblioteca.udea.edu.co/biblioApp/?isbn=${currentMaterial.isbn}&titleno=${currentMaterial.titleno}`,
       dialogTitle: 'Compartir material'
     })
+  }
+
+  const copyReference = () => {
+    var aux = document.createElement("input");
+    aux.setAttribute("value", utilities.stripHtml(apaReference));
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand("copy");
+    document.body.removeChild(aux);
   }
 
   return (
@@ -279,7 +288,15 @@ export default (props: any) => {
             }
           </div>
           {
-            currentMaterial.isbn && apaReference ? (<div className="bg-light rounded p-2" dangerouslySetInnerHTML={{ __html: apaReference }} />) : null
+            currentMaterial.isbn && apaReference?
+            (<div className="position-relative">
+              <div className="bg-light rounded p-2" dangerouslySetInnerHTML={{ __html: apaReference }}
+                onClick={() => {
+                  copyReference()
+                }}
+              />
+              <span className="position-absolute bottom-0 rigth-0 custom-bg-green text-light py-1 px-2">Copiar</span>
+            </div>):null
           }
           <IonGrid>
             <IonRow>

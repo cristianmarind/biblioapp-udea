@@ -123,7 +123,7 @@ export default class PageCarlosGaviria extends React.Component<any, any> {
         }
         <IonContent>
           <div className="pt-3 text-center font-weight-bold">
-            <span>Carlos Gaviria Diaz</span>
+            <span>Biblioteca Carlos Gaviria Díaz</span>
           </div>
           <SearchFilter applyFilter={this.applyFilter} />
           <div className="mb-2 px-2">

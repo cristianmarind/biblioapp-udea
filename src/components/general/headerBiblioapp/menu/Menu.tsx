@@ -111,7 +111,7 @@ const appPages: AppPage[] = [
     ]
   },
   {
-    title: 'Proximos eventos',
+    title: 'Próximos eventos',
     url: '/events',
     icon: eventsLogo,
   },

@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import TextMaxSize from "./../general/textMaxSize/TextMaxSize"
+//import TextMaxSize from "./../general/textMaxSize/TextMaxSize"
 import MaterialCard from './../../components/lobby/MaterialCard'
 import {
-  IonCard,
-  IonCardHeader,
-  IonCardContent,
-  IonCardSubtitle,
-  IonImg,
   IonGrid,
   IonRow,
-  IonCol,
-  IonCardTitle,
+  IonCol
 } from '@ionic/react';
 import { 
   Tabs,
