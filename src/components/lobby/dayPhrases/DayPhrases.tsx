@@ -24,8 +24,6 @@ export default (props: any) => {
   const getDayPhrases = () => {
     services.getModel('/programador/services/listarHistoriasPorDia.php', null).then(res => {
       setDayPhrases(res.data)
-      console.log(res.data);
-
     })
   }
 
