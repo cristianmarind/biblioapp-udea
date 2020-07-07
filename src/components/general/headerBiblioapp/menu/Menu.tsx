@@ -10,7 +10,7 @@ import {
 } from '@ionic/react';
 import { 
   logInOutline,
-  businessOutline,
+  businessOutline
 } from 'ionicons/icons';
 import React from 'react';
 import { menuController } from '@ionic/core';
@@ -33,6 +33,7 @@ import udeaLibrariesLogo from './../../../../assets/biblioapp/icons/libro-2.png'
 import biblioappInfoLogo from './../../../../assets/biblioapp/icons/informacion.png'
 import eventsLogo from './../../../../assets/biblioapp/icons/eventos.png'
 import requestTrainingLogo from './../../../../assets/biblioapp/icons/capacitaciones.png'
+import chat from './../../../../assets/biblioapp/icons/chat.png'
 
 import HOSTS from './../../../../providerServices/hosts.js'
 import ProviderServices from './../../../../providerServices/index'
@@ -62,6 +63,11 @@ const appPages: AppPage[] = [
     title: 'Servicios digitales',
     icon: servicesLogo,
     urls: [
+      {
+        title: 'Chatea con nosotros',
+        icon: chat,
+        url: '/chat'
+      },
       {
         title: 'Reserva de equipos',
         icon: turnosLogo,

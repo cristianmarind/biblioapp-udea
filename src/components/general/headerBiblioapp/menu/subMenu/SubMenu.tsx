@@ -69,7 +69,7 @@ export default class SubMenu extends React.Component<any, any> {
                 detail={false}
               >
                 <div className="custom-icon mr-2">
-                  <IonImg src={this.props.icon?this.props.icon:''} />
+                  <IonImg className="text-light" src={this.props.icon?this.props.icon:''} />
                 </div>
                 <IonLabel>{this.props.title}</IonLabel>
                 {iconSubMenu}

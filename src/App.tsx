@@ -24,6 +24,7 @@ import PageDefoultLibrary from './pages/services/turnos/libraries/defoultLibrary
 import PageMaterialReviews from './pages/services/reviews/materialReviews/MaterialReviews'
 import PageMyReviews from './pages/user/myReviews/MyReviews'
 import PageMyEvents from './pages/user/myEvents/MyEvents'
+import PageChat from './pages/services/chat/Chat'
 
 import React, { useState } from 'react';
 import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
@@ -57,9 +58,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './theme/customStyles.scss'
 
 /* Push Notifications */
-import { Plugins, PushNotification, PushNotificationToken, PushNotificationActionPerformed } from '@capacitor/core';
+/*import { Plugins, PushNotification, PushNotificationToken, PushNotificationActionPerformed } from '@capacitor/core';
 
-const { PushNotifications } = Plugins;
+const { PushNotifications } = Plugins;*/
 
 /*localStorage.setItem('username', 'cristian.marind')
 localStorage.setItem('userId', '1152701738')
@@ -70,7 +71,7 @@ localStorage.setItem('isLogged', 'true')*/
 
 const App: React.FC = () => {
 
-  const [notifications, setNotifications] = useState<any>([])
+  /*const [notifications, setNotifications] = useState<any>([])
 
   console.log(1);
     
@@ -107,7 +108,7 @@ const App: React.FC = () => {
         notif.push({ id: notification.notification.data.id, title: notification.notification.data.title, body: notification.notification.data.body })
         setNotifications(notif)
       }
-    );
+    );*/
 
   return (
     <IonApp>
@@ -135,6 +136,7 @@ const App: React.FC = () => {
             <Route path="/spaceReservation" component={PageSpaceReservation} exact={true} />
             <Route path="/requestTraining" component={PageRequestTraining} exact={true} />
             <Route path="/electronicResources" component={ElectronicResources} exact={true} />
+            <Route path="/chat" component={PageChat} exact={true} />
             <LoggedRoute path="/myAccount" component={PageMyAccount} exact={true} />
             <LoggedRoute path="/account/activeLoans" component={PageActiveLoans} exact={true} />
             <LoggedRoute path="/account/wishList" component={PageWishList} exact={true} />

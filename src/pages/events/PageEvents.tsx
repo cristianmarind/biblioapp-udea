@@ -90,6 +90,11 @@ export default class PageEvents extends React.Component<any, any> {
                                     {/* <span className="custom-text-green font-weight-bold">Ubicación: </span> */}
                                     <TextMaxSize sizeDefault="80" text={item.lugarEvento} labelVisible={false} />
                                   </div>
+                                  <div>
+                                    <button onClick={() => {
+                                      this.register(item)
+                                    }}>Registrarse</button>
+                                  </div>
                                 </IonText>
                               </IonCol>
                             </IonRow>
@@ -165,8 +170,7 @@ export default class PageEvents extends React.Component<any, any> {
       needUpdate: false,
       errorMessage: ""
     })
-    services.postRegisterUserEvent(event.id, "idGoogleCalendar").then(res => {
-      console.log(res);
+    services.postRegisterUserEvent(event.idEvento, "idGoogleCalendar").then(res => {
       let message = this.state.message
       message.isOpen = true
       message.type = 'correct'

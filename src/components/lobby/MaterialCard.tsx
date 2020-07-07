@@ -25,6 +25,9 @@ import refIcon from './../../assets/biblioapp/icons/referencia.png'
 import utilities from './../../utilities/index'
 import HOSTS from './../../providerServices/hosts.js'
 import ProviderServices from './../../providerServices/index'
+
+import defaultMaterialImage from './../../assets/biblioapp/caratulaMaterialNoDisponible.png'
+
 let services = new ProviderServices(HOSTS.CIRENE.HOST)
 const { Share } = Plugins
 
@@ -145,7 +148,7 @@ export default (props: any) => {
           <IonGrid>
             <IonRow>
               <IonCol size='4'>
-                <img src={props.image || "https://www.timvandevall.com/wp-content/uploads/2014/01/Book-Cover-Template-s.jpg"} alt="Img" />
+                <img src={props.image || defaultMaterialImage} alt="Img" />
               </IonCol>
               <IonCol size='8'>
                 <IonText>
@@ -201,7 +204,7 @@ export default (props: any) => {
             <IonText>
               <IonImg
                 className="w-25 float-left mr-3"
-                src={currentMaterial.image_url || "https://www.timvandevall.com/wp-content/uploads/2014/01/Book-Cover-Template-s.jpg"}
+                src={currentMaterial.image_url || defaultMaterialImage}
               />
               {
                 currentMaterial.tipo_publicacion ?
