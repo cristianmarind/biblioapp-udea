@@ -56,19 +56,76 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 /* Custom styles */
 import './theme/customStyles.scss'
 
+/* Push Notifications */
+import { Plugins, PushNotification, PushNotificationToken, PushNotificationActionPerformed } from '@capacitor/core';
+const { PushNotifications } = Plugins;
+
 /*localStorage.setItem('username', 'cristian.marind')
 localStorage.setItem('userId', '1152701738')
 localStorage.setItem('isLogged', 'true')*/
 
-const App: React.FC = () => {
 
-  const [selectedPage] = useState('');
 
-  return (
-    <IonApp>
-      <IonReactRouter>
-        <IonSplitPane contentId="main">
-          <Menu selectedPage={selectedPage} />
+
+export class App extends React.Component {
+  state: any = {};
+  props: any = {};
+  constructor(props: any) {
+    super(props);
+    this.state = { notifications: [] };
+  }
+
+  componentDidMount() {
+    console.log(1);
+    
+    // Register with Apple / Google to receive push via APNS/FCM
+    PushNotifications.register();
+
+    // On succcess, we should be able to receive notifications
+    PushNotifications.addListener('registration',
+      (token: PushNotificationToken) => {
+        alert('Push registration success, token: ' + token.value);
+      }
+    );
+
+    // Some issue with your setup and push will not work
+    PushNotifications.addListener('registrationError',
+      (error: any) => {
+        alert('Error on registration: ' + JSON.stringify(error));
+      }
+    );
+
+    // Show us the notification payload if the app is open on our device
+    PushNotifications.addListener('pushNotificationReceived',
+      (notification: PushNotification) => {
+        let notif = this.state.notifications;
+        notif.push({ id: notification.id, title: notification.title, body: notification.body })
+        this.setState({
+          notifications: notif
+        })
+      }
+    );
+
+    // Method called when tapping on a notification
+    PushNotifications.addListener('pushNotificationActionPerformed',
+      (notification: PushNotificationActionPerformed) => {
+        let notif = this.state.notifications;
+        notif.push({ id: notification.notification.data.id, title: notification.notification.data.title, body: notification.notification.data.body })
+        this.setState({
+          notifications: notif
+        })
+      }
+    );
+  }
+
+  
+  render() {
+    const { notifications } = this.state;
+    return (
+      <IonApp>
+        <IonReactRouter>
+          <IonSplitPane contentId="main">
+            <Menu />
             <IonRouterOutlet id="main">
               <Route path="/" component={PageLobby} exact={true} />
               <UnloggedRoute path="/login" component={PageLogin} exact={true} />
@@ -96,12 +153,12 @@ const App: React.FC = () => {
               <LoggedRoute path="/account/loanHistory" component={PageLoanHistory} exact={true} />
               <LoggedRoute path="/account/myReservations" component={MyReservations} exact={true} />
               <LoggedRoute path="/account/myReviews" component={PageMyReviews} exact={true} />
-              <LoggedRoute path="/account/myEvents" component={PageMyEvents} exact={true}/>
-          </IonRouterOutlet>
-        </IonSplitPane>
-      </IonReactRouter>
-    </IonApp>
-  );
-};
-
+              <LoggedRoute path="/account/myEvents" component={PageMyEvents} exact={true} />
+            </IonRouterOutlet>
+          </IonSplitPane>
+        </IonReactRouter>
+      </IonApp>
+    );
+  };
+}
 export default App;

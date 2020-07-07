@@ -183,6 +183,7 @@ export default class ProviderService {
     })
   }
 
+
   getWishList() {
     var bodydata = [{ appKey: appKey, documentoUsuario: localStorage.getItem('userId') }];
     return new Promise((resolve, reject) => {
@@ -682,6 +683,40 @@ export default class ProviderService {
             msg: codes.CODES.EMPTY_EVENTPUBLISHEDLIST.MSG
           })
         }
+
+      }).catch(error => {
+        reject({
+          msg: codes.CODES.DEFAULT.MSG,
+          error
+        })
+      })
+    })
+  }
+
+  postRegisterUserEvent(idEvento, idGoogleCalendar) {
+    var bodydata = [{ 
+      appKey: appKey, 
+      documentoUsuario: localStorage.getItem('userId'),
+      idEvento: idEvento,
+      idGoogleCalendar: idGoogleCalendar
+    }];
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('isLogged')) {
+        return reject({
+          msg: codes.CODES.UNLOGGED_USER.MSG
+        })
+      }
+      this.postModel('/programador/services/RegistrarUsuarioEnEventoApp.php', bodydata).then(response => {
+        resolve(response)
+        /*if (response.data.resultadoEliminarBusqueda == true) {
+
+          resolve(response.data.mensajeServicio)
+
+        } else {
+          reject({
+            msg: codes.CODES.ERROR_DELETEWISHLIST.MSG
+          })
+        }*/
 
       }).catch(error => {
         reject({

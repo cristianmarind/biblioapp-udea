@@ -295,7 +295,14 @@ export default (props: any) => {
                   copyReference()
                 }}
               />
-              <span className="position-absolute bottom-0 rigth-0 custom-bg-green text-light py-1 px-2">Copiar</span>
+              <span 
+                onClick={() => {
+                  copyReference()
+                }} 
+                className="position-absolute bottom-0 rigth-0 custom-bg-green text-light py-1 px-2"
+              >
+                Copiar
+              </span>
             </div>):null
           }
           <IonGrid>
