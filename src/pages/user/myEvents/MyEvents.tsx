@@ -43,6 +43,12 @@ export default class MyEvents extends React.Component<any, any> {
         }
     }
 
+    componentWillReceiveProps(nextProps:any){
+        if (nextProps.location.pathname == '/account/myEvents') {
+          this.getEventList()
+        }
+      }
+
     render() {
         let loadingTemplate
         if (this.state.isLoading) {
@@ -278,7 +284,6 @@ export default class MyEvents extends React.Component<any, any> {
             errorMessage: ""
         })
         services.getEventList().then(res => {
-            console.log(res);
             this.setState({
                 eventList: res,
                 isLoading: false,

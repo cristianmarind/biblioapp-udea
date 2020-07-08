@@ -43,6 +43,13 @@ export default class PageEvents extends React.Component<any, any> {
       this.getEventPublishedList()
     }
   }
+
+  componentWillReceiveProps(nextProps:any){
+    if (nextProps.location.pathname == '/events') {
+      this.getEventPublishedList()
+    }
+  }
+
   render() {
     let loadingTemplate
     if (this.state.isLoading) {
@@ -91,9 +98,9 @@ export default class PageEvents extends React.Component<any, any> {
                                     <TextMaxSize sizeDefault="80" text={item.lugarEvento} labelVisible={false} />
                                   </div>
                                   <div>
-                                    <button onClick={() => {
+                                    <IonButton onClick={() => {
                                       this.register(item)
-                                    }}>Registrarse</button>
+                                    }}>Registrarse</IonButton>
                                   </div>
                                 </IonText>
                               </IonCol>
@@ -123,6 +130,9 @@ export default class PageEvents extends React.Component<any, any> {
             this.setState({
               message
             })
+            this.props.history.push({
+              pathname: '/account/myEvents'
+            })
            }}>
             <Modal.Header closeButton>
               <Modal.Title className="custom-text-green">
@@ -130,7 +140,24 @@ export default class PageEvents extends React.Component<any, any> {
             </Modal.Title>
             </Modal.Header>
             <div className="pt-2 pb-4 px-3">
-              { this.state.message.message }
+              <span>{ this.state.message.message }</span>
+              <div>
+                {
+                  this.state.message.buttonClose?
+                  (
+                    <IonButton color="success" onClick={() => {
+                      let message = this.state.message
+                      message.isOpen = false
+                      this.setState({
+                        message
+                      })
+                      this.props.history.push({
+                        pathname: '/account/myEvents'
+                      })
+                    }}>Cerrar</IonButton>
+                  ):null
+                }
+              </div>
             </div>
           </Modal>
         </IonContent>
@@ -145,7 +172,6 @@ export default class PageEvents extends React.Component<any, any> {
       errorMessage: ""
     })
     services.getEventPublishedList().then(res => {
-      console.log(res);
       this.setState({
         eventList: res,
         isLoading: false,
@@ -165,7 +191,6 @@ export default class PageEvents extends React.Component<any, any> {
 
   register = (event:any) => {
     this.setState({
-      eventList: [],
       isLoading: true,
       needUpdate: false,
       errorMessage: ""
@@ -177,7 +202,6 @@ export default class PageEvents extends React.Component<any, any> {
       message.title = "Registro en el evento"
       message.message = "Se ha registrado correctamente"
       this.setState({
-        eventList: this.state.eventList,
         isLoading: false,
         needUpdate: false,
         errorMessage: "",
@@ -190,7 +214,6 @@ export default class PageEvents extends React.Component<any, any> {
       message.title = "Registro en el evento"
       message.message = "No se ha registrado, intente mas tarde."
       this.setState({
-        eventList: [],
         isLoading: false,
         needUpdate: false,
         errorMessage: err.msg,
