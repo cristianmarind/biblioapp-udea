@@ -58,9 +58,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './theme/customStyles.scss'
 
 /* Push Notifications */
-/*import { Plugins, PushNotification, PushNotificationToken, PushNotificationActionPerformed } from '@capacitor/core';
+import { Plugins } from '@capacitor/core';
 
-const { PushNotifications } = Plugins;*/
+const { PushNotifications } = Plugins;
 
 /*localStorage.setItem('username', 'cristian.marind')
 localStorage.setItem('userId', '1152701738')
@@ -71,44 +71,53 @@ localStorage.setItem('isLogged', 'true')*/
 
 const App: React.FC = () => {
 
-  /*const [notifications, setNotifications] = useState<any>([])
+  const [notifications, setNotifications] = useState<any>([])
 
-  console.log(1);
+  PushNotifications.requestPermission().then((res: any) => {
+    //alert(JSON.stringify(res))
+    console.log(JSON.stringify(res));
+    
+  })
     
     // Register with Apple / Google to receive push via APNS/FCM
     PushNotifications.register();
 
     // On succcess, we should be able to receive notifications
     PushNotifications.addListener('registration',
-      (token: PushNotificationToken) => {
-        alert('Push registration success, token: ' + token.value);
+      (token: any) => {
+        console.log(token);
+        //alert(JSON.stringify(token))
       }
     );
 
     // Some issue with your setup and push will not work
     PushNotifications.addListener('registrationError',
       (error: any) => {
-        alert('Error on registration: ' + JSON.stringify(error));
+        alert(JSON.stringify(error))
       }
     );
 
     // Show us the notification payload if the app is open on our device
     PushNotifications.addListener('pushNotificationReceived',
-      (notification: PushNotification) => {
+      (notification: any) => {
+       // alert("pushNotificationReceived" + JSON.stringify(notification))
         let notif = notifications;
         notif.push({ id: notification.id, title: notification.title, body: notification.body })
         setNotifications(notif)
+        //alert(JSON.stringify(notif))
       }
     );
 
     // Method called when tapping on a notification
     PushNotifications.addListener('pushNotificationActionPerformed',
-      (notification: PushNotificationActionPerformed) => {
+      (notification: any) => {
+        //alert("pushNotificationActionPerformed" + JSON.stringify(notification))
         let notif = notifications;
         notif.push({ id: notification.notification.data.id, title: notification.notification.data.title, body: notification.notification.data.body })
         setNotifications(notif)
+        //alert(JSON.stringify(notif))
       }
-    );*/
+    );
 
   return (
     <IonApp>
@@ -152,3 +161,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+
