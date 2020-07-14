@@ -104,11 +104,11 @@ const appPages: AppPage[] = [
         icon: supplyDocumentsLogo,
         url: '/supplyDocuments'
       },
-      {
+      /*{
         title: 'Reserva de espacios',
         icon: businessOutline,
         url: '/spaceReservation'
-      },
+      },*/
       {
         title: 'Solicitud de capacitaciones',
         icon: requestTrainingLogo,

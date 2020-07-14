@@ -32,7 +32,7 @@ let services = new ProviderServices(HOSTS.CIRENE.HOST)
 export default (props: any) => {
   const [saveQueryVisibility, setSaveQueryVisibility] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [page, setPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState<any>(1)
   const [isResult, setIsResult] = useState(false)
   const [visibilityStoredSearches, setVisibilityStoredSearches] = useState(false)
   const [visibilitySearchStored, setVisibilitySearchStored] = useState(false)
@@ -53,7 +53,7 @@ export default (props: any) => {
     setErrorMessage('')
   }, [props.location.state])
 
-  const search = (q?: any) => {
+  const search = (q?: any, page?: any) => {
     let queryParam = q ? q : query
     if (!queryParam.trim()) {
       return
@@ -76,15 +76,15 @@ export default (props: any) => {
 
   const nextPage = () => {
     if (res.length < 10) return
-    setPage(page + 1)
-    search()
+    search("", currentPage + 1)
+    setCurrentPage(currentPage + 1)
     lobbyContentRef.current.scrollTop = 0
   }
 
   const backPage = () => {
-    if (page == 1) return
-    setPage(page - 1)
-    search()
+    if (currentPage == 1) return
+    search("", currentPage - 1)
+    setCurrentPage(currentPage - 1)
     lobbyContentRef.current.scrollTop = 0
   }
 
@@ -148,11 +148,17 @@ export default (props: any) => {
                 }}
                 onKeyPress={e => {
                   if (e.key === 'Enter') {
-                    search()
+                    setCurrentPage(1)
+                    search("", 1)
                   }
                 }}
               />
-              <IonButton onClick={() => { search() }}>Buscar</IonButton>
+              <IonButton onClick={() => { 
+                setCurrentPage(1)
+                search("", 1)
+              }}>
+                Buscar
+              </IonButton>
             </IonItem>
             {
               saveQueryVisibility && localStorage.getItem('userId') ?
@@ -198,7 +204,7 @@ export default (props: any) => {
                       <IonIcon icon={arrowBackOutline} />
                     </div>
                     <div className="p-1 d-flex justify-content-center align-items-center">
-                      {page}
+                      {currentPage}
                     </div>
                     <div onClick={() => { nextPage() }} className="p-1 custom-text-green d-flex justify-content-center align-items-center">
                       <IonIcon icon={arrowForwardOutline} />

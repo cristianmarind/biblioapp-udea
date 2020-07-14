@@ -21,7 +21,7 @@ export default (props:any) => {
         <IonCard>
           <IonImg src={biblioappLogo} />
           <IonCardHeader>
-            <IonCardSubtitle>Version 4.1.3</IonCardSubtitle>
+            <IonCardSubtitle>Version 4.2.0</IonCardSubtitle>
             <IonCardTitle>BiblioApp</IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
