@@ -102,8 +102,15 @@ export default (props: any) => {
                       color="danger"
                       onClick={
                         e => {
-                          setReserveToCancel(item.codReserva)
-                          setShowConfirmAlert(true)
+                          let r = item.fechaInicio.split(" ")[1].split(":")[0]
+                          let currentHour = (new Date(Date.now())).getHours()
+                          if (currentHour < parseInt(r)) {
+                            setReserveToCancel(item.codReserva)
+                            setShowConfirmAlert(true)
+                          }else{
+                            setErrorMessage("En este momento no puedes cancelar tu reserva ya que esta en curso.")
+                            setShowErrorAlert(true)
+                          }
                         }
                       }
                     >
