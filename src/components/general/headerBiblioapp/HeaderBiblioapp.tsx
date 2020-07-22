@@ -110,7 +110,12 @@ const BiblioappInfo = (props:any) => {
       route: '/events',
       title: 'Eventos',
       backActive: false
-    }
+    },
+    {
+      route: '/chat',
+      title: 'Chatea con nosotros',
+      backActive: false
+    },
   ]
   const currentRoute = routes.find(r => {
     return r.route == window.location.pathname
@@ -122,8 +127,8 @@ const BiblioappInfo = (props:any) => {
       <IonToolbar color="primary">
         <IonButtons slot="start">
           <IonMenuButton>
-            <div className="custom-icon d-flex align-items-center m-0 p-2 custom-text-fluorescent-green">
-              <IonIcon icon={menuOutline} />
+            <div className="custom-icon d-flex align-items-center m-0 p-1 custom-text-fluorescent-green">
+              <IonIcon icon={menuOutline} size="large" />
             </div>
           </IonMenuButton>
         </IonButtons>

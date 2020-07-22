@@ -61,7 +61,7 @@ export default (props:any) => {
             color="none"
             expand="block"
           >
-            Iniciar sesión >
+            Iniciar sesión
           </IonButton>
           <IonItem>
             <IonImg src={biblioappLogo} />

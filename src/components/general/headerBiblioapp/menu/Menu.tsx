@@ -171,7 +171,9 @@ const Menu: React.FunctionComponent<any> = (props) => {
         lines="none" 
         detail={false}
       >
-        <IonIcon color="white" slot="start" icon={logInOutline} />
+        <div className="custom-icon mr-2">
+          <IonIcon icon={logInOutline} className="text-light" />
+        </div>
         <IonLabel>Iniciar sesión</IonLabel>
       </IonItem>
       </IonMenuToggle>

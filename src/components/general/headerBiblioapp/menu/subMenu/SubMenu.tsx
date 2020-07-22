@@ -1,7 +1,7 @@
 import React from 'react'
 import { IonItem, IonIcon, IonLabel, IonMenuToggle, IonList, IonImg } from '@ionic/react';
 import { 
-  arrowUp,
+  arrowForward,
   arrowDown 
 } from 'ionicons/icons';
 import './SubMenu.css';
@@ -17,7 +17,7 @@ export default class SubMenu extends React.Component<any, any> {
 
   render() {
     let subMenu = <div className="d-none"></div>
-    let iconSubMenu = <IonIcon size="small" slot="end" color="white" icon={arrowUp} />
+    let iconSubMenu = <IonIcon size="small" slot="end" color="white" icon={arrowForward} />
     if (this.state.isActive) {
       iconSubMenu = <IonIcon size="small" slot="end" color="white" icon={arrowDown} />
       subMenu = <div>
