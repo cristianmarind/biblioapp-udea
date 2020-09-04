@@ -35,8 +35,8 @@ export default class UdeaDocCenters extends React.Component<any, any> {
   }
 
   async componentDidMount() {
-    let providerServices = new ProviderServices(HOSTS.LIBRARIES.HOST)
-    providerServices.getModel('/libraries', {
+    let providerServices = new ProviderServices(HOSTS.CIRENE.HOST)
+    providerServices.getModel('/bibliotecaycentrosdedocumentacion/ObtenerBibliotecas.php', {
       where: {
         type: 'centro_doc'
       }

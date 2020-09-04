@@ -45,17 +45,17 @@ export default class UdeaLibraries extends React.Component<any, any> {
   }
 
   async componentDidMount(){
-    let providerServices = new ProviderServices(HOSTS.LIBRARIES.HOST)
+    let providerServices = new ProviderServices(HOSTS.CIRENE.HOST)
     let medellin = [], regiones = []
     try {
-      let res = await providerServices.getModel('/libraries', {
+      let res = await providerServices.getModel('/bibliotecaycentrosdedocumentacion/ObtenerBibliotecas.php', {
         where: {
           type: 'medellin'
         }
       })
       medellin = res.data
       
-      res = await providerServices.getModel('/libraries', {
+      res = await providerServices.getModel('/bibliotecaycentrosdedocumentacion/ObtenerBibliotecas.php', {
         where: {
           type: 'regiones'
         }
