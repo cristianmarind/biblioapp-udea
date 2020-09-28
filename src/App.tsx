@@ -18,7 +18,6 @@ import PageInstitutionalRepository from './pages/services/institutionalRepositor
 import PageSpaceReservation from './pages/services/spaceReservation/PageSpaceReservation'
 import PageSupplyDocuments from './pages/services/supplyDocuments/PageSupplyDocuments'
 import PageRequestTraining from './pages/services/requestTraining/RequestTraining'
-import ElectronicResources from './pages/services/electronicResources/ElectronicResources'
 import PageCarlosGaviria from './pages/services/turnos/libraries/carlosGaviria/PageCarlosGaviria'
 import PageDefoultLibrary from './pages/services/turnos/libraries/defoultLibrary/DefoultLibrary'
 import PageMaterialReviews from './pages/services/reviews/materialReviews/MaterialReviews'
@@ -144,7 +143,6 @@ const App: React.FC = () => {
             <Route path="/supplyDocuments" component={PageSupplyDocuments} exact={true} />
             <Route path="/spaceReservation" component={PageSpaceReservation} exact={true} />
             <Route path="/requestTraining" component={PageRequestTraining} exact={true} />
-            <Route path="/electronicResources" component={ElectronicResources} exact={true} />
             <Route path="/chat" component={PageChat} exact={true} />
             <LoggedRoute path="/myAccount" component={PageMyAccount} exact={true} />
             <LoggedRoute path="/account/activeLoans" component={PageActiveLoans} exact={true} />

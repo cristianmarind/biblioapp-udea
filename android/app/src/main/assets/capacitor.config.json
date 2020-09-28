@@ -1,5 +1,5 @@
 {
-  "appId": "com.biblioapp",
+  "appId": "com.biblioapp.app_biblioteca",
   "appName": "biblioapp",
   "bundledWebRuntime": false,
   "npmClient": "npm",

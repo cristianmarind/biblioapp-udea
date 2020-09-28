@@ -1,4 +1,4 @@
-package com.biblioapp;
+package com.biblioapp.app_biblioteca;
 
 import android.os.Bundle;
 

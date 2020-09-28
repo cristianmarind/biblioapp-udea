@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:897096707706:android:0a54a95b59cc1f101395c3",
+        "mobilesdk_app_id": "1:897096707706:android:c6809090919055611395c3",
         "android_client_info": {
-          "package_name": "com.biblioapp"
+          "package_name": "com.biblioapp.app_biblioteca"
         }
       },
       "oauth_client": [
@@ -30,6 +30,13 @@
             {
               "client_id": "897096707706-ldr2mail2gv21tv8bn9b57cv7nuoita1.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "897096707706-hvuuv4vdl1qj9p88t9eaeka8m9dus8qb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.biblioapp"
+              }
             }
           ]
         }

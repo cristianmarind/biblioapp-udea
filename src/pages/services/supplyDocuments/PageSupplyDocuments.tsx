@@ -11,7 +11,7 @@ export default (props:any) => {
                     title="Suministro de documentos"
                     width="100%"
                     height="100%"
-                    src="http://cirene.udea.edu.co/suministros/#/" 
+                    src="https://cirene.udea.edu.co/suministros/#/registrarsolicitudPortal" 
                 />
             </IonContent>
         </IonPage>

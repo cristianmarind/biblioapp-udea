@@ -46,6 +46,7 @@ interface AppPage {
   icon: string;
   title: string;
   urls?: Array<AppPage>;
+  isBrowser?: Boolean;
 }
 
 const appPages: AppPage[] = [
@@ -87,7 +88,8 @@ const appPages: AppPage[] = [
       {
         title: 'Recursos electrónicos',
         icon: electronicResourcesLogo,
-        url: '/electronicResources'
+        url: 'https://cirene.udea.edu.co/basesdedatosapp',
+        isBrowser: true
       },
       {
         title: 'Solicita material bibliografico',

@@ -5,6 +5,9 @@ import {
   arrowDown 
 } from 'ionicons/icons';
 import './SubMenu.css';
+import { Plugins } from '@capacitor/core';
+
+const { Browser } = Plugins;
 
 export default class SubMenu extends React.Component<any, any> {
 
@@ -39,10 +42,14 @@ export default class SubMenu extends React.Component<any, any> {
                 <IonItem 
                   className="itemMenu bg-transparent text-light"
                   onClick={() => {
-                    this.props.history.push({
-                      pathname: appPage.url,
-                      state: { refresh: true }
-                    })
+                    if (appPage.isBrowser) {
+                      Browser.open({ url: appPage.url});
+                    }else {
+                      this.props.history.push({
+                        pathname: appPage.url,
+                        state: { refresh: true }
+                      })
+                    }
                   }} 
                   routerDirection="none" 
                   lines="none" 
